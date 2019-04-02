@@ -1,11 +1,10 @@
 # smartBlinds
 First year project for electrical engineering at KTH. A smart blind capable of tilting and moving up/down.
 
-Team members:
+### Team members:
 
-Linus Backlund woop
-Simon Weideskog simonwei
-Tore Johansson
-Nils Johansson
-Hej hej tack för att ni bjöd in mig<3
-Kristina Kjellberg hej
+* Linus Backlund
+* Simon Weideskog
+* Tore Johansson
+* Nils Johansson
+* Kristina Kjellberg
