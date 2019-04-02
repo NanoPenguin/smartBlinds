@@ -8,4 +8,3 @@ Simon Weideskog simonwei
 Tore Johansson
 Nils Johansson
 Kristina Kjellberg hej
->>>>>>> 7d374410d9e634dd1cbe11949dd3d55133bb69f7
