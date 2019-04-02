@@ -4,7 +4,7 @@ First year project for electrical engineering at KTH. A smart blind capable of t
 ### Team members:
 
 * Linus Backlund
-* Simon Weideskog
+~~* Simon Weideskog~~
 * Tore Johansson
 * Nils Johansson
 * Kristina Kjellberg
