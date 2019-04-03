@@ -2,4 +2,9 @@
 code for control unit
 runs on raspberry pi zero w
 """
-print("Hello world!")
+URL = "Wubbadubba.se"
+
+def main():
+    
+
+main()
