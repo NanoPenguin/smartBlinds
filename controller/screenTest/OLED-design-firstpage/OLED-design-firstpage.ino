@@ -1,4 +1,4 @@
-/* 
+/*
  * Demo for SSD1306 based 128x64 OLED module using Adafruit SSD1306
  * library (https://github.com/adafruit/Adafruit_SSD1306).
  *
@@ -37,21 +37,19 @@ void setup()   {
 
 void loop()
 {
-  if(millis()-lastSwitch>loopTime){
-    lastSwitch = millis();
-    time=!time;
-  }
-  display.clearDisplay();
-
-  if(time){
-    display.setCursor(20,5);
-    display.setTextSize(3);
-    display.print("15:55");
-  }else{
-    display.setCursor(0,10);
+    display.setCursor(62,0);
     display.setTextSize(1);
-    display.print("    Lejonkungarna \n");
-    display.print("     is the best \n");
-  }
+    display.setTextColor(WHITE);      //omarkerad
+    display.print("\x18\n");
+
+    display.setCursor(62,0);
+
+    display.print("06:00              \x4\n");
+    display.setTextColor(BLACK, WHITE); //nästa är markerad, x4 är valt alarm
+    display.print("06:45              \x4\n");
+    display.setTextColor(WHITE);      //omarkerad
+    display.setCursor(62,0);
+    display.print("\x19\n");
+
   display.display();
 }
