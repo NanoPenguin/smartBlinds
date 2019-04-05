@@ -2,9 +2,10 @@
 code for control unit
 runs on raspberry pi zero w
 """
-URL = "Wubbadubba.se"
+from alarm import *
 
 def main():
-    
+    pass
+
 
 main()
