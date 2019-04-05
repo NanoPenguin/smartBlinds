@@ -13,7 +13,7 @@ class Settings():
         else:
             loadLocalData()
 
-    def loadWedData():
+    def loadWebData():
         #Funktion som läser in alla
         #inställningar från webinterface
         manualAlarmTimes.append("something")
