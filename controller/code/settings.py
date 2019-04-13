@@ -4,19 +4,19 @@ web interface or local drive
 """
 
 class Settings():
-    manualAlarmTimes[]
-    manualAlarmsActive[]
+    alarmTimes[]
+    activeManualAlarms[]
 
     def __init__(self,path="",loadFromWeb=False):
         if loadFromWeb:
-            loadWedData()
+            loadWebData()
         else:
             loadLocalData()
 
     def loadWebData():
         #Funktion som läser in alla
         #inställningar från webinterface
-        manualAlarmTimes.append("something")
+        manualAlarmTimes.append("12")
 
 
     def loadLocalData():
