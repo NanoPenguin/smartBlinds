@@ -1,10 +1,15 @@
 """
 Class for displaying on the screen
 """
-
+"""
+from luma.core.interface.serial import i2c, spi
+from luma.core.render import canvas
+from luma.oled.device import ssd1306, ssd1309, ssd1325, ssd1331, sh1106
+"""
 class Screen():
-    __init____(self):
-        pass
+    def __init____(self):
+        self._serial = spi(device=0, port=0)
+        self._screen = ssd1306(self._serial)
 
     def clockScreen(self):
         pass

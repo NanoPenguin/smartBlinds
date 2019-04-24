@@ -4,8 +4,8 @@ web interface or local drive
 """
 
 class Settings():
-    alarmTimes[]
-    activeManualAlarms[]
+    alarmTimes = []
+    activeManualAlarms = []
 
     def __init__(self,path="",loadFromWeb=False):
         if loadFromWeb:
