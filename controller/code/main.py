@@ -3,6 +3,8 @@ main code for control unit
 runs on raspberry pi zero w
 """
 
+import time
+
 from alarm import *
 from settings import *
 from blinds import *
@@ -20,6 +22,7 @@ def main():
     newAlarm(alarms, time.time())
     screen = Screen()
     screen.alarmScreen(alarms)
+    time.sleep(3)
 
 
 # reads from file and regreates saved alarms, settings and blids

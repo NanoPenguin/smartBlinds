@@ -2,8 +2,6 @@
 Class for storing alarms
 """
 
-import time
-
 class Alarm():  # class for each alarm object
     def __init__(self, time, fromCalendar=False, activated=True):
         self._time = time
