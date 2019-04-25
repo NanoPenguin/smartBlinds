@@ -54,6 +54,3 @@ class Screen():
     # settingsScreen handels the graphichs of the settings screen. Similar to alarmScreen.
     def settingsScreen(self):
         pass
-
-
-    def drawAlarm(self, alarm, Y, fontSize, blockSize):
