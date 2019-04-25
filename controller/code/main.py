@@ -20,6 +20,9 @@ epochSeconds = time.mktime(timeTuple)
 def main():
     alarms = [] # Array of alarm objects
     newAlarm(alarms, time.time())
+    newAlarm(alarms, time.time(), True, False)
+    newAlarm(alarms, time.time(), False, True)
+    newAlarm(alarms, time.time(), True, True)
     screen = Screen()
     screen.alarmScreen(alarms)
     time.sleep(3)

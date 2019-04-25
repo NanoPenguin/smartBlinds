@@ -22,8 +22,10 @@ class Screen():
     def alarmScreen(self, alarms):
         fontSize = 17
         blockSize = 22
+        scrollIndex = 0
 
         for alarm in alarms:
+            Y = (alarms.index(alarm)+1-scrollIndex) * blockSize
             self.drawAlarm(alarm, 21, fontSize, blockSize)
 
 
