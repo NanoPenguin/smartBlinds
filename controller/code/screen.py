@@ -32,7 +32,7 @@ class Screen():
         pass
 
 
-    def drawAlarm(alarm, fontSize, blockSize):
+    def drawAlarm(self, alarm, Y, fontSize, blockSize):
         alarmTime = str(alarm)
         alarmAuto = False
         alarmActive = alarm.isActivated()
