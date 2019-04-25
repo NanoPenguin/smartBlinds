@@ -55,7 +55,7 @@ class Screen():
 
 
     def scrollUp(self):
-        if self._scrollIndex
+        if self._scrollIndex:
             self._scrollIndex-=1
 
 
