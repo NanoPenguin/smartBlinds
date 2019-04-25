@@ -1,10 +1,12 @@
 from __future__ import print_function
 import datetime
+import dateutil.parser
 import pickle
 import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+from tz import LocalTimezone
 
 #Delete file token.pickle when modifying scopes
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
@@ -25,8 +27,10 @@ def getFirstEvent():
     if not event:
         print('No upcoming events found.')
     else:
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        startTime = start[11:16]
+        eventStart = event['start'].get('dateTime', event['start'].get('date'))
+        startTime = dateutil.parser.parse(eventStart)
+        startTime = startTime.astimezone(LocalTimezone())
+        startTime = startTime.strftime('%H:%M')
         print(startTime, event['summary'])
 
 def initCreds():
