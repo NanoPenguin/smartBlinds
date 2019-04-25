@@ -41,8 +41,8 @@ def writeToFile():
 
 # called from alarmScreen()
 # alarms=alarmArray, time=any time in seconds since epoch
-def newAlarm(alarms, time):
-    newAlarm = Alarm(time)
+def newAlarm(alarms, time, fromCalendar=False, activated=True):
+    newAlarm = Alarm(time, fromCalendar, activated)
     alarms.append(newAlarm)
 
 
