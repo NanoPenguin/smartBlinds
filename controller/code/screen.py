@@ -1,6 +1,8 @@
 """
 Class for displaying on the screen
 """
+
+import time
 from PIL import ImageFont, ImageDraw
 from luma.core.interface.serial import i2c, spi
 from luma.core.render import canvas
