@@ -11,7 +11,7 @@ SCREENDEVICE = ssd1306(SCREENSERIAL, rotate=2)
 
 
 class Screen():
-    def __init____(self):
+    def __init__(self):
         self._scrollIndex = 0
 
     def clockScreen(self):
@@ -20,7 +20,6 @@ class Screen():
     # alarmScreen handels the graphichs of viewing, setting and activating alarms
     # uses external functions to achieve this
     def alarmScreen(self, alarms):
-        scrollIndex = self._scrollIndex
         fontSize = 17
         blockSize = 22
 
@@ -42,7 +41,7 @@ class Screen():
                         autoStr = "cal"
                 else:
                         autoStr = "man"
-                Y = (alarms.index(alarm)+1-scrollIndex) * blockSize
+                Y = (alarms.index(alarm)+1-self._scrollIndex) * blockSize
                 draw.line((0, Y, W, Y), fill="white")
                 draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
                 draw.text((0, Y+(blockSize-fontSize)/2), alarmTime, fill="white", font=fontBold)
