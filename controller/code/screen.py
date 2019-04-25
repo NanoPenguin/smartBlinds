@@ -53,7 +53,8 @@ class Screen():
                     draw.ellipse((W-blockSize+9, Y+5, W-1, Y+blockSize-5), outline="white", fill=activeColor)
                 if self._scrollIndex > self._currentScroll:
                     self._currentScroll += self._scrollDelay
-                else self._currentScroll -= self._scrollDelay
+                else:
+                    self._currentScroll -= self._scrollDelay
 
 
     def scrollDown(self):
