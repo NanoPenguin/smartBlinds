@@ -24,7 +24,7 @@ class Screen():
         blockSize = 22
 
         for alarm in alarms:
-            self.drawAlarm(alarm, Y, fontSize, blockSize)
+            self.drawAlarm(alarm, 21, fontSize, blockSize)
 
 
     # settingsScreen handels the graphichs of the settings screen. Similar to alarmScreen.
