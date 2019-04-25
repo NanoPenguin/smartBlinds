@@ -54,5 +54,5 @@ class Screen():
                 draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
                 draw.text((0, Y+(blockSize-fontSize)/2), alarmTime, fill="white", font=fontBold)
                 autoStrSize = draw.textsize(autoStr, font=font)
-                draw.text((W-blockSize-autoStrSize[0], Y+(blockSize-fontSize)/2), autoStr, fill="white")
+                draw.text((W-blockSize-autoStrSize[0], Y+(blockSize-fontSize)/2), autoStr, fill="white", font=font)
                 draw.ellipse((W-blockSize+9, Y+5, W-1, Y+blockSize-5), outline="white", fill=activeColor)
