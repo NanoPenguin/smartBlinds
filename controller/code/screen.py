@@ -12,7 +12,7 @@ SCREENDEVICE = ssd1306(SCREENSERIAL, rotate=2)
 
 class Screen():
     def __init____(self):
-        pass
+        self._scrollIndex = 0
 
     def clockScreen(self):
         pass
@@ -22,7 +22,6 @@ class Screen():
     def alarmScreen(self, alarms):
         fontSize = 17
         blockSize = 22
-        scrollIndex = 0
 
         W = 128
         H = 64
@@ -42,13 +41,26 @@ class Screen():
                         autoStr = "cal"
                 else:
                         autoStr = "man"
-                Y = (alarms.index(alarm)+1-scrollIndex) * blockSize
+                Y = (alarms.index(alarm)+1-self._scrollIndex) * blockSize
                 draw.line((0, Y, W, Y), fill="white")
                 draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
                 draw.text((0, Y+(blockSize-fontSize)/2), alarmTime, fill="white", font=fontBold)
                 autoStrSize = draw.textsize(autoStr, font=font)
                 draw.text((W-blockSize-autoStrSize[0], Y+(blockSize-fontSize)/2), autoStr, fill="white", font=font)
                 draw.ellipse((W-blockSize+9, Y+5, W-1, Y+blockSize-5), outline="white", fill=activeColor)
+
+
+    def scrollDown(self):
+        self._scrollIndex+=1
+
+
+    def scrollUp(self):
+        if self._scrollIndex
+            self._scrollIndex-=1
+
+
+    def setScroll(self, index):
+        self._scrollIndex = index
 
 
     # settingsScreen handels the graphichs of the settings screen. Similar to alarmScreen.
