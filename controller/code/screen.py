@@ -31,7 +31,13 @@ class Screen():
         H = 64
         fontBold = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf", fontSize)
         font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMono.ttf", fontSize)
-        while(self._scrollIndex!=self._currentScroll):
+        if self._currentScroll < self._scrollIndex:
+            scrollDirUp = False
+        else:
+            scrollDirUp = True
+        for animationConst in range(blockSize+1):
+            if scrollDirUp:
+                animationConst = -animationConst
             with canvas(SCREENDEVICE) as draw:
                 for alarm in alarms:
                     alarmTime = str(alarm)
@@ -46,18 +52,14 @@ class Screen():
                             autoStr = "cal"
                     else:
                             autoStr = "man"
-                    Y = (alarms.index(alarm)+1-self._currentScroll) * blockSize
+                    Y = (alarms.index(alarm)+1-self._currentScroll) * blockSize + animationConst
                     draw.line((0, Y, W, Y), fill="white")
                     draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
                     draw.text((0, Y+(blockSize-fontSize)/2), alarmTime, fill="white", font=fontBold)
                     autoStrSize = draw.textsize(autoStr, font=font)
                     draw.text((W-blockSize-autoStrSize[0], Y+(blockSize-fontSize)/2), autoStr, fill="white", font=font)
                     draw.ellipse((W-blockSize+9, Y+5, W-1, Y+blockSize-5), outline="white", fill=activeColor)
-        if self._scrollIndex > self._currentScroll:
-            self._currentScroll += self._scrollDelay
-        else:
-            self._currentScroll -= self._scrollDelay
-        time.sleep(0.05)
+            time.sleep(self._scrollDelay)
 
 
     def scrollDown(self):
