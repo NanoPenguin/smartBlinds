@@ -32,9 +32,9 @@ class Screen():
         fontBold = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf", fontSize)
         font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMono.ttf", fontSize)
         if self._currentScroll < self._scrollIndex:
-            scrollDirUp = False
-        else:
             scrollDirUp = True
+        else:
+            scrollDirUp = False
         for animationConst in range(blockSize+1):
             if scrollDirUp:
                 animationConst = -animationConst
