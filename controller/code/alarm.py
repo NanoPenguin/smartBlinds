@@ -5,8 +5,9 @@ Class for storing alarms
 import time
 
 class Alarm():  # class for each alarm object
-    def __init__(self, time, activated=True):
+    def __init__(self, time, fromCalendar=False, activated=True):
         self._time = time
+        self._fromCalendar = fromCalendar
         self._activated = activated
 
 
@@ -24,6 +25,10 @@ class Alarm():  # class for each alarm object
 
     def isActivated(self):  # get activated True/False
         return self._activated
+
+
+    def isFromCalendar(self):
+        return self._fromCalendar
 
 
     def activate(self):  # set activated to True

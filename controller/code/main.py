@@ -17,6 +17,9 @@ epochSeconds = time.mktime(timeTuple)
 
 def main():
     alarms = [] # Array of alarm objects
+    newAlarm(alarms, time.time())
+    screen = Screen()
+    screen.alarmScreen(alarms)
 
 
 # reads from file and regreates saved alarms, settings and blids
