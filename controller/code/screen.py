@@ -29,8 +29,8 @@ class Screen():
         H = 64
         fontBold = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf", fontSize)
         font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMono.ttf", fontSize)
-        with canvas(SCREENDEVICE) as draw:
-            while(self._scrollIndex!=self._currentScroll):
+        while(self._scrollIndex!=self._currentScroll):
+            with canvas(SCREENDEVICE) as draw:
                 for alarm in alarms:
                     alarmTime = str(alarm)
                     alarmAuto = alarm.isFromCalendar()
@@ -51,10 +51,11 @@ class Screen():
                     autoStrSize = draw.textsize(autoStr, font=font)
                     draw.text((W-blockSize-autoStrSize[0], Y+(blockSize-fontSize)/2), autoStr, fill="white", font=font)
                     draw.ellipse((W-blockSize+9, Y+5, W-1, Y+blockSize-5), outline="white", fill=activeColor)
-                if self._scrollIndex > self._currentScroll:
-                    self._currentScroll += self._scrollDelay
-                else:
-                    self._currentScroll -= self._scrollDelay
+        if self._scrollIndex > self._currentScroll:
+            self._currentScroll += self._scrollDelay
+        else:
+            self._currentScroll -= self._scrollDelay
+        time.sleep(0.05)
 
 
     def scrollDown(self):
