@@ -60,6 +60,7 @@ class Screen():
                     draw.text((W-blockSize-autoStrSize[0], Y+(blockSize-fontSize)/2), autoStr, fill="white", font=font)
                     draw.ellipse((W-blockSize+9, Y+5, W-1, Y+blockSize-5), outline="white", fill=activeColor)
             time.sleep(self._scrollDelay)
+        self._currentScroll = self._scrollIndex
 
 
     def scrollDown(self):
