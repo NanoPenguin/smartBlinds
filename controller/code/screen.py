@@ -31,7 +31,7 @@ class Screen():
         with canvas(SCREENDEVICE) as draw:
             for alarm in alarms:
                 alarmTime = str(alarm)
-                alarmAuto = alar.isFromCalendar()
+                alarmAuto = alarm.isFromCalendar()
                 alarmActive = alarm.isActivated()
                 if alarmActive:
                         activeColor = "white"
