@@ -23,7 +23,7 @@ class Screen():
 
         for alarm in alarms:
             for Y in range(64):
-                    drawAlarm(alarm, Y, fontSize, blockSize)
+                    self.drawAlarm(alarm, Y, fontSize, blockSize)
                     time.sleep(0.015)
 
 
