@@ -38,7 +38,7 @@ class Screen():
         alarmActive = alarm.isActivated()
         W = 128
         H = 64
-        fontBold = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf", fontSiz$
+        fontBold = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf", fontSize)
         font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMono.ttf", fontSize)
         if alarmActive:
                 activeColor = "white"
