@@ -36,8 +36,6 @@ class Screen():
         else:
             scrollDirUp = True
         for animationConst in range(blockSize,0,-1):
-            if self._currentScroll == self._scrollIndex:
-                animationConst = 0
             if scrollDirUp:
                 #animationConst = blockSize - animationConst
                 animationConst = -animationConst
