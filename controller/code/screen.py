@@ -25,7 +25,7 @@ class Screen():
         self._fontBold = ImageFont.truetype(self._fontLocation + self._fontNameBold, self._fontSize)
         self._font = ImageFont.truetype(self._fontLocation + self._fontName, self._fontSize)
         self._clockFontSize = 30
-        self._fontClock = ImageFont.truetype(self._fontLocation + self._fontNameBold, self._clockFontSize)
+        self._fontClock = ImageFont.truetype(self._fontLocation + self._fontName, self._clockFontSize)
 
     def clockScreen(self):
         W = 128
