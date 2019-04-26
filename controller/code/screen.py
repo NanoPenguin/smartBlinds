@@ -17,13 +17,14 @@ class Screen():
         self._scrollIndex = 0
         self._currentScroll = 0
         self._scrollDelay = 0
+        self._self._alarms = self._alarms
 
     def clockScreen(self):
         pass
 
     # alarmScreen handels the graphichs of viewing, setting and activating alarms
     # uses external functions to achieve this
-    def alarmScreen(self, alarms):
+    def alarmScreen(self):
         fontSize = 17
         blockSize = 22
 
@@ -40,7 +41,7 @@ class Screen():
                 #animationConst = blockSize - animationConst
                 animationConst = -animationConst
             with canvas(SCREENDEVICE) as draw:
-                for alarm in alarms:
+                for alarm in self._alarms:
                     alarmTime = str(alarm)
                     alarmAuto = alarm.isFromCalendar()
                     alarmActive = alarm.isActivated()
@@ -53,13 +54,13 @@ class Screen():
                             autoStr = "cal"
                     else:
                             autoStr = "man"
-                    Y = (alarms.index(alarm)-self._currentScroll) * blockSize + animationConst - 1
+                    Y = (self._alarms.index(alarm)-self._currentScroll) * blockSize + animationConst - 1
                     if self._currentScroll == self._scrollIndex:
                             Y += blockSize*2
                     else:
                         if scrollDirUp:
                             Y += blockSize*2
-                    #print('index: {}  scroll: {}  animationConst: {}  Y: {}'.format(alarms.index(alarm), self._currentScroll, animationConst, Y))
+                    #print('index: {}  scroll: {}  animationConst: {}  Y: {}'.format(self._alarms.index(alarm), self._currentScroll, animationConst, Y))
                     draw.line((0, Y, W, Y), fill="white")
                     draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
                     draw.text((0, Y+(blockSize-fontSize)/2), alarmTime, fill="white", font=fontBold)
