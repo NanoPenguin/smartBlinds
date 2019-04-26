@@ -124,11 +124,12 @@ class Screen():
         timeList = timeStr.split(':')
         W = 128
         H = 64
+        Ycal = 2
         with canvas(SCREENDEVICE) as draw:
             w, h = draw.textsize(':', font=self._fontClock)
             draw.text(((W-w)/2, (H-h)/2), ':', fill="white", font=self._fontClock)
             w, h = draw.textsize(timeList[0], font=self._fontClock)
-            draw.rectangle(((W/2-w)/2, (H-h)/2, (W/2-w)/2+w, (H-h)/2+h), fill="white")
+            draw.rectangle(((W/2-w)/2, (H-h)/2+Ycal, (W/2-w)/2+w, (H-h)/2+h+Ycal), fill="white")
             draw.text(((W/2-w)/2, (H-h)/2), timeList[0], fill="black", font=self._fontClock)
             w, h = draw.textsize(timeList[1], font=self._fontClock)
             draw.text(((W/2-w)/2+W/2, (H-h)/2), timeList[1], fill="white", font=self._fontClock)
