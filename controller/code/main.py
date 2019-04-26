@@ -48,6 +48,8 @@ def main():
     time.sleep(2)
     screen.setHourScreen(str(alarms[0]))
     time.sleep(5)
+    screen.setMinuteScreen(str(alarms[0]))
+    time.sleep(5)
 
 
 # reads from file and regreates saved alarms, settings and blids
