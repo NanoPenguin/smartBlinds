@@ -33,6 +33,7 @@ def main():
     time.sleep(1)
     screen.alarmScrollDown()
     screen.alarmScrollDown()
+    screen.alarmScrollDown()
     time.sleep(3)
     screen.alarmScrollUp()
     time.sleep(1)
