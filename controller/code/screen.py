@@ -103,7 +103,7 @@ class Screen():
 
 
     def selectedAlarm(self):  # returns the selected alarm
-        if len(self.alarms) > self._currentScroll:
+        if len(self._alarms) > self._currentScroll:
             return self._alarms[self._currentScroll]
         else:
             return False
