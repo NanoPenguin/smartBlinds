@@ -120,6 +120,21 @@ class Screen():
             return False
 
 
+    def alarmSetHourScreen(self, timeStr):
+        timeList = timeStr.split(':')
+        W = 128
+        H = 64
+        with canvas(SCREENDEVICE) as draw:
+            w, h = draw.textsize(':', font=self._fontClock)
+            draw.text(((W-w)/2, (H-h)/2), ':', fill="white", font=self._fontClock)
+            w, h = draw.textsize(timeList[0], font=self._fontClock)
+            draw.rectangle(((W/2-w)/2, (H-h)/2, (W/2-w)/2w, (H-h)/2+h), fill="white")
+            draw.text(((W/2-w)/2, (H-h)/2), ':', fill="black", font=self._fontClock)
+            w, h = draw.textsize(timeList[1], font=self._fontClock)
+            draw.text(((W/2-w)/2+W/2, (H-h)/2), ':', fill="white", font=self._fontClock)
+
+
+
     # settingsScreen handels the graphichs of the settings screen. Similar to alarmScreen.
     def settingsScreen(self):
         pass

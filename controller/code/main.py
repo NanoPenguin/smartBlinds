@@ -45,7 +45,8 @@ def main():
     time.sleep(0.2)
     print(screen.selectedAlarm())"""
     screen.clockScreen()
-    time.sleep(5)
+    time.sleep(2)
+    screen.alarmSetHourScreen(str(alarms[0]))
 
 
 # reads from file and regreates saved alarms, settings and blids
