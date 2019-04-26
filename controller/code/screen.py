@@ -35,11 +35,9 @@ class Screen():
             scrollDirUp = False
         else:
             scrollDirUp = True
-        animationRange = [i for i in range(blockSize,0,-1)]
-        if scrollDirUp:
-            animationRange = animationRange.reverse()
-        for animationConst in animationRange:
+        for animationConst in range(blockSize,0,-1):
             if scrollDirUp:
+                animationConst = blockSize - animationConst
                 animationConst = -animationConst
             with canvas(SCREENDEVICE) as draw:
                 for alarm in alarms:
