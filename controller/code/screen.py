@@ -30,10 +30,20 @@ class Screen():
     def clockScreen(self):
         W = 128
         H = 64
+        earliest = 0
+        if self._alarms:
+            earliest = self._alarms[0].getTime()
+        for alarm in self._alarms:
+            tempTime = alarm.getTime()
+            if tempTime < earliest:
+                earliest = tempTime
         timeStr = time.strftime('%H:%M', time.localtime(time.time()))
         with canvas(SCREENDEVICE) as draw:
             w, h = draw.textsize(timeStr, font=self._fontClock)
             draw.text(((W-w)/2, (H-h)/2), timeStr, fill="white", font=self._fontClock)
+            if earliest:
+                draw.text((4, H-self._fontSize-4), time.strftime(time.localtime(earliest)), fill="white", font=self._font)
+
 
     # alarmScreen handels the graphichs of viewing, setting and activating alarms
     # uses external functions to achieve this
