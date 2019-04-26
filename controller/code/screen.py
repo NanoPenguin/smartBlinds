@@ -44,7 +44,7 @@ class Screen():
             w, h = draw.textsize(timeStr, font=self._fontClock)
             draw.text(((W-w)/2, (H-h)/2), timeStr, fill="white", font=self._fontClock)
             if earliest:
-                draw.text((4, H-self._fontSize-4), str(earliestAlarm), fill="white", font=self._font)
+                draw.text((4, H-self._fontSize), str(earliestAlarm), fill="white", font=self._font)
 
 
     # alarmScreen handels the graphichs of viewing, setting and activating alarms
