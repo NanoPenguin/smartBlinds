@@ -18,20 +18,30 @@ class Screen():
         self._currentScroll = 0
         self._scrollDelay = 0
         self._alarms = alarms
+        self._self._fontSize = 17
+        self._fontName = "FreeMono.ttf"
+        self._fontNameBold = "FreeMonoBold.ttf"
+        self._fontLocation = "/usr/share/fonts/truetype/freefont/"
+        self._self._fontBold = ImageFont.truetype(self._fontLocation + self._fontNameBold, self._fontSize)
+        self._font = ImageFont.truetype(self._fontLocation + self._fontName, self._fontSize)
+        self._clockFontSize = 30
+        self._fontClock = ImageFont.truetype(self._fontLocation + self._fontNameBold, self._clockFontSize)
 
     def clockScreen(self):
-        pass
+        W = 128
+        H = 64
+        timeStr = time.strftime('%H:%M', time.localtime(time.time()))
+        with canvas(SCREENDEVICE) as draw:
+            w, h = draw.textsize(timeStr, font=self._fontClock)
+            draw.text(((W-w)/2, (H-h)/2), timeStr, fill="white", font=self._fontClock)
 
     # alarmScreen handels the graphichs of viewing, setting and activating alarms
     # uses external functions to achieve this
     def alarmScreen(self):
-        fontSize = 17
+        self._fontSize = 17
         blockSize = 22
-
         W = 128
         H = 64
-        fontBold = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf", fontSize)
-        font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMono.ttf", fontSize)
         if self._currentScroll < self._scrollIndex:
             scrollDirUp = False
         else:
@@ -63,9 +73,9 @@ class Screen():
                     #print('index: {}  scroll: {}  animationConst: {}  Y: {}'.format(self._alarms.index(alarm), self._currentScroll, animationConst, Y))
                     draw.line((0, Y, W, Y), fill="white")
                     draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
-                    draw.text((4, Y+(blockSize-fontSize)/2), alarmTime, fill="white", font=fontBold)
+                    draw.text((4, Y+(blockSize-self._fontSize)/2), alarmTime, fill="white", font=self._fontBold)
                     autoStrSize = draw.textsize(autoStr, font=font)
-                    draw.text((W-blockSize-autoStrSize[0], Y+(blockSize-fontSize)/2), autoStr, fill="white", font=font)
+                    draw.text((W-blockSize-autoStrSize[0], Y+(blockSize-self._fontSize)/2), autoStr, fill="white", font=self._font)
                     draw.ellipse((W-blockSize+9, Y+5, W-1, Y+blockSize-5), outline="white", fill=activeColor)
                     draw.rectangle((0, blockSize, 2, blockSize*2-1), fill="white")
                 if self._currentScroll == self._scrollIndex:
