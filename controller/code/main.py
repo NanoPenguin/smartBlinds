@@ -42,6 +42,12 @@ def main():
     screen.scrollUp()
     screen.alarmScreen(alarms)
     time.sleep(3)
+    screen.scrollUp()
+    screen.alarmScreen(alarms)
+    time.sleep(3)
+    screen.scrollDown()
+    screen.alarmScreen(alarms)
+    time.sleep(3)
 
 
 # reads from file and regreates saved alarms, settings and blids
