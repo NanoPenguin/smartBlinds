@@ -33,16 +33,18 @@ class Screen():
         earliest = 0
         if self._alarms:
             earliest = self._alarms[0].getTime()
+            earliestAlarm = self._alarms[0]
         for alarm in self._alarms:
             tempTime = alarm.getTime()
             if tempTime < earliest:
                 earliest = tempTime
+                earliestAlarm = alarm
         timeStr = time.strftime('%H:%M', time.localtime(time.time()))
         with canvas(SCREENDEVICE) as draw:
             w, h = draw.textsize(timeStr, font=self._fontClock)
             draw.text(((W-w)/2, (H-h)/2), timeStr, fill="white", font=self._fontClock)
             if earliest:
-                draw.text((4, H-self._fontSize-4), time.strftime(time.localtime(earliest)), fill="white", font=self._font)
+                draw.text((4, H-self._fontSize-4), str(earliestAlarm), fill="white", font=self._font)
 
 
     # alarmScreen handels the graphichs of viewing, setting and activating alarms
