@@ -69,7 +69,7 @@ class Screen():
                                 autoStr = "cal"
                         else:
                                 autoStr = "man"
-                    Y = (self._alarms.index(alarm)-self._currentScroll) * blockSize + animationConst - 1
+                    Y = (alarms.index(alarm)-self._currentScroll) * blockSize + animationConst - 1
                     if self._currentScroll == self._scrollIndex:
                             Y += blockSize*2
                     else:
@@ -103,7 +103,10 @@ class Screen():
 
 
     def selectedAlarm(self):  # returns the selected alarm
-        return self._alarms[self._currentScroll]
+        if len(self.alarms) > self._currentScroll:
+            return self._alarms[self._currentScroll]
+        else:
+            return False
 
 
     # settingsScreen handels the graphichs of the settings screen. Similar to alarmScreen.
