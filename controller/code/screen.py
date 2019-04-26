@@ -67,7 +67,7 @@ class Screen():
                         if alarmAuto:
                                 autoStr = "cal"
                         else:
-                                autoStr = "man"
+                                autoStr = ""
                     Y = (alarms.index(alarm)-self._currentScroll) * blockSize + animationConst - 1
                     if self._currentScroll == self._scrollIndex:
                             Y += blockSize*2
@@ -77,11 +77,11 @@ class Screen():
                     draw.line((0, Y, W, Y), fill="white")
                     draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
                     draw.rectangle((0, blockSize, 2, blockSize*2-1), fill="white")
-                    draw.ellipse((W-blockSize+9, Y+5, W-1, Y+blockSize-5), outline="white", fill=activeColor)
                     if alarm != newAlarm:
                         draw.text((4, Y+(blockSize-self._fontSize)/2), alarmTime, fill="white", font=self._fontBold)
                         autoStrSize = draw.textsize(autoStr, font=self._font)
                         draw.text((W-blockSize-autoStrSize[0], Y+(blockSize-self._fontSize)/2), autoStr, fill="white", font=self._font)
+                        draw.ellipse((W-blockSize+9, Y+5, W-1, Y+blockSize-5), outline="white", fill=activeColor)
                     else:
                         draw.text((4, Y+(blockSize-self._fontSize)/2), newAlarm, fill="white", font=self._font)
                 if self._currentScroll == self._scrollIndex:
