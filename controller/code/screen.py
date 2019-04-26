@@ -53,6 +53,7 @@ class Screen():
                     else:
                             autoStr = "man"
                     Y = (alarms.index(alarm)+1-self._currentScroll) * blockSize + animationConst
+                    print(Y)
                     draw.line((0, Y, W, Y), fill="white")
                     draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
                     draw.text((0, Y+(blockSize-fontSize)/2), alarmTime, fill="white", font=fontBold)
