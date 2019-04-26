@@ -56,9 +56,9 @@ class Screen():
                     Y = (alarms.index(alarm)-self._currentScroll) * blockSize + animationConst
                     if self._currentScroll == self._scrollIndex:
                             Y += blockSize*2
-                    #else:
-                    #    if not scrollDirUp:
-                    #        Y -= blockSize*2
+                    else:
+                        if scrollDirUp:
+                            Y -= blockSize*2
                     print('index: {}  scroll: {}  animationConst: {}  Y: {}'.format(alarms.index(alarm), self._currentScroll, animationConst, Y))
                     draw.line((0, Y, W, Y), fill="white")
                     draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
