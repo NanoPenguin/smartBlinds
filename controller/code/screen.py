@@ -59,7 +59,7 @@ class Screen():
                     else:
                         if scrollDirUp:
                             Y += blockSize*2
-                    print('index: {}  scroll: {}  animationConst: {}  Y: {}'.format(alarms.index(alarm), self._currentScroll, animationConst, Y))
+                    #print('index: {}  scroll: {}  animationConst: {}  Y: {}'.format(alarms.index(alarm), self._currentScroll, animationConst, Y))
                     draw.line((0, Y, W, Y), fill="white")
                     draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
                     draw.text((0, Y+(blockSize-fontSize)/2), alarmTime, fill="white", font=fontBold)
