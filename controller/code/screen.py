@@ -129,9 +129,9 @@ class Screen():
             draw.text(((W-w)/2, (H-h)/2), ':', fill="white", font=self._fontClock)
             w, h = draw.textsize(timeList[0], font=self._fontClock)
             draw.rectangle(((W/2-w)/2, (H-h)/2, (W/2-w)/2+w, (H-h)/2+h), fill="white")
-            draw.text(((W/2-w)/2, (H-h)/2), ':', fill="black", font=self._fontClock)
+            draw.text(((W/2-w)/2, (H-h)/2), timeList[0], fill="black", font=self._fontClock)
             w, h = draw.textsize(timeList[1], font=self._fontClock)
-            draw.text(((W/2-w)/2+W/2, (H-h)/2), ':', fill="white", font=self._fontClock)
+            draw.text(((W/2-w)/2+W/2, (H-h)/2), timeList[1], fill="white", font=self._fontClock)
 
 
 
