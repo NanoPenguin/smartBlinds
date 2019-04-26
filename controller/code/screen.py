@@ -74,15 +74,19 @@ class Screen():
         self._currentScroll = self._scrollIndex
 
 
-    def scrollDown(self):
+    def alarmScrollDown(self):  # scrolls and selects next alarm
         self._scrollIndex+=1
         self.alarmScreen()
 
 
-    def scrollUp(self):
+    def alarmScrollUp(self):  # scrolls and selects previous alarm
         if self._scrollIndex:
             self._scrollIndex-=1
         self.alarmScreen()
+
+
+    def selectedAlarm(self):  # returns the selected alarm
+        return self._alarms[self._currentScroll]
 
 
     # settingsScreen handels the graphichs of the settings screen. Similar to alarmScreen.
