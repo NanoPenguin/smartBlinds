@@ -75,7 +75,7 @@ class Screen():
                         if scrollDirUp:
                             Y += blockSize*2
                     draw.line((0, Y, W, Y), fill="white")
-                    draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
+                    #draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
                     draw.rectangle((0, blockSize, 2, blockSize*2-1), fill="white")
                     if alarm != newAlarm:
                         draw.text((4, Y+(blockSize-self._fontSize)/2), alarmTime, fill="white", font=self._fontBold)
