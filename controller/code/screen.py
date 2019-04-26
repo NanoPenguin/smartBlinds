@@ -35,7 +35,7 @@ class Screen():
             scrollDirUp = False
         else:
             scrollDirUp = True
-        for animationConst in range(blockSize,0,-1):
+        for animationConst in range(blockSize,-1,-1):
             if scrollDirUp:
                 #animationConst = blockSize - animationConst
                 animationConst = -animationConst
