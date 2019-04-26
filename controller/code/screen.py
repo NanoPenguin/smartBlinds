@@ -41,7 +41,6 @@ class Screen():
         newAlarm = 'New Alarm'
         alarms = list(self._alarms)
         alarms.append(newAlarm)
-        print(alarms)
         self._fontSize = 17
         blockSize = 22
         W = 128
