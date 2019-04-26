@@ -25,7 +25,7 @@ class Screen():
         self._fontBold = ImageFont.truetype(self._fontLocation + self._fontNameBold, self._fontSize)
         self._font = ImageFont.truetype(self._fontLocation + self._fontName, self._fontSize)
         self._clockFontSize = 30
-        self._fontClock = ImageFont.truetype(self._fontLocation + self._fontName, self._clockFontSize)
+        self._fontClock = ImageFont.truetype(self._fontLocation + self._fontNameBold, self._clockFontSize)
 
     def clockScreen(self):
         W = 128
@@ -83,7 +83,7 @@ class Screen():
                         autoStrSize = draw.textsize(autoStr, font=self._font)
                         draw.text((W-blockSize-autoStrSize[0], Y+(blockSize-self._fontSize)/2), autoStr, fill="white", font=self._font)
                     else:
-                        draw.text((4, Y+(blockSize-self._fontSize)/2), newAlarm, fill="white", font=self._fontBold)
+                        draw.text((4, Y+(blockSize-self._fontSize)/2), newAlarm, fill="white", font=self._font)
                 if self._currentScroll == self._scrollIndex:
                     break
             time.sleep(self._scrollDelay)
