@@ -12,7 +12,7 @@ class Alarm():  # class for each alarm object
 
 
     def __str__(self):  # formats the time for printing
-        return time.strftime("%H:%M", time.gmtime(self._time))
+        return time.strftime("%H:%M %z %Z", time.localtime(self._time))
 
 
     def getTime(self):  # get the set time
