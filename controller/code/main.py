@@ -26,7 +26,7 @@ def main():
     newAlarm(alarms, time.time(), True, True)
     newAlarm(alarms, time.time(), True, False)
     screen.alarmScreen()
-    """time.sleep(1)
+    time.sleep(1)
     screen.alarmScrollDown()
     time.sleep(0.2)
     screen.alarmScrollDown()
@@ -43,11 +43,11 @@ def main():
     time.sleep(0.2)
     screen.alarmScrollDown()
     time.sleep(0.2)
-    print(screen.selectedAlarm())"""
+    print(screen.selectedAlarm())
     screen.clockScreen()
     time.sleep(2)
     screen.setHourScreen(str(alarms[0]))
-    time.sleep(5)
+    time.sleep(2)
     screen.setMinuteScreen(str(alarms[0]))
     time.sleep(5)
 
