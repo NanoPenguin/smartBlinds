@@ -55,7 +55,7 @@ class Screen():
                             autoStr = "cal"
                     else:
                             autoStr = "man"
-                    Y = (alarms.index(alarm)+1-self._currentScroll) * blockSize + animationConst
+                    Y = (alarms.index(alarm)-self._currentScroll) * blockSize + animationConst
                     print('index: {}  scroll: {}  animationConst: {}  Y: {}'.format(alarms.index(alarm), self._currentScroll, animationConst, Y))
                     draw.line((0, Y, W, Y), fill="white")
                     draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
