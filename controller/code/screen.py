@@ -13,11 +13,11 @@ SCREENDEVICE = ssd1306(SCREENSERIAL, rotate=2)
 
 
 class Screen():
-    def __init__(self):
+    def __init__(self, alarms):
         self._scrollIndex = 0
         self._currentScroll = 0
         self._scrollDelay = 0
-        self._self._alarms = self._alarms
+        self._alarms = alarms
 
     def clockScreen(self):
         pass
@@ -75,11 +75,13 @@ class Screen():
 
     def scrollDown(self):
         self._scrollIndex+=1
+        self.alarmScreen()
 
 
     def scrollUp(self):
         if self._scrollIndex:
             self._scrollIndex-=1
+        self.alarmScreen()
 
 
     # settingsScreen handels the graphichs of the settings screen. Similar to alarmScreen.
