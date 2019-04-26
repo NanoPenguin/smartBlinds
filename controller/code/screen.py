@@ -16,7 +16,7 @@ class Screen():
     def __init__(self):
         self._scrollIndex = 0
         self._currentScroll = 0
-        self._scrollDelay = 0.02
+        self._scrollDelay = 0.007
 
     def clockScreen(self):
         pass
