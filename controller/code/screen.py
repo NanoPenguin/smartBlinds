@@ -53,7 +53,7 @@ class Screen():
                             autoStr = "cal"
                     else:
                             autoStr = "man"
-                    Y = (alarms.index(alarm)-self._currentScroll) * blockSize + animationConst
+                    Y = (alarms.index(alarm)-self._currentScroll) * blockSize + animationConst - 1
                     if self._currentScroll == self._scrollIndex:
                             Y += blockSize*2
                     else:
