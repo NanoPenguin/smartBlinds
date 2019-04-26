@@ -35,7 +35,10 @@ class Screen():
             scrollDirUp = False
         else:
             scrollDirUp = True
-        for animationConst in range(blockSize+1,0,-1):
+        animationRange = range(blockSize,0,-1)
+        if scrollDirUp:
+            animationRange = animationRange.reverse()
+        for animationConst in animationRange:
             if scrollDirUp:
                 animationConst = -animationConst
             with canvas(SCREENDEVICE) as draw:
