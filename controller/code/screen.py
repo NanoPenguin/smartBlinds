@@ -35,7 +35,7 @@ class Screen():
             scrollDirUp = False
         else:
             scrollDirUp = True
-        animationRange = range(blockSize,0,-1)
+        animationRange = list(range(blockSize,0,-1))
         if scrollDirUp:
             animationRange = animationRange.reverse()
         for animationConst in animationRange:
