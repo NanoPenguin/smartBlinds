@@ -18,11 +18,11 @@ class Screen():
         self._currentScroll = 0
         self._scrollDelay = 0
         self._alarms = alarms
-        self._self._fontSize = 17
+        self._fontSize = 17
         self._fontName = "FreeMono.ttf"
         self._fontNameBold = "FreeMonoBold.ttf"
         self._fontLocation = "/usr/share/fonts/truetype/freefont/"
-        self._self._fontBold = ImageFont.truetype(self._fontLocation + self._fontNameBold, self._fontSize)
+        self._fontBold = ImageFont.truetype(self._fontLocation + self._fontNameBold, self._fontSize)
         self._font = ImageFont.truetype(self._fontLocation + self._fontName, self._fontSize)
         self._clockFontSize = 30
         self._fontClock = ImageFont.truetype(self._fontLocation + self._fontNameBold, self._clockFontSize)
