@@ -3,7 +3,7 @@ Class for loading the settings from
 web interface or local drive
 """
 
-class Settings():
+class Settings(self):
     self._settings = {
     'alarms': [],
     'preEventDelay': ''
