@@ -142,7 +142,7 @@ class Screen():
         if len(keys) > self._currentScroll:
             return keys[self._currentScroll]
         else:
-            return False    
+            return False
 
 
     def setHourScreen(self, timeStr):
@@ -189,13 +189,14 @@ class Screen():
             scrollDirUp = False
         else:
             scrollDirUp = True
+        keys = settings.keys()
         for animationConst in range(self._blockSize,-1,-2):
             if scrollDirUp:
                 #animationConst = self._blockSize - animationConst
                 animationConst = -animationConst
             with canvas(SCREENDEVICE) as draw:
-                for key in settings.keys():
-                    Y = (alarms.index(alarm)-self._currentScroll) * self._blockSize + animationConst - 1
+                for key in keys:
+                    Y = (keys.index(key)-self._currentScroll) * self._blockSize + animationConst - 1
                     if self._currentScroll == self._scrollIndex:
                             Y += self._blockSize*2
                     else:
