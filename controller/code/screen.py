@@ -181,15 +181,14 @@ class Screen():
     def settingsScreen(self):
         if self._lastMode != 'settings':
             self._resetScroll()
-        settings = self._settingsObject.getAll()
-
         W = 128
         H = 64
         if self._currentScroll < self._scrollIndex:
             scrollDirUp = False
         else:
             scrollDirUp = True
-        keys = [key for key in self._settingsObject.getKeys()]
+        keys = self._settingsObject.getKeys()
+        print
         for animationConst in range(self._blockSize,-1,-2):
             if scrollDirUp:
                 #animationConst = self._blockSize - animationConst
