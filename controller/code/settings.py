@@ -45,5 +45,5 @@ class Settings():
 
 
     def getKeys(self):
-        keys = [key for key in self._settings.items()
+        keys = [key for key in self._settings.items()]
         return keys
