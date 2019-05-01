@@ -1,5 +1,9 @@
 """
 Class for displaying on the screen
+
+TODO:
+create alarmsobject to sync alarms between classes
+
 """
 
 import time
@@ -13,11 +17,13 @@ SCREENDEVICE = ssd1306(SCREENSERIAL, rotate=2)
 
 
 class Screen():
-    def __init__(self, alarms):
+    def __init__(self, alarms, settingsObject):
         self._scrollIndex = 0
         self._currentScroll = 0
         self._scrollDelay = 0
         self._alarms = alarms
+        self._settingsObject = settingsObject
+        self._blockSize = 22
         self._fontSize = 17
         self._fontName = "FreeMono.ttf"
         self._fontNameBold = "FreeMonoBold.ttf"
@@ -26,6 +32,7 @@ class Screen():
         self._font = ImageFont.truetype(self._fontLocation + self._fontName, self._fontSize)
         self._clockFontSize = 30
         self._fontClock = ImageFont.truetype(self._fontLocation + self._fontNameBold, self._clockFontSize)
+        self._lastMode = ''
 
     def clockScreen(self):
         W = 128
@@ -45,25 +52,26 @@ class Screen():
             draw.text(((W-w)/2, (H-h)/2), timeStr, fill="white", font=self._fontClock)
             if earliest:
                 draw.text((0, H-self._fontSize), str(earliestAlarm), fill="white", font=self._font)
+        self._lastMode = 'clock'
 
 
     # alarmScreen handels the graphichs of viewing, setting and activating alarms
     # uses external functions to achieve this
     def alarmScreen(self):
+        if self._lastMode != 'alarms':
+            self._resetScroll()
         newAlarm = 'New Alarm'
         alarms = list(self._alarms)
         alarms.append(newAlarm)
-        self._fontSize = 17
-        blockSize = 22
         W = 128
         H = 64
         if self._currentScroll < self._scrollIndex:
             scrollDirUp = False
         else:
             scrollDirUp = True
-        for animationConst in range(blockSize,-1,-2):
+        for animationConst in range(self._blockSize,-1,-2):
             if scrollDirUp:
-                #animationConst = blockSize - animationConst
+                #animationConst = self._blockSize - animationConst
                 animationConst = -animationConst
             with canvas(SCREENDEVICE) as draw:
                 for alarm in alarms:
@@ -80,37 +88,45 @@ class Screen():
                                 autoStr = "cal"
                         else:
                                 autoStr = ""
-                    Y = (alarms.index(alarm)-self._currentScroll) * blockSize + animationConst - 1
+                    Y = (alarms.index(alarm)-self._currentScroll) * self._blockSize + animationConst - 1
                     if self._currentScroll == self._scrollIndex:
-                            Y += blockSize*2
+                            Y += self._blockSize*2
                     else:
                         if scrollDirUp:
-                            Y += blockSize*2
+                            Y += self._blockSize*2
                     draw.line((0, Y, W, Y), fill="white")
-                    #draw.line((0, Y+blockSize, W, Y+blockSize), fill="white")
-                    draw.rectangle((0, blockSize, 2, blockSize*2-1), fill="white")
+                    #draw.line((0, Y+self._blockSize, W, Y+self._blockSize), fill="white")
+                    draw.rectangle((0, self._blockSize, 2, self._blockSize*2-1), fill="white")
                     if alarm != newAlarm:
-                        draw.text((4, Y+(blockSize-self._fontSize)/2), alarmTime, fill="white", font=self._fontBold)
+                        draw.text((4, Y+(self._blockSize-self._fontSize)/2), alarmTime, fill="white", font=self._fontBold)
                         autoStrSize = draw.textsize(autoStr, font=self._font)
-                        draw.text((W-blockSize-autoStrSize[0], Y+(blockSize-self._fontSize)/2), autoStr, fill="white", font=self._font)
-                        draw.ellipse((W-blockSize+9, Y+5, W-1, Y+blockSize-5), outline="white", fill=activeColor)
+                        draw.text((W-self._blockSize-autoStrSize[0], Y+(self._blockSize-self._fontSize)/2), autoStr, fill="white", font=self._font)
+                        draw.ellipse((W-self._blockSize+9, Y+5, W-1, Y+self._blockSize-5), outline="white", fill=activeColor)
                     else:
-                        draw.text((4, Y+(blockSize-self._fontSize)/2), newAlarm, fill="white", font=self._font)
+                        draw.text((4, Y+(self._blockSize-self._fontSize)/2), newAlarm, fill="white", font=self._font)
                 if self._currentScroll == self._scrollIndex:
                     break
             time.sleep(self._scrollDelay)
         self._currentScroll = self._scrollIndex
+        self._lastMode = 'alarm'
 
 
-    def alarmScrollDown(self):  # scrolls and selects next alarm
+    def scrollDown(self):  # scrolls and selects next alarm
         self._scrollIndex+=1
-        self.alarmScreen()
+        if self._lastMode == 'alarm':
+            self.alarmScreen()
+        elif self._lastMode == 'settings':
+            self.settingsScreen()
 
 
-    def alarmScrollUp(self):  # scrolls and selects previous alarm
+
+    def scrollUp(self):  # scrolls and selects previous alarm
         if self._scrollIndex:
             self._scrollIndex-=1
-        self.alarmScreen()
+        if self._lastMode == 'alarm':
+            self.alarmScreen()
+        elif self._lastMode == 'settings':
+            self.settingsScreen()
 
 
     def selectedAlarm(self):  # returns the selected alarm
@@ -118,6 +134,15 @@ class Screen():
             return self._alarms[self._currentScroll]
         else:
             return False
+
+
+    def selectedSetting(self):  # returns the selected setting
+        settings = self._settingsObject.getAll()
+        keys = [key for key in settings.keys()]
+        if len(keys) > self._currentScroll:
+            return keys[self._currentScroll]
+        else:
+            return False    
 
 
     def setHourScreen(self, timeStr):
@@ -133,6 +158,7 @@ class Screen():
             draw.text(((W/2-w)/2, (H-h)/2), timeList[0], fill="black", font=self._fontClock)
             w, h = draw.textsize(timeList[1], font=self._fontClock)
             draw.text(((W/2-w)/2+W/2, (H-h)/2), timeList[1], fill="white", font=self._fontClock)
+        self._lastMode = 'setHour'
 
 
     def setMinuteScreen(self, timeStr):
@@ -148,8 +174,44 @@ class Screen():
             draw.text(((W/2-w)/2, (H-h)/2), timeList[0], fill="white", font=self._fontClock)
             w, h = draw.textsize(timeList[1], font=self._fontClock)
             draw.text(((W/2-w)/2+W/2, (H-h)/2), timeList[1], fill="black", font=self._fontClock)
+        self._lastMode = 'setMinute'
 
 
     # settingsScreen handels the graphichs of the settings screen. Similar to alarmScreen.
     def settingsScreen(self):
-        pass
+        if self._lastMode != 'settings':
+            self._resetScroll()
+        settings = self._settingsObject.getAll()
+
+        W = 128
+        H = 64
+        if self._currentScroll < self._scrollIndex:
+            scrollDirUp = False
+        else:
+            scrollDirUp = True
+        for animationConst in range(self._blockSize,-1,-2):
+            if scrollDirUp:
+                #animationConst = self._blockSize - animationConst
+                animationConst = -animationConst
+            with canvas(SCREENDEVICE) as draw:
+                for key in settings.keys():
+                    Y = (alarms.index(alarm)-self._currentScroll) * self._blockSize + animationConst - 1
+                    if self._currentScroll == self._scrollIndex:
+                            Y += self._blockSize*2
+                    else:
+                        if scrollDirUp:
+                            Y += self._blockSize*2
+                    draw.line((0, Y, W, Y), fill="white")
+                    #draw.line((0, Y+self._blockSize, W, Y+self._blockSize), fill="white")
+                    draw.rectangle((0, self._blockSize, 2, self._blockSize*2-1), fill="white")
+                    draw.text((4, Y+(self._blockSize-self._fontSize)/2), key, fill="white", font=self._font)
+                if self._currentScroll == self._scrollIndex:
+                    break
+            time.sleep(self._scrollDelay)
+        self._currentScroll = self._scrollIndex
+        self._lastMode = 'settings'
+
+
+    def _resetScroll(self):
+        self._currentScroll = 0
+        self._scrollIndex = 0

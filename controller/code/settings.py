@@ -4,22 +4,41 @@ web interface or local drive
 """
 
 class Settings():
-    alarmTimes = []
-    activeManualAlarms = []
+    self._settings = {
+    'alarms': [],
+    'preEventDelay': ''
+    }
 
-    def __init__(self,path="",loadFromWeb=False):
+    def __init__(self, path="", loadFromWeb=False):
         if loadFromWeb:
             loadWebData()
         else:
             loadLocalData()
+        self._createAlarms()
 
-    def loadWebData():
+
+    def getSetting(self, key):
+        return self._settings[key]
+
+
+    def getAll(self):
+        return self._settings
+
+
+    def loadWebData(self):
         #Funktion som läser in alla
         #inställningar från webinterface
-        manualAlarmTimes.append("12")
+        pass
 
 
-    def loadLocalData():
+    def loadLocalData(self):
         #Funktion som läser in alla
         #inställningar från en lokal textfil
-        manualAlarmTimes.append("something else")
+        pass
+
+
+    def _createAlarms(self):
+        alarms = []
+        for alarm in self._settings['alarms']:
+            alarms.append(Alarm(alarm['time'], alarm['fromCalendar'], alarm['isActivated']))
+        self._settings['alarms'] = alarms

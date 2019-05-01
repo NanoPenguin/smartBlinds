@@ -18,8 +18,11 @@ epochSeconds = time.mktime(timeTuple)
 """
 
 def main():
-    alarms = []  # Array of alarm objects
-    screen = Screen(alarms)  # initialising screen
+    # must be initialized settings - alarms - screen
+    settings = Settings()  # initializing settings
+    alarms = settings.getSetting['alarms']  # initializing alarms
+    screen = Screen(alarms)  # initializing screen
+
     newAlarm(alarms, time.time())
     newAlarm(alarms, time.time(), True, False)
     newAlarm(alarms, time.time(), False, True)
@@ -27,23 +30,25 @@ def main():
     newAlarm(alarms, time.time(), True, False)
     screen.alarmScreen()
     time.sleep(1)
-    screen.alarmScrollDown()
+    screen.scrollDown()
     time.sleep(0.2)
-    screen.alarmScrollDown()
+    screen.scrollDown()
     time.sleep(0.2)
-    screen.alarmScrollDown()
-    screen.alarmScrollDown()
-    screen.alarmScrollDown()
-    time.sleep(1)
-    screen.alarmScrollUp()
-    time.sleep(0.2)
-    screen.alarmScrollUp()
-    time.sleep(0.2)
-    screen.alarmScrollUp()
-    time.sleep(0.2)
-    screen.alarmScrollDown()
-    time.sleep(0.2)
+    screen.scrollDown()
+    screen.scrollDown()
+    screen.scrollUp()
     print(screen.selectedAlarm())
+    time.sleep(1)
+    screen.settingsScreen()
+    time.sleep(0.2)
+    screen.scrollDown()
+    time.sleep(0.2)
+    screen.scrollUp()
+    time.sleep(0.2)
+    screen.scrollDown()
+    time.sleep(0.2)
+    print(screen.selectedSetting())
+    time.sleep(2)
     screen.clockScreen()
     time.sleep(2)
     screen.setHourScreen(str(alarms[0]))
