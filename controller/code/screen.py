@@ -76,8 +76,7 @@ class Screen():
                 for alarm in alarms:
                     #print(alarm)
                     if alarms.index(alarm) <= self._scrollIndex+2 and \
-                        alarms.index(alarm) => self._scrollIndex-2):
-                        alarms.index(alarm) >= 2*self._scrollIndex-self._currentScroll
+                        alarms.index(alarm) >= self._scrollIndex-2):
                         if alarm != newAlarm:
                             alarmTime = str(alarm)
                             alarmAuto = alarm.isFromCalendar()
@@ -199,7 +198,7 @@ class Screen():
             with canvas(SCREENDEVICE) as draw:
                 for key in keys:
                     if keys.index(key) <= self._scrollIndex+2 and \
-                        keys.index(key) => self._scrollIndex-2):
+                        keys.index(key) >= self._scrollIndex-2):
                         Y = (keys.index(key)-self._currentScroll) * self._blockSize + animationConst - 1
                         if self._currentScroll == self._scrollIndex:
                                 Y += self._blockSize*2
