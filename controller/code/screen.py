@@ -70,12 +70,13 @@ class Screen():
         else:
             scrollDirUp = True
         for animationConst in range(self._blockSize,-1,-2):
+            print(animationConst)
             if scrollDirUp:
                 #animationConst = self._blockSize - animationConst
                 animationConst = -animationConst
             with canvas(SCREENDEVICE) as draw:
                 for alarm in alarms:
-                    print(alarm)
+                    #print(alarm)
                     if alarm != newAlarm:
                         alarmTime = str(alarm)
                         alarmAuto = alarm.isFromCalendar()
@@ -90,7 +91,7 @@ class Screen():
                         else:
                                 autoStr = ""
                     Y = (alarms.index(alarm)-self._currentScroll) * self._blockSize + animationConst - 1
-                    print(Y)
+                    #print(Y)
                     if self._currentScroll == self._scrollIndex:
                             Y += self._blockSize*2
                     else:
