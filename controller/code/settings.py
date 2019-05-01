@@ -10,8 +10,8 @@ from alarm import *
 class Settings():
     def __init__(self, path="", loadFromWeb=False):
         self._settings = OrderedDict()
-        self._settings['alarms'] = [],
-        self._settings['preEventDelay'] = ''
+        self._settings['Alarms'] = [],
+        self._settings['Morning time'] = ''
         if loadFromWeb:
             self.loadWebData()
         else:
@@ -41,10 +41,10 @@ class Settings():
 
     def _createAlarms(self):
         alarms = []
-        alarmList = self._settings['alarms'][0]
+        alarmList = self._settings['Alarms'][0]
         for alarm in alarmList:
             alarms.append(Alarm(alarm['time'], alarm['fromCalendar'], alarm['isActivated']))
-        self._settings['alarms'] = alarms
+        self._settings['Alarms'][0] = alarms
 
 
     def getKeys(self):
