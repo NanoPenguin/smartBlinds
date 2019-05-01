@@ -29,17 +29,6 @@ def main():
     newAlarm(alarms, time.time(), True, True)
     newAlarm(alarms, time.time(), True, False)
 
-    screen.settingsScreen()
-    time.sleep(0.2)
-    screen.scrollDown()
-    time.sleep(0.2)
-    screen.scrollUp()
-    time.sleep(0.2)
-    screen.scrollDown()
-    time.sleep(0.2)
-    print(screen.selectedSetting())
-    time.sleep(2)
-
     screen.alarmScreen()
     time.sleep(1)
     screen.scrollDown()
