@@ -10,9 +10,9 @@ class Settings():
         'preEventDelay': ''
         }
         if loadFromWeb:
-            loadWebData()
+            self.loadWebData()
         else:
-            loadLocalData()
+            self.loadLocalData()
         self._createAlarms()
 
 
