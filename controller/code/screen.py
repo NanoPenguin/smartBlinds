@@ -75,6 +75,7 @@ class Screen():
                 animationConst = -animationConst
             with canvas(SCREENDEVICE) as draw:
                 for alarm in alarms:
+                    print(alarm)
                     if alarm != newAlarm:
                         alarmTime = str(alarm)
                         alarmAuto = alarm.isFromCalendar()
@@ -89,6 +90,7 @@ class Screen():
                         else:
                                 autoStr = ""
                     Y = (alarms.index(alarm)-self._currentScroll) * self._blockSize + animationConst - 1
+                    print(Y)
                     if self._currentScroll == self._scrollIndex:
                             Y += self._blockSize*2
                     else:
@@ -114,7 +116,6 @@ class Screen():
     def scrollDown(self):  # scrolls and selects next alarm
         self._scrollIndex+=1
         if self._lastMode == 'alarm':
-            print('scrolled down alarm')
             self.alarmScreen()
         elif self._lastMode == 'settings':
             self.settingsScreen()
@@ -125,7 +126,6 @@ class Screen():
         if self._scrollIndex:
             self._scrollIndex-=1
         if self._lastMode == 'alarm':
-            print('scrolled up alarm')
             self.alarmScreen()
         elif self._lastMode == 'settings':
             self.settingsScreen()
