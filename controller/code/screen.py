@@ -2,7 +2,6 @@
 Class for displaying on the screen
 
 TODO:
-create alarmsobject to sync alarms between classes
 
 """
 
@@ -139,8 +138,7 @@ class Screen():
 
 
     def selectedSetting(self):  # returns the selected setting
-        settings = self._settingsObject.getAll()
-        keys = [key for key in settings.keys()]
+        keys = [key for key in self._settingsObject.getKeys()]
         if len(keys) > self._currentScroll:
             return keys[self._currentScroll]
         else:
@@ -191,7 +189,7 @@ class Screen():
             scrollDirUp = False
         else:
             scrollDirUp = True
-        keys = [key for key in settings.keys()]
+        keys = [key for key in self._settingsObject.getKeys()]
         for animationConst in range(self._blockSize,-1,-2):
             if scrollDirUp:
                 #animationConst = self._blockSize - animationConst
