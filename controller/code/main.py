@@ -31,7 +31,7 @@ def main():
     screen.alarmScreen()
     time.sleep(1)
     screen.scrollDown()
-    time.sleep(0.2)
+    time.sleep(2)
     screen.scrollDown()
     time.sleep(0.2)
     screen.scrollDown()
