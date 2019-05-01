@@ -189,7 +189,7 @@ class Screen():
             scrollDirUp = False
         else:
             scrollDirUp = True
-        keys = settings.keys()
+        keys = [key for key in settings.keys()]
         for animationConst in range(self._blockSize,-1,-2):
             if scrollDirUp:
                 #animationConst = self._blockSize - animationConst
