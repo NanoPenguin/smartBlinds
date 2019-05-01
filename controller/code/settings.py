@@ -48,6 +48,5 @@ class Settings():
 
 
     def getKeys(self):
-        keys = [key for key in self._settings.items()]
-        print(keys)
+        keys = [key[0] for key in self._settings.items()]
         return keys
