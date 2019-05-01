@@ -3,13 +3,12 @@ Class for loading the settings from
 web interface or local drive
 """
 
-class Settings(self):
-    self._settings = {
-    'alarms': [],
-    'preEventDelay': ''
-    }
-
+class Settings():
     def __init__(self, path="", loadFromWeb=False):
+        self._settings = {
+        'alarms': [],
+        'preEventDelay': ''
+        }
         if loadFromWeb:
             loadWebData()
         else:
