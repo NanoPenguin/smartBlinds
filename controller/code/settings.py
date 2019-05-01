@@ -5,6 +5,8 @@ web interface or local drive
 
 from collections import OrderedDict
 
+from alarm import *
+
 class Settings():
     def __init__(self, path="", loadFromWeb=False):
         self._settings = OrderedDict()
