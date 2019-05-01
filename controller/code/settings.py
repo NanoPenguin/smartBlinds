@@ -17,6 +17,7 @@ class Settings():
 
 
     def getSetting(self, key):
+        print('########')
         print(self._settings[key])
         return self._settings[key]
 
