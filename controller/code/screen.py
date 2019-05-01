@@ -75,36 +75,39 @@ class Screen():
             with canvas(SCREENDEVICE) as draw:
                 for alarm in alarms:
                     #print(alarm)
-                    if alarm != newAlarm:
-                        alarmTime = str(alarm)
-                        alarmAuto = alarm.isFromCalendar()
-                        alarmActive = alarm.isActivated()
-                        if alarmActive:
-                                activeColor = "white"
-                        else:
-                                activeColor = "black"
+                    if alarms.index(alarm) <= self._scrollIndex+2 and \
+                        alarms.index(alarm) => self._scrollIndex-2):
+                        alarms.index(alarm) >= 2*self._scrollIndex-self._currentScroll
+                        if alarm != newAlarm:
+                            alarmTime = str(alarm)
+                            alarmAuto = alarm.isFromCalendar()
+                            alarmActive = alarm.isActivated()
+                            if alarmActive:
+                                    activeColor = "white"
+                            else:
+                                    activeColor = "black"
 
-                        if alarmAuto:
-                                autoStr = "cal"
+                            if alarmAuto:
+                                    autoStr = "cal"
+                            else:
+                                    autoStr = ""
+                        Y = (alarms.index(alarm)-self._currentScroll) * self._blockSize + animationConst - 1
+                        #print(Y)
+                        if self._currentScroll == self._scrollIndex:
+                                Y += self._blockSize*2
                         else:
-                                autoStr = ""
-                    Y = (alarms.index(alarm)-self._currentScroll) * self._blockSize + animationConst - 1
-                    #print(Y)
-                    if self._currentScroll == self._scrollIndex:
-                            Y += self._blockSize*2
-                    else:
-                        if scrollDirUp:
-                            Y += self._blockSize*2
-                    draw.line((0, Y, W, Y), fill="white")
-                    #draw.line((0, Y+self._blockSize, W, Y+self._blockSize), fill="white")
-                    draw.rectangle((0, self._blockSize, 2, self._blockSize*2-1), fill="white")
-                    if alarm != newAlarm:
-                        draw.text((4, Y+(self._blockSize-self._fontSize)/2), alarmTime, fill="white", font=self._fontBold)
-                        autoStrSize = draw.textsize(autoStr, font=self._font)
-                        draw.text((W-self._blockSize-autoStrSize[0], Y+(self._blockSize-self._fontSize)/2), autoStr, fill="white", font=self._font)
-                        draw.ellipse((W-self._blockSize+9, Y+5, W-1, Y+self._blockSize-5), outline="white", fill=activeColor)
-                    else:
-                        draw.text((4, Y+(self._blockSize-self._fontSize)/2), newAlarm, fill="white", font=self._font)
+                            if scrollDirUp:
+                                Y += self._blockSize*2
+                        draw.line((0, Y, W, Y), fill="white")
+                        #draw.line((0, Y+self._blockSize, W, Y+self._blockSize), fill="white")
+                        draw.rectangle((0, self._blockSize, 2, self._blockSize*2-1), fill="white")
+                        if alarm != newAlarm:
+                            draw.text((4, Y+(self._blockSize-self._fontSize)/2), alarmTime, fill="white", font=self._fontBold)
+                            autoStrSize = draw.textsize(autoStr, font=self._font)
+                            draw.text((W-self._blockSize-autoStrSize[0], Y+(self._blockSize-self._fontSize)/2), autoStr, fill="white", font=self._font)
+                            draw.ellipse((W-self._blockSize+9, Y+5, W-1, Y+self._blockSize-5), outline="white", fill=activeColor)
+                        else:
+                            draw.text((4, Y+(self._blockSize-self._fontSize)/2), newAlarm, fill="white", font=self._font)
                 if self._currentScroll == self._scrollIndex:
                     break
             time.sleep(self._scrollDelay)
@@ -195,16 +198,18 @@ class Screen():
                 animationConst = -animationConst
             with canvas(SCREENDEVICE) as draw:
                 for key in keys:
-                    Y = (keys.index(key)-self._currentScroll) * self._blockSize + animationConst - 1
-                    if self._currentScroll == self._scrollIndex:
-                            Y += self._blockSize*2
-                    else:
-                        if scrollDirUp:
-                            Y += self._blockSize*2
-                    draw.line((0, Y, W, Y), fill="white")
-                    #draw.line((0, Y+self._blockSize, W, Y+self._blockSize), fill="white")
-                    draw.rectangle((0, self._blockSize, 2, self._blockSize*2-1), fill="white")
-                    draw.text((4, Y+(self._blockSize-self._fontSize)/2), key, fill="white", font=self._font)
+                    if keys.index(key) <= self._scrollIndex+2 and \
+                        keys.index(key) => self._scrollIndex-2):
+                        Y = (keys.index(key)-self._currentScroll) * self._blockSize + animationConst - 1
+                        if self._currentScroll == self._scrollIndex:
+                                Y += self._blockSize*2
+                        else:
+                            if scrollDirUp:
+                                Y += self._blockSize*2
+                        draw.line((0, Y, W, Y), fill="white")
+                        #draw.line((0, Y+self._blockSize, W, Y+self._blockSize), fill="white")
+                        draw.rectangle((0, self._blockSize, 2, self._blockSize*2-1), fill="white")
+                        draw.text((4, Y+(self._blockSize-self._fontSize)/2), key, fill="white", font=self._font)
                 if self._currentScroll == self._scrollIndex:
                     break
             time.sleep(self._scrollDelay)
