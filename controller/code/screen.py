@@ -58,7 +58,7 @@ class Screen():
     # alarmScreen handels the graphichs of viewing, setting and activating alarms
     # uses external functions to achieve this
     def alarmScreen(self):
-        if self._lastMode != 'alarms':
+        if self._lastMode != 'alarm':
             self._resetScroll()
         newAlarm = 'New Alarm'
         alarms = list(self._alarms)
@@ -107,8 +107,8 @@ class Screen():
                         draw.ellipse((W-self._blockSize+9, Y+5, W-1, Y+self._blockSize-5), outline="white", fill=activeColor)
                     else:
                         draw.text((4, Y+(self._blockSize-self._fontSize)/2), newAlarm, fill="white", font=self._font)
-                #if self._currentScroll == self._scrollIndex:
-                #    break
+                if self._currentScroll == self._scrollIndex:
+                    break
             time.sleep(self._scrollDelay)
         self._currentScroll = self._scrollIndex
         self._lastMode = 'alarm'
