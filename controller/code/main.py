@@ -21,7 +21,7 @@ def main():
     # must be initialized settings - alarms - screen
     settings = Settings()  # initializing settings
     alarms = settings.getSetting('alarms')  # initializing alarms
-    screen = Screen(alarms)  # initializing screen
+    screen = Screen(alarms, settings)  # initializing screen
 
     newAlarm(alarms, time.time())
     newAlarm(alarms, time.time(), True, False)
