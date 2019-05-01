@@ -3,12 +3,13 @@ Class for loading the settings from
 web interface or local drive
 """
 
+from collections import OrderedDict
+
 class Settings():
     def __init__(self, path="", loadFromWeb=False):
-        self._settings = {
-        'alarms': [],
-        'preEventDelay': ''
-        }
+        self._settings = OrderedDict()
+        self._settings['alarms'] = [],
+        self._settings['preEventDelay'] = ''
         if loadFromWeb:
             self.loadWebData()
         else:
@@ -41,3 +42,8 @@ class Settings():
         for alarm in self._settings['alarms']:
             alarms.append(Alarm(alarm['time'], alarm['fromCalendar'], alarm['isActivated']))
         self._settings['alarms'] = alarms
+
+
+    def getKeys(self):
+        keys = [key for key in self._settings.items()
+        return keys
