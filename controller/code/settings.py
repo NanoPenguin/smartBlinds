@@ -41,10 +41,11 @@ class Settings():
 
     def _createAlarms(self):
         alarms = []
-        if self._settings['alarms']:
-            for alarm in self._settings['alarms']:
-                alarms.append(Alarm(alarm['time'], alarm['fromCalendar'], alarm['isActivated']))
-            self._settings['alarms'] = alarms
+        alarmList = self._settings['alarms']
+        print(alarmList)
+        for alarm in alarmList:
+            alarms.append(Alarm(alarm['time'], alarm['fromCalendar'], alarm['isActivated']))
+        self._settings['alarms'] = alarms
 
 
     def getKeys(self):
