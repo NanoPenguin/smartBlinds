@@ -38,7 +38,7 @@ class Screen():
         W = 128
         H = 64
         with canvas(SCREENDEVICE) as draw:
-            Y = int(H/2-self._fontSize/2-(len(message)-1))*(self._fontSize+2)
+            Y = int(H/2-self._fontSize/2)#-(len(message)-1))*(self._fontSize+2)
             for line in message:
                 draw.text((4, Y), line, fill="white", font=self._font)
                 Y += self._fontSize
