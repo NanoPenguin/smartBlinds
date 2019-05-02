@@ -8,44 +8,53 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from tz import LocalTimezone
 
+from alarm import *
+
 #Delete file token.pickle when modifying scopes
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 class Cal():
     def __init__(self,calendarId=None):
-        self.__calendarIdList = []
+        self._calendarIdList = []
         self.initCreds()
         if calendarId:
-            self.__calendarIdList.append(calendarId)
+            self._calendarIdList.append(calendarId)
         self.loadCalendarIds()
 
 
 
     def loadCalendarIds(self):
-        calendarList = self.__service.calendarList().list().execute()
+        ignoreIdList = ['e_2_sv#weeknum@group.v.calendar.google.com',
+                'sv.swedish#holiday@group.v.calendar.google.com',
+                'addressbook#contacts@group.v.calendar.google.com']
+        calendarList = self._service.calendarList().list().execute()
         for calendar in calendarList['items']:
-            self.__calendarIdList.append(calendar['id'])
-
+            id = calendar['id']
+            if id not in ignoreIdList:
+                self._calendarIdList.append(id)
 
     def getFirstEvent(self,calendarId):
-        # Call the Calendar API
-        print('Getting the upcoming morning event')
+        print('Getting upcoming morning event for '+calendarId)
         currentTime = datetime.datetime.utcnow()
-        dt = currentTime.replace(day=currentTime.day+1,hour=0,minute=0,second=0)
-        startDate = dt.isoformat()+'Z'
-        #8vu3do178lqo3rk17seb5uhgmdlgl53v@import.calendar.google.com
-        events_result = self.__service.events().list(calendarId=calendarId, timeMin=startDate,
-                                            maxResults=1, singleEvents=True,
+        # Start and stop date for next day
+        start = currentTime.replace(day=currentTime.day+1,hour=0,minute=0,second=0)
+        stop = currentTime.replace(day=currentTime.day+2,hour=0,minute=0,second=0)
+        startDate = start.isoformat()+'Z'
+        stopDate = stop.isoformat()+'Z'
+        eventsResult = self._service.events().list(calendarId=calendarId, timeMin=startDate,
+                                            timeMax=stopDate,maxResults=100, singleEvents=True,
                                             orderBy='startTime').execute()
-        event = events_result.get('items', [])[0]
+        events = eventsResult.get('items', [])
 
-        if not event:
-            print('No upcoming events found.')
-        else:
-            eventStart = event['start'].get('dateTime', event['start'].get('date'))
-            startTime = dateutil.parser.parse(eventStart)
-            startTime = startTime.astimezone(LocalTimezone())
-            startTime = startTime.strftime('%H:%M')
-            print(startTime, event['summary'])
+        if events:
+            for event in events:
+                eventStart = event['start'].get('dateTime', event['start'].get('date'))
+                startTime = dateutil.parser.parse(eventStart).astimezone(LocalTimezone())
+                startTimeStr = startTime.strftime('%H:%M')
+                if startTimeStr != '00:00':
+                    print(startTime.strftime('%H:%M'), event['summary'])
+                    return time.mktime(startTime.timetuple())
+        print('No upcoming events found.')
+        return None
 
     def initCreds(self):
         creds = None
@@ -67,16 +76,19 @@ class Cal():
                 pickle.dump(creds, token)
 
         service = build('calendar', 'v3', credentials=creds)
-        self.__service = service
+        self._service = service
 
     def getCalendarAlarms(self):
         calendarAlarms = []
-        for calendarId in self.__calendarIdList:
-            calendarAlarms.append(Alarm(getFirstEvent(calendarId),True,True))
+        for calendarId in self._calendarIdList:
+            startTime = self.getFirstEvent(calendarId)
+            if startTime:
+                calendarAlarms.append(Alarm(startTime,True,True))
         return calendarAlarms
 
 def test():
     cal = Cal()
-    print(cal.getCalendarAlarms())
+    for alarm in cal.getCalendarAlarms():
+        print(alarm,end=' | ')
 
 test()
