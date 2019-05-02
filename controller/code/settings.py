@@ -38,6 +38,7 @@ class Settings():
     def loadLocalData(self):
         #Funktion som läser in alla
         #inställningar från en lokal textfil
+        print('Reading settings from file:')
         try:
             file = open(self._file, 'r')
             for line in file.readlines():
@@ -57,6 +58,7 @@ class Settings():
                         else: alarm['isActivated'] = False
                 if key in ['Cal. margin', 'Easy wake']:
                     value = int(splitline[1])
+                print('\t'+key+': '+str(value))
                 self._settings[key] = value
             file.close()
         except FileNotFoundError:
@@ -64,8 +66,8 @@ class Settings():
 
 
     def saveSettings(self):
+        print('Saving the following settings:')
         file = open(self._file, 'w')
-        print(self._settings.items())
         for key, value in self._settings.items():
             if key == 'Alarms':
                 alarms = []
@@ -74,7 +76,7 @@ class Settings():
                 value = ('/').join(alarms)
             elif key in ['Cal. margin', 'Easy wake']:
                 value = str(value)
-                print(key+'  >>  '+value)
+            print('\t'+key+': '+value)
             file.write(key+':'+value+'\n')
         file.close()
 
