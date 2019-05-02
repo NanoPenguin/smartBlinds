@@ -58,7 +58,7 @@ class Screen():
     # uses external functions to achieve this
     def alarmScreen(self):
         if self._lastMode != 'alarm':
-            self._resetScroll()
+            self.resetScroll()
         newAlarm = 'New Alarm'
         alarms = list(self._alarms)
         alarms.append(newAlarm)
@@ -182,7 +182,7 @@ class Screen():
     # settingsScreen handels the graphichs of the settings screen. Similar to alarmScreen.
     def settingsScreen(self):
         if self._lastMode != 'settings':
-            self._resetScroll()
+            self.resetScroll()
         W = 128
         H = 64
         if self._currentScroll < self._scrollIndex:
@@ -216,6 +216,6 @@ class Screen():
         self._lastMode = 'settings'
 
 
-    def _resetScroll(self):
+    def resetScroll(self):
         self._currentScroll = 0
         self._scrollIndex = 0

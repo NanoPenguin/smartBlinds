@@ -23,11 +23,11 @@ def main():
     alarms = settings.getSetting('Alarms')  # initializing alarms
     screen = Screen(alarms, settings)  # initializing screen
 
-    newAlarm(settings, alarms, time.time())
-    newAlarm(settings, alarms, time.time(), True, False)
-    newAlarm(settings, alarms, time.time(), False, True)
-    newAlarm(settings, alarms, time.time(), True, True)
-    newAlarm(settings, alarms, time.time(), True, False)
+    newAlarm(time.time())
+    newAlarm(time.time(), True, False)
+    newAlarm(time.time(), False, True)
+    newAlarm(time.time(), True, True)
+    newAlarm(time.time(), True, False)
 
     screen.alarmScreen()
     time.sleep(1)
@@ -39,6 +39,11 @@ def main():
     screen.scrollDown()
     screen.scrollUp()
     print(screen.selectedAlarm())
+    removeAlarm(screen.selectedAlarm())
+    screen.resetScroll()
+    screen.alarmScreen()
+    time.sleep(0.3)
+    screen.scrollDown()
     time.sleep(1)
 
     screen.settingsScreen()
@@ -62,23 +67,14 @@ def main():
     settings.saveSettings()
 
 
-# reads from file and regreates saved alarms, settings and blids
-# has to creat global objects
-def readFromFile():
-    pass
+    # alarms=alarmArray, time=any time in seconds since epoch
+    def newAlarm(time, fromCalendar=False, activated=True):
+        newAlarm = Alarm(time, fromCalendar, activated)
+        alarms.append(newAlarm)
 
 
-# writs alarms, settings and blids to file
-def writeToFile():
-    pass
-
-
-# called from alarmScreen()
-# alarms=alarmArray, time=any time in seconds since epoch
-def newAlarm(settings, alarms, time, fromCalendar=False, activated=True):
-    newAlarm = Alarm(time, fromCalendar, activated)
-    alarms.append(newAlarm)
-    #settings.addAlarm(newAlarm)
+    def removeAlarm(alarm):
+        alarms.remove(alarm)
 
 
 main()
