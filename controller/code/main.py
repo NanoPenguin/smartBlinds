@@ -17,64 +17,65 @@ year, mon, day, h, m, s, wd, yd, -1
 epochSeconds = time.mktime(timeTuple)
 """
 
-def main():
-    # must be initialized settings - alarms - screen
-    settings = Settings()  # initializing settings
-    alarms = settings.getSetting('Alarms')  # initializing alarms
-    screen = Screen(alarms, settings)  # initializing screen
+# must be initialized settings - alarms - screen
+SETTINGS = Settings()  # initializing settings
+ALARMS = settings.getSetting('Alarms')  # initializing alarms
+SCREEN = Screen(alarms, settings)  # initializing screen
 
+
+def main():
     newAlarm(time.time())
     newAlarm(time.time(), True, False)
     newAlarm(time.time(), False, True)
     newAlarm(time.time(), True, True)
     newAlarm(time.time(), True, False)
 
-    screen.alarmScreen()
+    SCREEN.alarmScreen()
     time.sleep(1)
-    screen.scrollDown()
+    SCREEN.scrollDown()
     time.sleep(2)
-    screen.scrollDown()
+    SCREEN.scrollDown()
     time.sleep(0.2)
-    screen.scrollDown()
-    screen.scrollDown()
-    screen.scrollUp()
-    print(screen.selectedAlarm())
-    removeAlarm(screen.selectedAlarm())
-    screen.resetScroll()
-    screen.alarmScreen()
+    SCREEN.scrollDown()
+    SCREEN.scrollDown()
+    SCREEN.scrollUp()
+    print(SCREEN.selectedAlarm())
+    removeAlarm(SCREEN.selectedAlarm())
+    SCREEN.resetScroll()
+    SCREEN.alarmScreen()
     time.sleep(0.3)
-    screen.scrollDown()
+    SCREEN.scrollDown()
     time.sleep(1)
 
-    screen.settingsScreen()
+    SCREEN.settingsScreen()
     time.sleep(0.2)
-    screen.scrollDown()
+    SCREEN.scrollDown()
     time.sleep(0.2)
-    screen.scrollUp()
+    SCREEN.scrollUp()
     time.sleep(0.2)
-    screen.scrollDown()
+    SCREEN.scrollDown()
     time.sleep(0.2)
-    print(screen.selectedSetting())
+    print(SCREEN.selectedSetting())
     time.sleep(2)
 
-    screen.clockScreen()
+    SCREEN.clockScreen()
     time.sleep(2)
-    screen.setHourScreen(str(alarms[0]))
+    SCREEN.setHourScreen(str(alarms[0]))
     time.sleep(2)
-    screen.setMinuteScreen(str(alarms[0]))
+    SCREEN.setMinuteScreen(str(alarms[0]))
     time.sleep(2)
 
-    settings.saveSettings()
+    SETTINGS.saveSettings()
 
 
-    # alarms=alarmArray, time=any time in seconds since epoch
-    def newAlarm(time, fromCalendar=False, activated=True):
-        newAlarm = Alarm(time, fromCalendar, activated)
-        alarms.append(newAlarm)
+# alarms=alarmArray, time=any time in seconds since epoch
+def newAlarm(time, fromCalendar=False, activated=True):
+    newAlarm = Alarm(time, fromCalendar, activated)
+    ALARMS.append(newAlarm)
 
 
-    def removeAlarm(alarm):
-        alarms.remove(alarm)
+def removeAlarm(alarm):
+    ALARMS.remove(alarm)
 
 
 main()
