@@ -66,7 +66,7 @@ class Settings():
     def saveSettings(self):
         file = open(self._file, 'w')
         for key, value in self._settings.items():
-            if key = 'Alarms':
+            if key == 'Alarms':
                 for alarm in value:
                     alarm = alarm.savingStr()
                 value = ('/').join(value)
