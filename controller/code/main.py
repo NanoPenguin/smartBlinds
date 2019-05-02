@@ -31,16 +31,16 @@ def main():
     newAlarm(time.time(), True, False)
 
     SCREEN.messageScreen(['This message'])
-    time.sleep(3)
-    SCREEN.messageScreen(['This is a', 'message'])
-    time.sleep(3)
-    SCREEN.messageScreen(['This is', 'another', 'message'])
-    time.sleep(3)
-    """
-    SCREEN.alarmScreen()
     time.sleep(1)
+    SCREEN.messageScreen(['This is a', 'message'])
+    time.sleep(1)
+    SCREEN.messageScreen(['This is', 'another', 'message'])
+    time.sleep(1)
+
+    SCREEN.alarmScreen()
+    time.sleep(0.5)
     SCREEN.scrollDown()
-    time.sleep(2)
+    time.sleep(0.5)
     SCREEN.scrollDown()
     time.sleep(0.2)
     SCREEN.scrollDown()
@@ -48,11 +48,12 @@ def main():
     SCREEN.scrollUp()
     print(SCREEN.selectedAlarm())
     removeAlarm(SCREEN.selectedAlarm())
-    SCREEN.resetScroll()
-    SCREEN.alarmScreen()
-    time.sleep(0.3)
-    SCREEN.scrollDown()
+    SCREEN.message(['Alarm removed'])
     time.sleep(1)
+    SCREEN.alarmScreen()
+    time.sleep(1)
+    SCREEN.scrollDown()
+    time.sleep(0.5)
 
     SCREEN.settingsScreen()
     time.sleep(0.2)
@@ -63,16 +64,16 @@ def main():
     SCREEN.scrollDown()
     time.sleep(0.2)
     print(SCREEN.selectedSetting())
-    time.sleep(2)
+    time.sleep(1)
 
     SCREEN.clockScreen()
-    time.sleep(2)
+    time.sleep(1)
     SCREEN.setHourScreen(str(ALARMS[0]))
-    time.sleep(2)
+    time.sleep(1)
     SCREEN.setMinuteScreen(str(ALARMS[0]))
-    time.sleep(2)
+    time.sleep(1)
 
-    SETTINGS.saveSettings()"""
+    SETTINGS.saveSettings()
 
 
 # alarms=alarmArray, time=any time in seconds since epoch
