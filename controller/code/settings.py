@@ -48,7 +48,7 @@ class Settings():
                     alarms = splitline[1].split('/')
                     for alarm in alarms:
                         alarm = alarm.split(',')
-                    value = [{'time': int(alarm[0], 'fromCalendar': alarm[1], 'isActivated': alarm[2]} for alarm in alarms]
+                    value = [{'time': int(alarm[0]), 'fromCalendar': alarm[1], 'isActivated': alarm[2]} for alarm in alarms]
                     for alarm in value:
                         if alarm['fromCalendar'] == 'True':
                             alarm['fromCalendar'] = True
