@@ -39,7 +39,7 @@ class Settings():
         #Funktion som läser in alla
         #inställningar från en lokal textfil
         try:
-            file = open(self._file)
+            file = open(self._file, 'r')
             for line in file.readlines():
                 splitline = line.split(':')
                 key = splitline[0]
@@ -55,12 +55,25 @@ class Settings():
                         if alarm['isActivated'] == 'True':
                             alarm['isActivated'] = True
                         else: alarm['isActivated'] = False
-                if key == 'Cal. margin' or key == 'Easy wake':
+                if key in ['Cal. margin', 'Easy wake']:
                     value = int(splitline[1])
                 self._settings[key] = value
+            file.close()
         except FileNotFoundError:
             print('No settings.txt found')
 
+
+    def saveSettings(self):
+        file = open(self._file, 'w')
+        for key, value in self._settings.items():
+            if key = 'Alarms':
+                for alarm in value:
+                    alarm = alarm.savingStr()
+                value = ('/').join(value)
+            if key in ['Cal. margin', 'Easy wake']:
+                value = str(value)
+            file.write(key+':'+value)
+        file.close()
 
 
     def _createAlarms(self):
@@ -74,3 +87,7 @@ class Settings():
     def getKeys(self):
         keys = [key[0] for key in self._settings.items()]
         return keys
+
+
+    def addAlarm(self, alarm):
+        self._settings['Alarms'].append(alarm)

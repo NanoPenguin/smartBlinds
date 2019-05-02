@@ -23,11 +23,11 @@ def main():
     alarms = settings.getSetting('Alarms')  # initializing alarms
     screen = Screen(alarms, settings)  # initializing screen
 
-    newAlarm(alarms, time.time())
-    newAlarm(alarms, time.time(), True, False)
-    newAlarm(alarms, time.time(), False, True)
-    newAlarm(alarms, time.time(), True, True)
-    newAlarm(alarms, time.time(), True, False)
+    newAlarm(settings, alarms, time.time())
+    newAlarm(settings, alarms, time.time(), True, False)
+    newAlarm(settings, alarms, time.time(), False, True)
+    newAlarm(settings, alarms, time.time(), True, True)
+    newAlarm(settings, alarms, time.time(), True, False)
 
     screen.alarmScreen()
     time.sleep(1)
@@ -57,7 +57,9 @@ def main():
     screen.setHourScreen(str(alarms[0]))
     time.sleep(2)
     screen.setMinuteScreen(str(alarms[0]))
-    time.sleep(5)
+    time.sleep(2)
+
+    settings.saveSettings()
 
 
 # reads from file and regreates saved alarms, settings and blids
@@ -73,9 +75,10 @@ def writeToFile():
 
 # called from alarmScreen()
 # alarms=alarmArray, time=any time in seconds since epoch
-def newAlarm(alarms, time, fromCalendar=False, activated=True):
+def newAlarm(settings, alarms, time, fromCalendar=False, activated=True):
     newAlarm = Alarm(time, fromCalendar, activated)
     alarms.append(newAlarm)
+    settings.addAlarm(newAlarm)
 
 
 main()

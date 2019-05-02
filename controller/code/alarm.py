@@ -38,8 +38,13 @@ class Alarm():  # class for each alarm object
     def deactivate(self):  # set activated to False
         self._activated = False
 
+
     def toggleActivated(self): # toggle activated/deactivated
         if self._activated:
             self._activated = False
 
         else: self._activated = True
+
+
+    def savingStr(self):
+        return str(self_time)+','+str(self._fromCalendar)+','+str(self._activated)
