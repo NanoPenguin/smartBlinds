@@ -47,16 +47,18 @@ class Settings():
                 key = splitline[0]
                 if key == 'Alarms':
                     alarms = splitline[1].split('/')
+                    splittedAlarms = []
                     for alarm in alarms:
                         alarm = alarm.split(',')
-                        value = [{'time': int(part[0]), 'fromCalendar': part[1], 'isActivated': part[2]} for part in alarm]
-                        for alarm in value:
-                            if alarm['fromCalendar'] == 'True':
-                                alarm['fromCalendar'] = True
-                            else: alarm['fromCalendar'] = False
-                            if alarm['isActivated'] == 'True':
-                                alarm['isActivated'] = True
-                            else: alarm['isActivated'] = False
+                        splittedAlarms.append(alarm)
+                    value = [{'time': int(alarm[0]), 'fromCalendar': alarm[1], 'isActivated': alarm[2]} for alarm in splittedAlarms]
+                    for alarm in value:
+                        if alarm['fromCalendar'] == 'True':
+                            alarm['fromCalendar'] = True
+                        else: alarm['fromCalendar'] = False
+                        if alarm['isActivated'] == 'True':
+                            alarm['isActivated'] = True
+                        else: alarm['isActivated'] = False
                 if key in ['Cal. margin', 'Easy wake']:
                     value = int(splitline[1])
                 print('\t'+key+': '+str(value))
