@@ -71,10 +71,10 @@ class Settings():
                 for alarm in value:
                     alarms.append(alarm.savingStr())
                 value = ('/').join(alarms)
-            if key in ['Cal. margin', 'Easy wake']:
+            elif key in ['Cal. margin', 'Easy wake']:
                 value = str(value)
                 print(key+'  >>  '+value)
-            file.write(key+':'+value)
+            file.write(key+':'+value+'\n')
         file.close()
 
 
