@@ -78,7 +78,7 @@ def writeToFile():
 def newAlarm(settings, alarms, time, fromCalendar=False, activated=True):
     newAlarm = Alarm(time, fromCalendar, activated)
     alarms.append(newAlarm)
-    settings.addAlarm(newAlarm)
+    #settings.addAlarm(newAlarm)
 
 
 main()
