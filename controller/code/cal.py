@@ -33,8 +33,8 @@ class Cal(): # Class for contact with google calendar
                 self._calendarIdList.append(id)
 
 
-    def getFirstEvent(self,calendarId):
-        # get the first event (after 00:00) for calendar with given id.
+    def getFirstEvent(self, calendarId):
+        # Get the first event (after 00:00) for calendar with given id.
         # Returns a time object or None if no event is found
 
         print('Getting upcoming morning event for '+calendarId)
@@ -102,11 +102,3 @@ class Cal(): # Class for contact with google calendar
         if earliestIndex != -1:
             calendarAlarms[earliestIndex].activate()
         return calendarAlarms
-
-def test(): # Test function
-    cal = Cal()
-    calAlarmList = cal.getCalendarAlarms()
-    for alarm in calAlarmList:
-        print(alarm.printingStr(),end=' | ')
-
-test()
