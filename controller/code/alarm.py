@@ -48,3 +48,12 @@ class Alarm():  # class for each alarm object
 
     def savingStr(self):
         return str(int(self._time))+','+str(self._fromCalendar)+','+str(self._activated)
+
+    def printingStr(self):
+        active = ' Inactive'
+        if self._activated:
+            active = ' Active'
+        fromCal = ''
+        if self._fromCalendar:
+            fromCal = ' from calendar'
+        return str(str(self)+active+fromCal)
