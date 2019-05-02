@@ -45,7 +45,9 @@ class Settings():
                 key = splitline[0]
                 if key == 'Alarms':
                     alarms = splitline[1].split('/')
-                    value = [{'time': int(alarm[0]), 'fromCalendar': alarm[1], 'isActivated': alarm[2]} for alarm.split(',') in alarms]
+                    for alarm in alarms:
+                        alarm = alarm.split(',')
+                    value = [{'time': int(alarm[0]), 'fromCalendar': alarm[1], 'isActivated': alarm[2]} for alarm in alarms]
                     for alarm in value:
                         if alarm['fromCalendar'] == 'True':
                             alarm['fromCalendar'] = True
