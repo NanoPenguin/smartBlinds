@@ -12,8 +12,9 @@ from alarm import *
 
 #Delete file token.pickle when modifying scopes
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-class Cal():
-    def __init__(self,calendarId=None):
+
+class Cal(): # Class for contact with google calendar
+    def __init__(self,calendarId=None): # initialize Cal object
         self._calendarIdList = []
         self.initCreds()
         if calendarId:
@@ -21,7 +22,7 @@ class Cal():
         self.loadCalendarIds()
 
 
-    def loadCalendarIds(self):
+    def loadCalendarIds(self): # load personal calendarIds from google account
         ignoreIdList = ['e_2_sv#weeknum@group.v.calendar.google.com',
                 'sv.swedish#holiday@group.v.calendar.google.com',
                 'addressbook#contacts@group.v.calendar.google.com']
@@ -33,7 +34,8 @@ class Cal():
 
 
     def getFirstEvent(self,calendarId):
-        #
+        # get the first event (after 00:00) for calendar with given id.
+        # Returns a time object or None if no event is found
 
         print('Getting upcoming morning event for '+calendarId)
         currentTime = datetime.datetime.utcnow()
@@ -59,7 +61,7 @@ class Cal():
         return None
 
 
-    def initCreds(self):
+    def initCreds(self): # init credentials and connect to google account
         creds = None
         # The file token.pickle stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
