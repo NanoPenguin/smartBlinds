@@ -8,10 +8,12 @@ from collections import OrderedDict
 from alarm import *
 
 class Settings():
-    def __init__(self, path="", loadFromWeb=False):
+    def __init__(self, loadFromWeb=False):
+        self._file = 'settings.txt'
         self._settings = OrderedDict()
         self._settings['Alarms'] = [],
-        self._settings['Morning time'] = ''
+        self._settings['Cal. margin'] = 0
+        self._settings['Easy wake'] = 0
         if loadFromWeb:
             self.loadWebData()
         else:
@@ -36,15 +38,35 @@ class Settings():
     def loadLocalData(self):
         #Funktion som läser in alla
         #inställningar från en lokal textfil
-        pass
+        try:
+            file = open(self._file)
+            for line in file.readlines():
+                splitline = line.split(':')
+                key = splitline[0]
+                if key == 'Alarms':
+                    alarms = splitline[1].split('/')
+                    value = [{'time': int(alarm[0]), 'fromCalendar': alarm[1], 'isActivated': alarm[2]} for alarm.split(',') in alarms]
+                    for alarm in value:
+                        if alarm['fromCalendar'] == 'True':
+                            alarm['fromCalendar'] = True
+                        else: alarm['fromCalendar'] = False
+                        if alarm['isActivated'] == 'True':
+                            alarm['isActivated'] = True
+                        else: alarm['isActivated'] = False
+                if key == 'Cal. margin' or key == 'Easy wake':
+                    value = int(splitline[1])
+                self._settings[key] = value
+        except FileNotFoundError:
+            print('No settings.txt found')
+
 
 
     def _createAlarms(self):
         alarms = []
-        alarmList = self._settings['Alarms'][0]
+        alarmList = self._settings['Alarms']
         for alarm in alarmList:
             alarms.append(Alarm(alarm['time'], alarm['fromCalendar'], alarm['isActivated']))
-        self._settings['Alarms'][0] = alarms
+        self._settings['Alarms'] = alarms
 
 
     def getKeys(self):
