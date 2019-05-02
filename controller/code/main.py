@@ -32,6 +32,7 @@ def main():
 
     SCREEN.messageScreen("""This is a
     message""")
+    time.sleep(3)
 
     SCREEN.alarmScreen()
     time.sleep(1)
