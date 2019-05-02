@@ -11,7 +11,7 @@ class Settings():
     def __init__(self, loadFromWeb=False):
         self._file = 'settings.txt'
         self._settings = OrderedDict()
-        self._settings['Alarms'] = [],
+        self._settings['Alarms'] = []
         self._settings['Cal. margin'] = 0
         self._settings['Easy wake'] = 0
         if loadFromWeb:
