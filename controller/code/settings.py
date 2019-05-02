@@ -67,9 +67,10 @@ class Settings():
         file = open(self._file, 'w')
         for key, value in self._settings.items():
             if key == 'Alarms':
+                alarms = []
                 for alarm in value:
-                    alarm = alarm.savingStr()
-                value = ('/').join(value)
+                    alarms.append(alarm.savingStr())
+                value = ('/').join(alarms)
             if key in ['Cal. margin', 'Easy wake']:
                 value = str(value)
             file.write(key+':'+value)
