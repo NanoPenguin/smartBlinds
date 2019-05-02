@@ -60,9 +60,9 @@ def main():
 
     SCREEN.clockScreen()
     time.sleep(2)
-    SCREEN.setHourScreen(str(alarms[0]))
+    SCREEN.setHourScreen(str(ALARMS[0]))
     time.sleep(2)
-    SCREEN.setMinuteScreen(str(alarms[0]))
+    SCREEN.setMinuteScreen(str(ALARMS[0]))
     time.sleep(2)
 
     SETTINGS.saveSettings()
