@@ -1,3 +1,5 @@
 __pycache__
 notes.txt
 playground.py
+credentials.json
+token.pickle
