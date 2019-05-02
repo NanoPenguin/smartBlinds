@@ -20,7 +20,7 @@ epochSeconds = time.mktime(timeTuple)
 def main():
     # must be initialized settings - alarms - screen
     settings = Settings()  # initializing settings
-    alarms = settings.getSetting('alarms')  # initializing alarms
+    alarms = settings.getSetting('Alarms')  # initializing alarms
     screen = Screen(alarms, settings)  # initializing screen
 
     newAlarm(alarms, time.time())
