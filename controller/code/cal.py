@@ -33,6 +33,8 @@ class Cal():
 
 
     def getFirstEvent(self,calendarId):
+        #
+
         print('Getting upcoming morning event for '+calendarId)
         currentTime = datetime.datetime.utcnow()
         # Start and stop date for next day
@@ -80,16 +82,29 @@ class Cal():
         self._service = service
 
     def getCalendarAlarms(self):
+        # Returns list with Alarm-objects based on the first event
+        # from each personal calendar.
+        # The earliest alarm in the list is activated.
         calendarAlarms = []
+        earliest = None
+        earliestIndex = -1
+        i=0
         for calendarId in self._calendarIdList:
             startTime = self.getFirstEvent(calendarId)
             if startTime:
-                calendarAlarms.append(Alarm(startTime,True,True))
+                if (not earliest) or startTime<earliest:
+                    earliest = startTime
+                    earliestIndex = i
+                calendarAlarms.append(Alarm(startTime,True,False))
+            i+=1
+        if earliestIndex != -1:
+            calendarAlarms[earliestIndex].activate()
         return calendarAlarms
 
-def test():
+def test(): # Test function
     cal = Cal()
-    for alarm in cal.getCalendarAlarms():
-        print(alarm,end=' | ')
+    calAlarmList = cal.getCalendarAlarms()
+    for alarm in calAlarmList:
+        print(alarm.printingStr(),end=' | ')
 
 test()
