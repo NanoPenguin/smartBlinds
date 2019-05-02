@@ -73,6 +73,7 @@ class Settings():
                 value = ('/').join(alarms)
             if key in ['Cal. margin', 'Easy wake']:
                 value = str(value)
+                print(key+'  >>  '+value)
             file.write(key+':'+value)
         file.close()
 
