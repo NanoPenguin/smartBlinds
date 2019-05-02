@@ -65,6 +65,7 @@ class Settings():
 
     def saveSettings(self):
         file = open(self._file, 'w')
+        print(self._settings.items())
         for key, value in self._settings.items():
             if key == 'Alarms':
                 alarms = []
