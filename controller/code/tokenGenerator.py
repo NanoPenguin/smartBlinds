@@ -28,7 +28,4 @@ def newCreds(): # init credentials and connect to new google account
     with open('token.pickle', 'wb') as token:
         pickle.dump(creds, token)
 
-def main():
-    tokenGenerator()
-
-main()
+tokenGenerator()
