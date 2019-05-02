@@ -21,7 +21,6 @@ class Cal():
         self.loadCalendarIds()
 
 
-
     def loadCalendarIds(self):
         ignoreIdList = ['e_2_sv#weeknum@group.v.calendar.google.com',
                 'sv.swedish#holiday@group.v.calendar.google.com',
@@ -31,6 +30,7 @@ class Cal():
             id = calendar['id']
             if id not in ignoreIdList:
                 self._calendarIdList.append(id)
+
 
     def getFirstEvent(self,calendarId):
         print('Getting upcoming morning event for '+calendarId)
@@ -55,6 +55,7 @@ class Cal():
                     return time.mktime(startTime.timetuple())
         print('No upcoming events found.')
         return None
+
 
     def initCreds(self):
         creds = None

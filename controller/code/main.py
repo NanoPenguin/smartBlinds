@@ -10,6 +10,7 @@ from settings import *
 from blinds import *
 from comm import *
 from screen import *
+from cal import *
 
 """
 timeTuple = (2020,11,11,12,12,13,2,67,-1)
@@ -21,14 +22,17 @@ epochSeconds = time.mktime(timeTuple)
 SETTINGS = Settings()  # initializing settings
 ALARMS = SETTINGS.getSetting('Alarms')  # initializing alarms
 SCREEN = Screen(ALARMS, SETTINGS)  # initializing screen
+CAL = Cal()
 
 
 def main():
     newAlarm(time.time())
     newAlarm(time.time(), True, False)
     newAlarm(time.time(), False, True)
-    newAlarm(time.time(), True, True)
+    newAlarm(time.time(), False, True)
     newAlarm(time.time(), True, False)
+    # Load alarmtimes from calendar
+    # ALARMS.append(CAL.getCalendarAlarms())
 
     SCREEN.messageScreen(['This message'])
     time.sleep(1)
