@@ -42,22 +42,21 @@ class Settings():
         try:
             file = open(self._file, 'r')
             for line in file.readlines():
+                line = line.strip('\n')
                 splitline = line.split(':')
                 key = splitline[0]
                 if key == 'Alarms':
                     alarms = splitline[1].split('/')
-                    print(alarms)
                     for alarm in alarms:
                         alarm = alarm.split(',')
-                        print(alarm)
-                    value = [{'time': int(part[0]), 'fromCalendar': part[1], 'isActivated': part[2]} for part in alarm]
-                    for alarm in value:
-                        if alarm['fromCalendar'] == 'True':
-                            alarm['fromCalendar'] = True
-                        else: alarm['fromCalendar'] = False
-                        if alarm['isActivated'] == 'True':
-                            alarm['isActivated'] = True
-                        else: alarm['isActivated'] = False
+                        value = [{'time': int(part[0]), 'fromCalendar': part[1], 'isActivated': part[2]} for part in alarm]
+                        for alarm in value:
+                            if alarm['fromCalendar'] == 'True':
+                                alarm['fromCalendar'] = True
+                            else: alarm['fromCalendar'] = False
+                            if alarm['isActivated'] == 'True':
+                                alarm['isActivated'] = True
+                            else: alarm['isActivated'] = False
                 if key in ['Cal. margin', 'Easy wake']:
                     value = int(splitline[1])
                 print('\t'+key+': '+str(value))
