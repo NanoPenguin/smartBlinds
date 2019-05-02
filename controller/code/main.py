@@ -30,8 +30,7 @@ def main():
     newAlarm(time.time(), True, True)
     newAlarm(time.time(), True, False)
 
-    SCREEN.messageScreen("""This is a
-    message""")
+    SCREEN.messageScreen(['This is a', 'message'])
     time.sleep(3)
 
     SCREEN.alarmScreen()
