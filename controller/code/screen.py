@@ -38,7 +38,7 @@ class Screen():
         W = 128
         H = 64
         with canvas(SCREENDEVICE) as draw:
-            draw.text((4, 10, message, fill="white", font=self._font)
+            draw.text((4, 10), message, fill="white", font=self._font)
         self._lastMode = 'message'
 
 
