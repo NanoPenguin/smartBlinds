@@ -34,9 +34,9 @@ def main():
     time.sleep(3)
     SCREEN.messageScreen(['This is a', 'message'])
     time.sleep(3)
-    SCREEN.messageScreen(['This is a', 'another', 'message'])
+    SCREEN.messageScreen(['This is', 'another', 'message'])
     time.sleep(3)
-
+    """
     SCREEN.alarmScreen()
     time.sleep(1)
     SCREEN.scrollDown()
@@ -72,7 +72,7 @@ def main():
     SCREEN.setMinuteScreen(str(ALARMS[0]))
     time.sleep(2)
 
-    SETTINGS.saveSettings()
+    SETTINGS.saveSettings()"""
 
 
 # alarms=alarmArray, time=any time in seconds since epoch
