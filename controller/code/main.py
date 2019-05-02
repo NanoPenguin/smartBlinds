@@ -48,7 +48,7 @@ def main():
     SCREEN.scrollUp()
     print(SCREEN.selectedAlarm())
     removeAlarm(SCREEN.selectedAlarm())
-    SCREEN.message(['Alarm removed'])
+    SCREEN.messageScreen(['Alarm removed'])
     time.sleep(1)
     SCREEN.alarmScreen()
     time.sleep(1)
