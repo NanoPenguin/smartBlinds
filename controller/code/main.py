@@ -27,11 +27,6 @@ CAL = Cal()  # initializing calendar
 
 
 def main():
-    newAlarm(time.time())
-    newAlarm(time.time(), True, False)
-    newAlarm(time.time(), False, True)
-    newAlarm(time.time(), False, True)
-    newAlarm(time.time(), True, False)
     # Load alarmtimes from calendar
     # ALARMS.append(CAL.getCalendarAlarms())
 
