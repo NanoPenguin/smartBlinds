@@ -18,11 +18,12 @@ year, mon, day, h, m, s, wd, yd, -1
 epochSeconds = time.mktime(timeTuple)
 """
 
-# must be initialized settings - alarms - screen
+# must be initialized settings - alarms - screen in that exact order
 SETTINGS = Settings()  # initializing settings
 ALARMS = SETTINGS.getSetting('Alarms')  # initializing alarms
 SCREEN = Screen(ALARMS, SETTINGS)  # initializing screen
-CAL = Cal()
+BLINDS = Blinds(SETTINGS.getSetting('Blinds angle'))  # initializing blinds
+CAL = Cal()  # initializing calendar
 
 
 def main():
