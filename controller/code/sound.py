@@ -13,7 +13,7 @@ class Sound():
         self._pwmPin.ChangeDutyCycle(50)
         freqTemp = self._freq
         for i in range(5):
-            sleep(400)
+            sleep(0.4)
             self._freq = (self._freq+(100))
             self.updateFreq()
         self._freq = freqTemp
