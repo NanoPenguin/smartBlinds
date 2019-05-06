@@ -25,7 +25,7 @@ ALARMS = SETTINGS.getSetting('Alarms')  # initializing alarms
 SCREEN = Screen(ALARMS, SETTINGS)  # initializing screen
 BLINDS = Blinds(SETTINGS.getSetting('Blinds angle'))  # initializing blinds
 CAL = Cal()  # initializing calendar
-IO = IO()  # Initializing GPIO
+GPIO = Io()  # Initializing GPIO
 
 
 def main():
@@ -33,13 +33,13 @@ def main():
     # ALARMS.append(CAL.getCalendarAlarms())
 
     while True:
-        if IO.waitForInput() is 'up':
+        if GPIO.waitForInput() is 'up':
             SCREEN.messageScreen(['UP'])
-        elif IO.waitForInput() is 'down':
+        elif GPIO.waitForInput() is 'down':
             SCREEN.messageScreen(['DOWN'])
-        elif IO.waitForInput() is 'left':
+        elif GPIO.waitForInput() is 'left':
             SCREEN.messageScreen(['LEFT'])
-        elif IO.waitForInput() is 'right':
+        elif GPIO.waitForInput() is 'right':
             SCREEN.messageScreen(['RIGHT'])
         time.sleep(0.3)
 
