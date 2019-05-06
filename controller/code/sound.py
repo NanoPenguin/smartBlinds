@@ -12,7 +12,7 @@ class Sound():
         self._pwmPin.ChangeDutyCycle(50)
         for i in range(1,6,1):
             sleep(400)
-            self._pwmPin.ChangeFrequency((800+(100*i))
+            self._pwmPin.ChangeFrequency((800+(100*i)))
 
     def stopSound():
         self._pwmPin.stop()
