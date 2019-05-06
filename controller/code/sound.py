@@ -5,17 +5,33 @@ class Sound():
     def __init__(self):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(13, GPIO.OUT)
-        self._pwmPin = GPIO.PWM(13, 800)
+        self._freq = 800
+        self._pwmPin = GPIO.PWM(13, self._freq)
 
     def makeSound(self):
         self._pwmPin.start(0)
         self._pwmPin.ChangeDutyCycle(50)
-        for i in range(1,6,1):
+        freqTemp = self._freq
+        for i in range(5):
             sleep(400)
-            self._pwmPin.ChangeFrequency((800+(100*i)))
+            self._freq = (self._freq+(100))
+            self.updateFreq()
+        self._freq = freqTemp
+        self.updateFreq()
 
     def stopSound(self):
         self._pwmPin.stop()
 
     def gpioCleanup(self):
         GPIO.cleanup()
+
+    def increaseFreq(self):
+        self._freq += 100
+        self.updateFreq()
+
+    def decreaseFreq(self):
+        self._freq -= 100
+        self.updateFreq()
+
+    def updateFreq():
+        self._pwmPin.ChangeFrequency(self._freq)

@@ -38,13 +38,16 @@ def main():
         input = IO.waitForInput()
         if input is 'up':
             SCREEN.messageScreen(['UP'])
-            SOUND.makeSound()
+            SOUND.increaseFreq()
         elif input is 'down':
             SCREEN.messageScreen(['DOWN'])
+            SOUND.decreaseFreq()
         elif input is 'left':
             SCREEN.messageScreen(['LEFT'])
+            SOUND.stopSound()
         elif input is 'right':
             SCREEN.messageScreen(['RIGHT'])
+            SOUND.makeSound()
         time.sleep(0.3)
 
     SCREEN.messageScreen(['This message'])
