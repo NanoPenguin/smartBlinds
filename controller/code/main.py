@@ -25,7 +25,7 @@ ALARMS = SETTINGS.getSetting('Alarms')  # initializing alarms
 SCREEN = Screen(ALARMS, SETTINGS)  # initializing screen
 BLINDS = Blinds(SETTINGS.getSetting('Blinds angle'))  # initializing blinds
 CAL = Cal()  # initializing calendar
-IO = Io()  # Initializing GPIO
+IO = IO()  # Initializing GPIO
 
 
 def main():
