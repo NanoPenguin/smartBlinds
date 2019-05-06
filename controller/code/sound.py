@@ -19,6 +19,9 @@ class Sound():
         self._freq = freqTemp
         self.updateFreq()
 
+    def getFreq(self): # get frequency
+        return self._freq
+
     def stopSound(self):
         self._pwmPin.stop()
 
