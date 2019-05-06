@@ -11,7 +11,7 @@ from blinds import *
 from comm import *
 from screen import *
 from cal import *
-from io import Io
+from io import *
 
 """
 timeTuple = (2020,11,11,12,12,13,2,67,-1)
@@ -25,7 +25,7 @@ ALARMS = SETTINGS.getSetting('Alarms')  # initializing alarms
 SCREEN = Screen(ALARMS, SETTINGS)  # initializing screen
 BLINDS = Blinds(SETTINGS.getSetting('Blinds angle'))  # initializing blinds
 CAL = Cal()  # initializing calendar
-IO = Io()  # Initializing GPIO
+IO = Gpio()  # Initializing GPIO
 
 
 def main():
