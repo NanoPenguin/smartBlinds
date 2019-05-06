@@ -36,5 +36,5 @@ class Sound():
         self._freq -= 100
         self.updateFreq()
 
-    def updateFreq():
+    def updateFreq(self):
         self._pwmPin.ChangeFrequency(self._freq)
