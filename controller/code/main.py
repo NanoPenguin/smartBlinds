@@ -11,7 +11,7 @@ from blinds import *
 from comm import *
 from screen import *
 from cal import *
-from io import *
+from gpio import *
 
 """
 timeTuple = (2020,11,11,12,12,13,2,67,-1)
