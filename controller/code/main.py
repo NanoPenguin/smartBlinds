@@ -12,6 +12,7 @@ from comm import *
 from screen import *
 from cal import *
 from gpio import *
+from sound import *
 
 """
 timeTuple = (2020,11,11,12,12,13,2,67,-1)
@@ -26,6 +27,7 @@ SCREEN = Screen(ALARMS, SETTINGS)  # initializing screen
 BLINDS = Blinds(SETTINGS.getSetting('Blinds angle'))  # initializing blinds
 CAL = Cal()  # initializing calendar
 IO = Io()  # Initializing GPIO
+SOUND = Sound() # Initializing Sound
 
 
 def main():
@@ -33,13 +35,15 @@ def main():
     # ALARMS.append(CAL.getCalendarAlarms())
 
     while True:
-        if IO.waitForInput() is 'up':
+        input = IO.waitForInput()
+        if input is 'up':
             SCREEN.messageScreen(['UP'])
-        elif IO.waitForInput() is 'down':
+            SOUND.makeSound()
+        elif input is 'down':
             SCREEN.messageScreen(['DOWN'])
-        elif IO.waitForInput() is 'left':
+        elif input is 'left':
             SCREEN.messageScreen(['LEFT'])
-        elif IO.waitForInput() is 'right':
+        elif input is 'right':
             SCREEN.messageScreen(['RIGHT'])
         time.sleep(0.3)
 
