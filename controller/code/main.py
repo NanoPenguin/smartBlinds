@@ -11,6 +11,7 @@ from blinds import *
 from comm import *
 from screen import *
 from cal import *
+from io import *
 
 """
 timeTuple = (2020,11,11,12,12,13,2,67,-1)
@@ -29,6 +30,17 @@ CAL = Cal()  # initializing calendar
 def main():
     # Load alarmtimes from calendar
     # ALARMS.append(CAL.getCalendarAlarms())
+
+    while True:
+        if IO.waitForInput() is 'up':
+            SCREEN.messageScreen(['UP'])
+        elif IO.waitForInput() is 'down':
+            SCREEN.messageScreen(['DOWN'])
+        elif IO.waitForInput() is 'left':
+            SCREEN.messageScreen(['LEFT'])
+        elif IO.waitForInput() is 'right':
+            SCREEN.messageScreen(['RIGHT'])
+        time.sleep(0.3)
 
     SCREEN.messageScreen(['This message'])
     time.sleep(1)
