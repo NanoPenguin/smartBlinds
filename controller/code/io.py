@@ -5,7 +5,7 @@ Class for reading io-inputs on pins
 from gpiozero import Button
 from time import sleep
 
-class IO():
+class Io():
     def __init__(self):
         self._up = Button(17)
         self._down = Button(27)
