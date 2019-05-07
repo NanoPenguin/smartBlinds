@@ -218,9 +218,17 @@ def settingsScreen():
 
 
 def alarmListScreen():
-    SCREEN.alarmScreen()
-    input = IO.waitForInput()
     while True:
+        input = IO.waitForInput()
+        if input is 'left':
+            break
+        elif input is 'up':
+            SCREEN.scrollUp()
+        elif input is 'down':
+            SCREEN.scrollDown()
+        elif input is 'right':
+            message(['NOT CODED'])
+        time.sleep(BUTTONDELAY)
 
 
 
