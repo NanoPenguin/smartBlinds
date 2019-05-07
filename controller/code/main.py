@@ -33,6 +33,7 @@ SOUND = Sound() # Initializing Sound
 # Global timeconstants
 MESSAGEDELAY = 1
 BUTTONDELAY = 0.4
+BUTTONHOLDDELAY = 2
 
 
 def main():
@@ -217,7 +218,10 @@ def settingsScreen():
 
 
 def alarmListScreen():
-    pass
+    SCREEN.alarmScreen()
+    input = IO.waitForInput()
+    while True:
+
 
 
 def message(message):

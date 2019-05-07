@@ -7,10 +7,10 @@ from time import sleep
 
 class Io():
     def __init__(self):  # initialize GPIO
-        self._up = Button(22)
-        self._down = Button(27)
-        self._left = Button(23)
-        self._right = Button(17)
+        self._up = Button(27)
+        self._down = Button(22)
+        self._left = Button(17)
+        self._right = Button(23)
 
 
     def waitForInput(self):
