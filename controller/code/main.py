@@ -130,6 +130,7 @@ def newAlarmScreen():
         elif input is 'down':
             newAlarm.setTime(newAlarm.getTime()-3600)
         elif input is 'right':
+            time.sleep(BUTTONDELAY)
             while True:
                 SCREEN.setMinuteScreen(str(newAlarm))
                 input = IO.waitForInput()
