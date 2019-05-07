@@ -38,11 +38,11 @@ class Sound():
             else:
                 self._pwmPin.ChangeDutyCycle(100)
         self.stopSound()
-"""
+    """
     def increaseFreq(self):
         self._freq += 100
         self.updateFreq()
-"""
+    """
 
     def decreaseFreq(self):
         self._pwmPin.start(0)
