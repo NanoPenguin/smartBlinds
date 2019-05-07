@@ -118,7 +118,7 @@ def clockScreen():
 
 def newAlarmScreen():
     message(['Set new Alarm'])
-    newAlarm = newAlarm(time.localtime(time.time()))
+    newAlarm = Alarm(time.localtime(time.time()))
     while True:
         SCREEN.setHourScreen(str(newAlarm))
         input = IO.waitForInput()
