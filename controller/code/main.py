@@ -214,7 +214,7 @@ def alarmListScreen():
     pass
 
 
-def displayMessage(message):
+def message(message):
     SCREEN.displayMessage(message)
     time.sleep(MESSAGEDELAY)
 
