@@ -106,9 +106,9 @@ def clockScreen():
         input = IO.readInput()
         if input:
             if input is 'left':
-                pass
-            elif input is 'up':
                 newAlarmScreen()
+            elif input is 'up':
+                pass
             elif input is 'down':
                 pass
             elif input is 'right':
@@ -118,7 +118,7 @@ def clockScreen():
 
 def newAlarmScreen():
     message(['Set new Alarm'])
-    newAlarm = Alarm(time.localtime(time.time()))
+    newAlarm = Alarm(time.time())
     while True:
         SCREEN.setHourScreen(str(newAlarm))
         input = IO.waitForInput()
