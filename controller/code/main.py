@@ -8,7 +8,7 @@ import time
 from alarm import *
 from settings import *
 from blinds import *
-from comm import *
+from communication import *
 from screen import *
 from cal import *
 from gpio import *
