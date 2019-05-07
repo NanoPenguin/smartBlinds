@@ -177,41 +177,49 @@ def settingsScreen():
                 else:
                     value = 1
                 SETTINGS.setSetting(setting, value)
-                if setting is 'Close direction':
-                    if value:
-                        direction = 'up'
-                    else:
-                        direction = 'down'
-                    message(['Close direction', 'set to '+direction])
+            elif setting is 'Close direction':
+                if value:
+                    direction = 'up'
+                else:
+                    direction = 'down'
+                message(['Close direction', 'set to '+direction])
+            elif setting in ['Cal. margin', 'Easy wake']:
                 if setting is 'Cal. margin':
                     message(['Set time for' ,'wake-up before', 'first event'])
-                    previous = SETTINGS.getSetting('Cal. margin')
-                    hours = int(previous/3600)
-                    minutes = int((previous%3600)/60)
-                    while True:
-                        SCREEN.setHourScreen(toTimeStr(hours, minutes))
-                        input = IO.waitForInput()
-                        if input is 'left':
-                            message(['Changes discarded'])
+                elif setting is 'Easy wake':
+                    message(['Set how long', 'it takes to', 'open blinds'])
+                previous = SETTINGS.getSetting(setting)
+                hours = int(previous/3600)
+                minutes = int((previous%3600)/60)
+                while True:
+                    SCREEN.setHourScreen(toTimeStr(hours, minutes))
+                    input = IO.waitForInput()
+                    if input is 'left':
+                        message(['Changes discarded'])
+                        break
+                    elif input is 'up':
+                        hours+=1
+                    elif input is 'down':
+                        hours-=1
+                    elif input is 'right':
+                        toBreak = False
+                        while True:
+                            SCREEN.setMinuteScreen(toTimeStr(hours, minutes))
+                            input = IO.waitForInput()
+                            if input is 'left':
+                                break
+                            elif input is 'up':
+                                minutes+=1
+                            elif input is 'down':
+                                minutes-=1
+                            elif input is 'right':
+                                SETTINGS.setSetting(setting, hours*3600+minutes*60)
+                                message(['Value changed'])
+                                toBreak = True
+                                break
+                        if toBreak:
                             break
-                        elif input is 'up':
-                            hours+=1
-                        elif input is 'down':
-                            hours-=1
-                        elif input is 'right':
-                            while True:
-                                SCREEN.setMinuteScreen(toTimeStr(hours, minutes))
-                                input = IO.waitForInput()
-                                if input is 'left':
-                                    break
-                                elif input is 'up':
-                                    minutes+=1
-                                elif input is 'down':
-                                    minutes-=1
-                                elif input is 'right':
-                                    message(['Value changed'])
-                                    break
-                            if 
+
 
 
 def alarmListScreen():
