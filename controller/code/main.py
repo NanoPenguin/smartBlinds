@@ -153,7 +153,7 @@ def settingsScreen():
         elif input is 'up':
             SCREEN.scrollUp()
         elif input is 'down':
-            screen.scrollDown()
+            SCREEN.scrollDown()
         elif input is 'right':
             setting = SCREEN.selectedSetting()
             if setting is 'Alarms':
