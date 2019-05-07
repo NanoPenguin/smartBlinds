@@ -219,7 +219,7 @@ def settingsScreen():
 
 def alarmListScreen():
     SCREEN.alarmScreen()
-    while IO.readInput()
+    while IO.readInput():
         time.sleep(0.1)
     while True:
         input = IO.waitForInput()
