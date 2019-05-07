@@ -1,8 +1,5 @@
 """
 Class for the state of the blinds
-ANGLE:
-UP: angle = 300
-DOWN: angle = 0
 """
 
 class Blinds():

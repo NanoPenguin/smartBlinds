@@ -24,3 +24,15 @@ class Io():
             elif not self._right.is_pressed:
                 return 'right'
             sleep(0.1)
+
+
+    def readInput(self):
+        if not self._up.is_pressed:
+            return 'up'
+        elif not self._down.is_pressed:
+            return 'down'
+        elif not self._left.is_pressed:
+            return 'left'
+        elif not self._right.is_pressed:
+            return 'right'
+        return False

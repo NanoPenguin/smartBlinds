@@ -30,6 +30,10 @@ IO = Io()  # Initializing GPIO
 SOUND = Sound() # Initializing Sound
 
 
+# Global messageDelay
+MESSAGEDELAY = 1
+
+
 def main():
     # Load alarmtimes from calendar
     # ALARMS.append(CAL.getCalendarAlarms())
@@ -104,6 +108,131 @@ def newAlarm(time, fromCalendar=False, activated=True):
 
 def removeAlarm(alarm):
     ALARMS.remove(alarm)
+
+
+def clockScreen():
+    while True:
+        SCREEN.clockScreen()
+        input = IO.readInput()
+        if input:
+            if input is 'left':
+                pass
+            elif input is 'up':
+                newAlarmScreen()
+            elif input is 'down':
+                pass
+            elif input is 'right':
+                settingsScreen()
+        time.sleep(0.1)
+
+
+def newAlarmScreen():
+    message(['Set new Alarm'])
+    newAlarm = newAlarm(time.localtime(time.time()))
+    while True:
+        SCREEN.setHourScreen(str(newAlarm))
+        input = IO.waitForInput()
+        if input is 'left':
+            message(['Alarm discarded'])
+            return False
+        elif input is 'up':
+            newAlarm.setTime(newAlarm.getTime()+3600)
+        elif input is 'down':
+            newAlarm.setTime(newAlarm.getTime()-3600)
+        elif input is 'right':
+            while True:
+                SCREEN.setMinuteScreen(str(newAlarm))
+                input = IO.waitForInput()
+                if input is 'left':
+                    break
+                elif input is 'up':
+                    newAlarm.setTime(newAlarm.getTime()+60)
+                elif input is 'down':
+                    newAlarm.setTime(newAlarm.getTime()-60)
+                elif input is 'right':
+                    ALARMS.append(newAlarm)
+                    message(['Alarm set'])
+                    return True
+
+
+def settingsScreen():
+    message(['Settings'])
+    SCREEN.settingsScreen()
+    while True:
+        input = IO.waitForInput()
+        if input is 'left':
+            return False
+        elif input is 'up':
+            SCREEN.scrollUp()
+        elif input is 'down':
+            screen.scrollDown()
+        elif input is 'right':
+            setting = SCREEN.selectedSetting()
+            if setting is 'Alarms':
+                alarmListScreen()
+            elif setting in ['Close direction']:
+                value = SETTINGS.getSetting(setting)
+                if value:
+                    value = 0
+                else:
+                    value = 1
+                SETTINGS.setSetting(setting, value)
+                if setting is 'Close direction':
+                    if value:
+                        direction = 'up'
+                    else:
+                        direction = 'down'
+                    message(['Close direction', 'set to '+direction])
+                if setting is 'Cal. margin':
+                    message(['Set time for' ,'wake-up before', 'first event'])
+                    previous = SETTINGS.getSetting('Cal. margin')
+                    hours = int(previous/3600)
+                    minutes = int((previous%3600)/60)
+                    while True:
+                        SCREEN.setHourScreen(toTimeStr(hours, minutes))
+                        input = IO.waitForInput()
+                        if input is 'left':
+                            message(['Changes discarded'])
+                            break
+                        elif input is 'up':
+                            hours+=1
+                        elif input is 'down':
+                            hours-=1
+                        elif input is 'right':
+                            while True:
+                                SCREEN.setMinuteScreen(toTimeStr(hours, minutes))
+                                input = IO.waitForInput()
+                                if input is 'left':
+                                    break
+                                elif input is 'up':
+                                    minutes+=1
+                                elif input is 'down':
+                                    minutes-=1
+                                elif input is 'right':
+                                    message(['Value changed'])
+                                    break
+                            if 
+
+
+def alarmListScreen():
+    pass
+
+
+def displayMessage(message):
+    SCREEN.displayMessage(message)
+    time.sleep(MESSAGEDELAY)
+
+
+def toTimeStr(hours, minutes):
+    if hours < 10:
+        hourStr = '0'+str(hours)
+    else:
+        hourStr = str(hours)
+    if minutes < 10:
+        minuteStr = '0'+str(minutes)
+    else:
+        minuteStr = str(minutes)
+    return hourStr+':'+minuteStr
 
 
 main()

@@ -1,8 +1,5 @@
 """
 Class for displaying on the screen
-
-TODO:
-
 """
 
 import time
@@ -132,7 +129,6 @@ class Screen():
             self.alarmScreen()
         elif self._lastMode == 'settings':
             self.settingsScreen()
-
 
 
     def scrollUp(self):  # scrolls and selects previous alarm

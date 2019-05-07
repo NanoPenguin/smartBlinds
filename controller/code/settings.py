@@ -14,9 +14,9 @@ class Settings():
         self._settings['Alarms'] = []
         self._settings['Cal. margin'] = 0
         self._settings['Easy wake'] = 0
-        self._settings['Autodim'] = 1320 # minutes from 00:00, -1 = off
+        #self._settings['Autodim'] = 1320 # minutes from 00:00, -1 = off
         self._settings['Blinds angle'] = 0
-        self._settings['Close direction'] = 1 # 1 or 0
+        self._settings['Close direction'] = 1 # 1 or 0, 1=up 0=down
         if loadFromWeb:
             self.loadWebData()
         else:
@@ -26,6 +26,10 @@ class Settings():
 
     def getSetting(self, key):
         return self._settings[key]
+
+
+    def setSetting(self, key, value):
+        self._settings[key] = value
 
 
     def getAll(self):
