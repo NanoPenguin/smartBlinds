@@ -38,21 +38,9 @@ def main():
     # Load alarmtimes from calendar
     # ALARMS.append(CAL.getCalendarAlarms())
 
-    while True:
-        input = IO.waitForInput()
-        if input is 'up':
-            SOUND.increaseFreq()
-            SCREEN.messageScreen(['UP'+str(SOUND.getFreq())])
-        elif input is 'down':
-            SOUND.decreaseFreq()
-            SCREEN.messageScreen(['DOWN'+str(SOUND.getFreq())])
-        elif input is 'left':
-            SOUND.stopSound()
-            SCREEN.messageScreen(['LEFT'+str(SOUND.getFreq())])
-        elif input is 'right':
-            SOUND.makeSound()
-            SCREEN.messageScreen(['RIGHT'+str(SOUND.getFreq())])
-        time.sleep(0.3)
+    clockScreen()
+
+    time.sleep(5)
 
     SCREEN.messageScreen(['This message'])
     time.sleep(1)
