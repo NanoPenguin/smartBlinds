@@ -30,8 +30,9 @@ IO = Io()  # Initializing GPIO
 SOUND = Sound() # Initializing Sound
 
 
-# Global messageDelay
+# Global timeconstants
 MESSAGEDELAY = 1
+BUTTONDELAY = 0.4
 
 
 def main():
@@ -111,7 +112,7 @@ def clockScreen():
                 pass
             elif input is 'right':
                 settingsScreen()
-        time.sleep(0.1)
+        time.sleep(BUTTONDELAY)
 
 
 def newAlarmScreen():
@@ -141,6 +142,8 @@ def newAlarmScreen():
                     ALARMS.append(newAlarm)
                     message(['Alarm set'])
                     return True
+            time.sleep(BUTTONDELAY)
+        time.sleep(BUTTONDELAY)
 
 
 def settingsScreen():
@@ -205,8 +208,11 @@ def settingsScreen():
                                 message(['Value changed'])
                                 toBreak = True
                                 break
+                                time.sleep(BUTTONDELAY)
                         if toBreak:
                             break
+                    time.sleep(BUTTONDELAY)
+        time.sleep(BUTTONDELAY)
 
 
 
