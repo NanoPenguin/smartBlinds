@@ -272,16 +272,17 @@ def watchAlarms():
     nowHour, nowMinute = toTimeInt(now)
     if nowMinute!=LASTTRIGGEREDMINUTE:
         LASTTRIGGEREDMINUTE = 100
-    for alarm in activeAlarms:
-        hour = alarm.getHour()
-        minute = alarm.getMinute()
-        if nowHour==hour and nowMinute==minute and LASTTRIGGEREDMINUTE!=nowMinute:
-            if alarm.isFromCalendar():
-                removeAlarm(alarm)
-            else:
-                alarm.toggleActivated()
-            LASTTRIGGEREDMINUTE = minute
-            triggerAlarm()
+    else:
+        for alarm in activeAlarms:
+            hour = alarm.getHour()
+            minute = alarm.getMinute()
+            if nowHour==hour and nowMinute==minute:
+                if alarm.isFromCalendar():
+                    removeAlarm(alarm)
+                else:
+                    alarm.toggleActivated()
+                LASTTRIGGEREDMINUTE = minute
+                triggerAlarm()
 
 
 def triggerAlarm():
