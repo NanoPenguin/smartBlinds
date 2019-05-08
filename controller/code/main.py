@@ -226,7 +226,7 @@ def settingsScreen():
 def alarmListScreen():
     while True:
         SCREEN.alarmScreen()
-        waitForInput()
+        waitForRelease()
         input = IO.waitForInput()
         if input is 'left':
             break
