@@ -100,9 +100,9 @@ def removeAlarm(alarm):
 
 
 def clockScreen():
+    waitForRelease()
     while True:
         SCREEN.clockScreen()
-        waitForRelease()
         input = IO.readInput()
         if input:
             if input is 'left':
