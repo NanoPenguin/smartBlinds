@@ -34,8 +34,10 @@ SOUND = Sound() # Initializing Sound
 MESSAGEDELAY = 0.7
 BUTTONHOLDDELAY = 1
 INPUTTIMEOUT = 10
+CAL_CHANGE_DAY_TIME = '17:00'
 
 LASTTRIGGEREDMINUTE = 100
+CAL_UPDATED = False
 
 
 def main():
@@ -109,7 +111,6 @@ def newAlarmScreen():
                     ALARMS.append(newAlarm)
                     message(['Alarm set'])
                     return True
-
 
 def settingsScreen():
     message(['Settings'])
@@ -269,19 +270,33 @@ def watchAlarms():
             activeAlarms.append(alarm)
     now = time.strftime("%H:%M", time.localtime(time.time()))
     nowHour, nowMinute = toTimeInt(now)
+    if not nowMinute and not CAL_UPDATED:
+        if now == CAL_CHANGE_DAY_TIME:
+            CAL.setDayTomorrow()
+        updateCalAlarms()
+        CAL_UPDATED = true
+    elif int(now[0:2]) > int(CAL_CHANGE_DAY_TIME[0:2])+1:
+        CAL_DAY_CHANGED = false
+
     if nowMinute!=LASTTRIGGEREDMINUTE:
         LASTTRIGGEREDMINUTE = 100
     for alarm in activeAlarms:
         hour = alarm.getHour()
         minute = alarm.getMinute()
         if (nowHour>hour or (nowHour==hour and nowMinute>=minute)) and LASTTRIGGEREDMINUTE!=nowMinute:
-            if alarm.isFromCalendar():
-                removeAlarm(alarm)
-            else:
-                alarm.toggleActivated()
+            alarm.toggleActivated()
             LASTTRIGGEREDMINUTE = minute
             triggerAlarm()
 
+
+def updateCalAlarms():
+    newCalAlarms = CAL.getCalendarAlarms(SETTINGS.getSetting('Cal. margin'))
+    if newCalAlarms != 'ERROR'
+        for alarm in ALARMS:
+            if alarm.isFromCalendar():
+                removeAlarm(alarm)
+        for alarm in newCalAlarms:
+            ALARMS.append(alarm)
 
 def triggerAlarm():
     print('ALARM TRIGGERED')

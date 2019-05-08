@@ -20,6 +20,11 @@ class Cal(): # Class for contact with google calendar
         if calendarId:
             self._calendarIdList.append(calendarId)
         self.loadCalendarIds()
+        currentTime = datetime.datetime.utcnow()
+        if currentTime.getHour()>=17:
+            self.setDayTomorrow()
+        else:
+            self._alarmDate = currentTime.replace(day=currentTime.day,hour=0,minute=0,second=0)
 
 
     def loadCalendarIds(self): # load personal calendarIds from google account
@@ -32,6 +37,9 @@ class Cal(): # Class for contact with google calendar
             if id not in ignoreIdList:
                 self._calendarIdList.append(id)
 
+    def setDayTomorrow(self):
+        currentTime = datetime.datetime.utcnow()
+        self._alarmDate = currentTime.replace(day=currentTime.day+1,hour=0,minute=0,second=0)
 
     def getFirstEvent(self, calendarId):
         # Get the first event (after 00:00) for calendar with given id.
@@ -40,8 +48,8 @@ class Cal(): # Class for contact with google calendar
         print('Getting upcoming morning event for '+calendarId)
         currentTime = datetime.datetime.utcnow()
         # Start and stop date for next day
-        start = currentTime.replace(day=currentTime.day+1,hour=0,minute=0,second=0)
-        stop = currentTime.replace(day=currentTime.day+2,hour=0,minute=0,second=0)
+        start = self._alarmDate
+        stop = self._alarmDate.replace(day=currentTime.day+1)
         startDate = start.isoformat()+'Z'
         stopDate = stop.isoformat()+'Z'
         eventsResult = self._service.events().list(calendarId=calendarId, timeMin=startDate,
@@ -83,7 +91,7 @@ class Cal(): # Class for contact with google calendar
         service = build('calendar', 'v3', credentials=creds)
         self._service = service
 
-    def getCalendarAlarms(self):
+    def getCalendarAlarms(self,calMargin):
         # Returns list with Alarm-objects based on the first event
         # from each personal calendar.
         # The earliest alarm in the list is activated.
@@ -93,6 +101,7 @@ class Cal(): # Class for contact with google calendar
         i=0
         for calendarId in self._calendarIdList:
             startTime = self.getFirstEvent(calendarId)
+            startTime = startTime-calMargin
             if startTime:
                 if (not earliest) or startTime<earliest:
                     earliest = startTime
