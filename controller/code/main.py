@@ -35,7 +35,7 @@ MESSAGEDELAY = 0.7
 BUTTONHOLDDELAY = 1
 INPUTTIMEOUT = 10
 
-LASTTRIGGEREDMINUTE = -1
+LASTTRIGGEREDMINUTE = 100
 
 
 def main():
@@ -270,7 +270,7 @@ def watchAlarms():
     now = time.strftime("%H:%M", time.localtime(time.time()))
     nowHour, nowMinute = toTimeInt(now)
     if nowMinute!=LASTTRIGGEREDMINUTE:
-        LASTTRIGGEREDMINUTE = -1
+        LASTTRIGGEREDMINUTE = 100
     for alarm in activeAlarms:
         hour = alarm.getHour()
         minute = alarm.getMinute()
