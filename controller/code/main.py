@@ -161,10 +161,7 @@ def settingsScreen():
         elif input is 'right':
             setting = SCREEN.selectedSetting()
             if setting is 'Alarms':
-                if ALARMS:
-                    alarmListScreen()
-                else:
-                    message(['No alarms'])
+                alarmListScreen()
             elif setting in ['Close direction']:
                 value = SETTINGS.getSetting(setting)
                 if value:
