@@ -204,6 +204,7 @@ def alarmListScreen():
                     alarm.toggleActivated()
                 else:
                     SCREEN.messageScreen(['Delete?', 'NO       YES'])
+                    waitForRelease()
                     input = IO.waitForInput()
                     if input is 'left':
                         message(['Not deleted'])
