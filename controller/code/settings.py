@@ -76,6 +76,8 @@ class Settings():
                 value = ('/').join(alarms)
             elif key in ['Cal. margin', 'Easy wake', 'Autodim', 'Close dir']:
                 value = str(value)
+            else:
+                continue
             print('\t'+key+': '+value)
             file.write(key+':'+value+'\n')
         file.close()
