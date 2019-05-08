@@ -41,53 +41,6 @@ def main():
 
     clockScreen()
 
-    time.sleep(5)
-
-    SCREEN.messageScreen(['This message'])
-    time.sleep(1)
-    SCREEN.messageScreen(['This is a', 'message'])
-    time.sleep(1)
-    SCREEN.messageScreen(['This is', 'another', 'message'])
-    time.sleep(1)
-
-    SCREEN.alarmScreen()
-    time.sleep(0.5)
-    SCREEN.scrollDown()
-    time.sleep(0.5)
-    SCREEN.scrollDown()
-    time.sleep(0.2)
-    SCREEN.scrollDown()
-    SCREEN.scrollDown()
-    SCREEN.scrollUp()
-    print(SCREEN.selectedAlarm())
-    removeAlarm(SCREEN.selectedAlarm())
-    SCREEN.messageScreen(['Alarm removed'])
-    time.sleep(1)
-    SCREEN.alarmScreen()
-    time.sleep(1)
-    SCREEN.scrollDown()
-    time.sleep(0.5)
-
-    SCREEN.settingsScreen()
-    time.sleep(0.2)
-    SCREEN.scrollDown()
-    time.sleep(0.2)
-    SCREEN.scrollUp()
-    time.sleep(0.2)
-    SCREEN.scrollDown()
-    time.sleep(0.2)
-    print(SCREEN.selectedSetting())
-    time.sleep(1)
-
-    SCREEN.clockScreen()
-    time.sleep(1)
-    SCREEN.setHourScreen(str(ALARMS[0]))
-    time.sleep(1)
-    SCREEN.setMinuteScreen(str(ALARMS[0]))
-    time.sleep(1)
-
-    SETTINGS.saveSettings()
-
 
 # alarms=alarmArray, time=any time in seconds since epoch
 def newAlarm(time, fromCalendar=False, activated=True):
@@ -113,6 +66,7 @@ def clockScreen():
                 pass
             elif input is 'right':
                 settingsScreen()
+                SETTINGS.saveSettings()
 
 
 def newAlarmScreen():
@@ -123,7 +77,7 @@ def newAlarmScreen():
         waitForRelease()
         input = IO.waitForInput()
         if input is 'left':
-            message(['Alarm discarded'])
+            message(['Alarm', 'discarded'])
             return False
         elif input is 'up':
             newAlarm.setTime(newAlarm.getTime()+3600)
@@ -162,7 +116,7 @@ def settingsScreen():
             setting = SCREEN.selectedSetting()
             if setting is 'Alarms':
                 alarmListScreen()
-            elif setting in ['Close direction']:
+            elif setting in ['Close', 'direction']:
                 value = SETTINGS.getSetting(setting)
                 if value:
                     value = 0
@@ -180,6 +134,7 @@ def settingsScreen():
                 elif setting == 'Easy wake':
                     mes = ['Set how long', 'it takes to', 'open blinds']
                 message(mes)
+                time.sleep(MESSAGEDELAY)
                 previous = SETTINGS.getSetting(setting)
                 hours = int(previous/3600)
                 minutes = int((previous%3600)/60)

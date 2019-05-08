@@ -8,7 +8,7 @@ from collections import OrderedDict
 from alarm import *
 
 class Settings():
-    def __init__(self, loadFromWeb=False):
+    def __init__(self):
         self._file = 'settings.txt'
         self._settings = OrderedDict()
         self._settings['Alarms'] = []
@@ -17,10 +17,7 @@ class Settings():
         self._settings['Autodim'] = 1320 # minutes from 00:00, -1 = off
         self._settings['Blinds angle'] = 0
         self._settings['Close direction'] = 1 # 1 or 0, 1=up 0=down
-        if loadFromWeb:
-            self.loadWebData()
-        else:
-            self.loadLocalData()
+        self.loadLocalData()
         self._createAlarms()
 
 
@@ -34,12 +31,6 @@ class Settings():
 
     def getAll(self):
         return self._settings
-
-
-    def loadWebData(self):
-        #Funktion som läser in alla
-        #inställningar från webinterface
-        pass
 
 
     def loadLocalData(self):
