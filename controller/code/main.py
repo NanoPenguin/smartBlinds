@@ -179,6 +179,7 @@ def settingsScreen():
                 message(['Close direction', 'set to '+direction])
             elif setting in ['Cal. margin', 'Easy wake']:
                 if setting is 'Cal. margin':
+                    print('test')
                     mes = ['Set time for' ,'wake-up before', 'first event']
                 elif setting is 'Easy wake':
                     mes = ['Set how long', 'it takes to', 'open blinds']
