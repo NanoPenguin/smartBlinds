@@ -32,7 +32,7 @@ SOUND = Sound() # Initializing Sound
 
 # Global timeconstants
 MESSAGEDELAY = 1
-BUTTONDELAY = 0.4
+BUTTONDELAY = 0.2
 BUTTONHOLDDELAY = 2
 
 
