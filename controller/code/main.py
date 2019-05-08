@@ -199,8 +199,8 @@ def alarmListScreen():
                     if not IO.readInput() or time.time()-now > BUTTONHOLDDELAY:
                         break
                 then = time.time()
+                alarm = SCREEN.selectedAlarm()
                 if then-now < BUTTONHOLDDELAY:
-                    alarm = SCREEN.selectedAlarm()
                     alarm.toggleActivated()
                 else:
                     SCREEN.messageScreen(['Delete?', 'NO       YES'])
