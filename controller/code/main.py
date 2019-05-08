@@ -189,12 +189,16 @@ def settingsScreen():
                     waitForRelease()
                     input = IO.waitForInput()
                     if input is 'left':
-                        message(['Changes discarded'])
+                        message(['Changes', 'discarded'])
                         break
                     elif input is 'up':
                         hours+=1
+                        if hours == 24:
+                            hours = 0
                     elif input is 'down':
                         hours-=1
+                        if hours < 0:
+                            hours = 23
                     elif input is 'right':
                         toBreak = False
                         while True:
@@ -205,8 +209,12 @@ def settingsScreen():
                                 break
                             elif input is 'up':
                                 minutes+=1
+                                if minutes == 60:
+                                    minutes = 0
                             elif input is 'down':
                                 minutes-=1
+                                if minutes < 0:
+                                    minutes = 59
                             elif input is 'right':
                                 SETTINGS.setSetting(setting, hours*3600+minutes*60)
                                 message(['Value', 'changed'])
