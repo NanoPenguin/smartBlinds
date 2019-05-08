@@ -14,7 +14,6 @@ class Settings():
         self._settings['Alarms'] = []
         self._settings['Cal. margin'] = 0
         self._settings['Easy wake'] = 0
-        self._settings['Autodim'] = 1320 # minutes from 00:00, -1 = off
         self._settings['Close dir'] = 1 # 1 or 0, 1=up 0=down
         self.loadLocalData()
         self._createAlarms()
@@ -59,7 +58,7 @@ class Settings():
                         if alarm['isActivated'] == 'True':
                             alarm['isActivated'] = True
                         else: alarm['isActivated'] = False
-                if key in ['Cal. margin', 'Easy wake', 'Autodim', 'Close dir']:
+                if key in ['Cal. margin', 'Easy wake', 'Close dir']:
                     value = int(splitline[1])
                 print('\t'+key+': '+str(value))
                 self._settings[key] = value
@@ -77,7 +76,7 @@ class Settings():
                 for alarm in value:
                     alarms.append(alarm.savingStr())
                 value = ('/').join(alarms)
-            elif key in ['Cal. margin', 'Easy wake', 'Autodim', 'Close dir']:
+            elif key in ['Cal. margin', 'Easy wake', 'Close dir']:
                 value = str(value)
             else:
                 continue
