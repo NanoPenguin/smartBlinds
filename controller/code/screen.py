@@ -45,12 +45,16 @@ class Screen():
         W = 128
         H = 64
         earliest = 0
+        earliestAlarm = ''
         if self._alarms:
-            earliest = self._alarms[0].getTime()
-            earliestAlarm = self._alarms[0]
+            for alarm in self._alarms:
+                if alarm. isActivated():
+                    earliest = alarm.getTime()
+                    earliestAlarm = alarm
+                    break
         for alarm in self._alarms:
             tempTime = alarm.getTime()
-            if tempTime < earliest:
+            if tempTime < earliest and alarm.isActivated():
                 earliest = tempTime
                 earliestAlarm = alarm
         timeStr = time.strftime('%H:%M', time.localtime(time.time()))
