@@ -39,7 +39,6 @@ class Screen():
             for line in message:
                 draw.text((4, Y), line, fill="white", font=self._font)
                 Y += self._fontSize
-        self._lastMode = 'message'
 
 
     def clockScreen(self):
