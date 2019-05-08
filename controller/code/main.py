@@ -264,6 +264,8 @@ def waitForRelease():
 
 def watchAlarms():
     global LASTTRIGGEREDMINUTE
+    now = time.strftime("%H:%M", time.localtime(time.time()))
+    nowHour, nowMinute = toTimeInt(now)
     if nowMinute!=LASTTRIGGEREDMINUTE:
         LASTTRIGGEREDMINUTE = 100
     else:
@@ -271,8 +273,6 @@ def watchAlarms():
         for alarm in ALARMS:
             if alarm.isActivated():
                 activeAlarms.append(alarm)
-        now = time.strftime("%H:%M", time.localtime(time.time()))
-        nowHour, nowMinute = toTimeInt(now)
         for alarm in activeAlarms:
             hour = alarm.getHour()
             minute = alarm.getMinute()
