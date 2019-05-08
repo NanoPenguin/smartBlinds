@@ -251,7 +251,7 @@ def toTimeStr(hours, minutes):
 
 
 def waitForRelease():
-    while IO.readInput():
+    while not IO.readInput():
         time.sleep(0.1)
 
 
