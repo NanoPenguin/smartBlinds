@@ -263,6 +263,7 @@ def waitForRelease():
 
 
 def watchAlarms():
+    global LASTTRIGGEREDMINUTE
     activeAlarms = []
     for alarm in ALARMS:
         if alarm.isActivated():
