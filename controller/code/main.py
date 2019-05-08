@@ -42,8 +42,7 @@ CAL_UPDATED = False
 
 def main():
     # Load alarmtimes from calendar
-    # ALARMS.append(CAL.getCalendarAlarms())
-
+    updateCalAlarms()
     clockScreen()
 
 
