@@ -31,8 +31,8 @@ SOUND = Sound() # Initializing Sound
 
 
 # Global timeconstants
-MESSAGEDELAY = 1
-BUTTONHOLDDELAY = 2
+MESSAGEDELAY = 0.7
+BUTTONHOLDDELAY = 1
 
 
 def main():
@@ -195,13 +195,15 @@ def alarmListScreen():
                 newAlarmScreen()
             else:
                 now = time.time()
-                waitForRelease()
+                while True:
+                    if not IO.readInput() or time.time()-now > BUTTONHOLDDELAY:
+                        break
                 then = time.time()
                 if then-now < BUTTONHOLDDELAY:
                     alarm = SCREEN.selectedAlarm()
                     alarm.toggleActivated()
                 else:
-                    SCREEN.messageScreen(['Delete?', 'NO      YES'])
+                    SCREEN.messageScreen(['Delete?', 'NO       YES'])
                     input = IO.waitForInput()
                     if input is 'left':
                         message(['Not deleted'])
