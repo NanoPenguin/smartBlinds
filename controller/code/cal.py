@@ -21,7 +21,7 @@ class Cal(): # Class for contact with google calendar
             self._calendarIdList.append(calendarId)
         self.loadCalendarIds()
         currentTime = datetime.datetime.utcnow()
-        if currentTime.getHour()>=17:
+        if currentTime.hour>=17:
             self.setDayTomorrow()
         else:
             self._alarmDate = currentTime.replace(day=currentTime.day,hour=0,minute=0,second=0)
