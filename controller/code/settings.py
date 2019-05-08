@@ -48,7 +48,7 @@ class Settings():
                     for alarm in alarms:
                         alarm = alarm.split(',')
                         splittedAlarms.append(alarm)
-                    if splittedAlarms:
+                    if splittedAlarms[0][0]:
                         value = [{'time': int(alarm[0]), 'fromCalendar': alarm[1], 'isActivated': alarm[2]} for alarm in splittedAlarms]
                     else:
                         value = []
