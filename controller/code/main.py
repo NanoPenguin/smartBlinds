@@ -194,7 +194,20 @@ def alarmListScreen():
             if not SCREEN.selectedAlarm():
                 newAlarmScreen()
             else:
-                message(['NOT CODED'])
+                now = time.time()
+                waitForRelease()
+                then = time.time()
+                if then-now < BUTTONHOLDDELAY:
+                    alarm = SCREEN.selectedAlarm()
+                    alarm.toggleActivated()
+                else:
+                    SCREEN.messageScreen(['Delete?', 'NO      YES'])
+                    input = IO.waitForInput()
+                    if input is 'left':
+                        message(['Not deleted'])
+                    elif input is 'right':
+                        removeAlarm(alarm)
+                        message(['Deleted'])
 
 
 
