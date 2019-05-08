@@ -172,7 +172,6 @@ def settingsScreen():
                 else:
                     value = 1
                 SETTINGS.setSetting(setting, value)
-            elif setting is 'Close direction':
                 if value:
                     direction = 'up'
                 else:
@@ -209,7 +208,7 @@ def settingsScreen():
                                 minutes-=1
                             elif input is 'right':
                                 SETTINGS.setSetting(setting, hours*3600+minutes*60)
-                                message(['Value changed'])
+                                message(['Value', 'changed'])
                                 toBreak = True
                                 break
                                 time.sleep(BUTTONDELAY)
