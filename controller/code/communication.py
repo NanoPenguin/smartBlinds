@@ -7,7 +7,7 @@ Class for communication between RPi and Arduino via Serial
 import serial
 from time import sleep
 
-startMarker = 60 
+startMarker = 60
 endMarker = 62
 
 class Communication():
@@ -17,7 +17,7 @@ class Communication():
     self._baudRate = baudRate
     self._ser = self.startSerial(self._serPort, self._baudRate)
     try:
-      self.waitForArduino() 
+      self.waitForArduino()
     except AttributeError:
       pass
 
@@ -31,12 +31,12 @@ class Communication():
     try:
       ser = serial.Serial(serPort, baudRate)
       #DEBUG: print("Serial port " + serPort + " opened  Baudrate " + str(baudRate))
-      
+
       return ser
-    
+
     except serial.SerialException:
       print("Could not start serial connection")
-    
+
   def sendToArduino(self, sendStr):
     self._ser.write(sendStr.encode())
 

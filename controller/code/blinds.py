@@ -14,10 +14,10 @@ class Blinds():
     def getBlindsData(self):  # return current angle
         try:
             setpoint, position = self._blinds.getBlindsData()
-            return setpoint, position
+            return setpoint, position, True
         except AttributeError:
             print("No blinds connected")
-            return 0, 0
+            return 0, 0, False
     def setAngle(self, angle):  # set new angle
         self._angle = angle
         try:
