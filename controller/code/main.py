@@ -64,11 +64,11 @@ def clockScreen():
                 newAlarmScreen()
                 SETTINGS.saveSettings()
             elif input is 'up':
-                a, b, connected = BLINDS.up()
+                connected = BLINDS.up()
                 if not connected:
                     message(['Blinds not', 'connected'])
             elif input is 'down':
-                a, b, connected = BLINDS.down()
+                connected = BLINDS.down()
                 if not connected:
                     message(['Blinds not', 'connected'])
             elif input is 'right':

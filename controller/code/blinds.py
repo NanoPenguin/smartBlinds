@@ -11,19 +11,25 @@ class Blinds():
         self._upAngle = 0
         self._blinds = Communication()
 
+
     def getBlindsData(self):  # return current angle
         try:
             setpoint, position = self._blinds.getBlindsData()
-            return setpoint, position, True
+            return setpoint, position
         except AttributeError:
             print("No blinds connected")
-            return 0, 0, False
+            return 0, 0
+
+
     def setAngle(self, angle):  # set new angle
         self._angle = angle
         try:
             self._blinds.setBlinds(angle)
+            return True
         except AttributeError:
             print("No blinds connected")
+            return False
+
 
     def up(self):  # set blinds to up
         self.setAngle(self._upAngle)
