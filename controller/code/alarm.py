@@ -31,6 +31,16 @@ class Alarm():  # class for each alarm object
         return self._fromCalendar
 
 
+    def getHour(self):
+        hour = int(time.strftime("%H", time.localtime(self._time)))
+        return hour
+
+
+    def getMinute(self):
+        minute = int(time.strftime("%M", time.localtime(self._time)))
+        return minute
+
+
     def activate(self):  # set activated to True
         self._activated = True
 

@@ -55,6 +55,7 @@ def removeAlarm(alarm):
 
 def clockScreen():
     while True:
+        watchAlarms()
         SCREEN.clockScreen()
         waitForRelease()
         input = IO.waitForInput()
@@ -75,6 +76,7 @@ def newAlarmScreen():
     message(['Set new', 'alarm'])
     newAlarm = Alarm(time.time())
     while True:
+        watchAlarms()
         SCREEN.setHourScreen(str(newAlarm))
         waitForRelease()
         input = IO.waitForInput()
@@ -87,6 +89,7 @@ def newAlarmScreen():
             newAlarm.setTime(newAlarm.getTime()-3600)
         elif input is 'right':
             while True:
+                watchAlarms()
                 SCREEN.setMinuteScreen(str(newAlarm))
                 waitForRelease()
                 input = IO.waitForInput()
@@ -105,6 +108,7 @@ def newAlarmScreen():
 def settingsScreen():
     message(['Settings'])
     while True:
+        watchAlarms()
         SCREEN.settingsScreen()
         waitForRelease()
         input = IO.waitForInput()
@@ -141,6 +145,7 @@ def settingsScreen():
                 hours = int(previous/3600)
                 minutes = int((previous%3600)/60)
                 while True:
+                    watchAlarms()
                     SCREEN.setHourScreen(toTimeStr(hours, minutes))
                     waitForRelease()
                     input = IO.waitForInput()
@@ -158,6 +163,7 @@ def settingsScreen():
                     elif input is 'right':
                         toBreak = False
                         while True:
+                            watchAlarms()
                             SCREEN.setMinuteScreen(toTimeStr(hours, minutes))
                             waitForRelease()
                             input = IO.waitForInput()
@@ -182,6 +188,7 @@ def settingsScreen():
 
 def alarmListScreen():
     while True:
+        watchAlarms()
         SCREEN.alarmScreen()
         waitForRelease()
         input = IO.waitForInput()
@@ -216,6 +223,7 @@ def alarmListScreen():
 
 
 def message(message):
+    watchAlarms()
     SCREEN.messageScreen(message)
     time.sleep(MESSAGEDELAY)
 
@@ -232,6 +240,13 @@ def toTimeStr(hours, minutes):
     return hourStr+':'+minuteStr
 
 
+def toTimeInt(timeStr):
+    hour, minute = timeStr.split(':')
+    hour = int(hour)
+    minute = int(minute)
+    return hour, minute
+
+
 def waitForRelease():
     now = time.time()
     while IO.readInput():
@@ -239,6 +254,28 @@ def waitForRelease():
         then = time.time()
         if then-now>INPUTTIMEOUT:
             return False
+
+
+def watchAlarms():
+    activeAlarms = []
+    for alarm in ALARMS:
+        if alarm.isActivated():
+            activeAlarms.append(alarm)
+    now = time.strftime("%H:%M", time.localtime(time.time()))
+    nowHour, nowMinute = toTimeInt(now)
+    for alarm in activeAlarms:
+        hour = alarm.getHour()
+        minute = alarm.getMinute()
+        if nowHour>hour or (nowHour==hour and nowMinute>=minute):
+            if alarm.isFromCalendar():
+                removeAlarm(alarm)
+            else:
+                alarm.toggleActivated()
+            triggerAlarm()
+
+
+def triggerAlarm():
+    print('ALARM TRIGGERED')
 
 
 main()
