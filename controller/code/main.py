@@ -60,6 +60,7 @@ def clockScreen():
         if input:
             if input is 'left':
                 newAlarmScreen()
+                SETTINGS.saveSettings()
             elif input is 'up':
                 pass
             elif input is 'down':
