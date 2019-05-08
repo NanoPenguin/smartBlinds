@@ -149,8 +149,8 @@ def newAlarmScreen():
 
 def settingsScreen():
     message(['Settings'])
-    SCREEN.settingsScreen()
     while True:
+        SCREEN.settingsScreen()
         input = IO.waitForInput()
         if input is 'left':
             return False
