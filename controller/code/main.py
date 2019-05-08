@@ -182,6 +182,7 @@ def settingsScreen():
                     mes = ['Set time for' ,'wake-up before', 'first event']
                 elif setting is 'Easy wake':
                     mes = ['Set how long', 'it takes to', 'open blinds']
+                print(setting)
                 message(mes)
                 previous = SETTINGS.getSetting(setting)
                 hours = int(previous/3600)
