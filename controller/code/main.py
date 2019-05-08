@@ -35,6 +35,8 @@ MESSAGEDELAY = 0.7
 BUTTONHOLDDELAY = 1
 INPUTTIMEOUT = 10
 
+LASTTRIGGEREDMINUTE = -1
+
 
 def main():
     # Load alarmtimes from calendar
@@ -267,14 +269,17 @@ def watchAlarms():
             activeAlarms.append(alarm)
     now = time.strftime("%H:%M", time.localtime(time.time()))
     nowHour, nowMinute = toTimeInt(now)
+    if nowMinute!=LASTTRIGGEREDMINUTE:
+        LASTTRIGGEREDMINUTE = -1
     for alarm in activeAlarms:
         hour = alarm.getHour()
         minute = alarm.getMinute()
-        if nowHour>hour or (nowHour==hour and nowMinute>=minute):
+        if (nowHour>hour or (nowHour==hour and nowMinute>=minute)) and LASTTRIGGEREDMINUTE!=nowMinute:
             if alarm.isFromCalendar():
                 removeAlarm(alarm)
             else:
                 alarm.toggleActivated()
+            LASTTRIGGEREDMINUTE = minute
             triggerAlarm()
 
 
