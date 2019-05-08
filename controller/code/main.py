@@ -117,7 +117,7 @@ def settingsScreen():
             setting = SCREEN.selectedSetting()
             if setting is 'Alarms':
                 alarmListScreen()
-            elif setting in ['Close', 'direction']:
+            elif setting in ['Close dir']:
                 value = SETTINGS.getSetting(setting)
                 if value:
                     value = 0
@@ -128,7 +128,7 @@ def settingsScreen():
                     direction = 'up'
                 else:
                     direction = 'down'
-                message(['Close direction', 'set to '+direction])
+                message(['Close dir', 'set to '+direction])
             elif setting in ['Cal. margin', 'Easy wake']:
                 if setting == 'Cal. margin':
                     mes = ['Set time for' ,'wake-up before', 'first event']
