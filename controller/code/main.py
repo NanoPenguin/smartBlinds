@@ -151,6 +151,7 @@ def settingsScreen():
     message(['Settings'])
     while True:
         SCREEN.settingsScreen()
+        waitForRelease()
         input = IO.waitForInput()
         if input is 'left':
             return False
@@ -188,6 +189,7 @@ def settingsScreen():
                 minutes = int((previous%3600)/60)
                 while True:
                     SCREEN.setHourScreen(toTimeStr(hours, minutes))
+                    waitForRelease()
                     input = IO.waitForInput()
                     if input is 'left':
                         message(['Changes discarded'])
@@ -200,6 +202,7 @@ def settingsScreen():
                         toBreak = False
                         while True:
                             SCREEN.setMinuteScreen(toTimeStr(hours, minutes))
+                            waitForRelease()
                             input = IO.waitForInput()
                             if input is 'left':
                                 break
@@ -253,6 +256,11 @@ def toTimeStr(hours, minutes):
     else:
         minuteStr = str(minutes)
     return hourStr+':'+minuteStr
+
+
+def waitForRelease():
+    while IO.readInput():
+        time.sleep(0.1)
 
 
 main()
