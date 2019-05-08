@@ -63,9 +63,9 @@ def clockScreen():
                 newAlarmScreen()
                 SETTINGS.saveSettings()
             elif input is 'up':
-                pass
+                BLINDS.up()
             elif input is 'down':
-                pass
+                BLINDS.down()
             elif input is 'right':
                 settingsScreen()
                 SETTINGS.saveSettings()
