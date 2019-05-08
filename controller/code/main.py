@@ -275,7 +275,7 @@ def watchAlarms():
     for alarm in activeAlarms:
         hour = alarm.getHour()
         minute = alarm.getMinute()
-        if (nowHour>hour or (nowHour==hour and nowMinute>=minute)) and LASTTRIGGEREDMINUTE!=nowMinute:
+        if nowHour==hour and nowMinute==minute and LASTTRIGGEREDMINUTE!=nowMinute:
             if alarm.isFromCalendar():
                 removeAlarm(alarm)
             else:
