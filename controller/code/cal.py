@@ -100,8 +100,7 @@ class Cal(): # Class for contact with google calendar
         earliestIndex = -1
         i=0
         for calendarId in self._calendarIdList:
-            startTime = self.getFirstEvent(calendarId)
-            startTime = startTime-calMargin
+            startTime = self.getFirstEvent(calendarId) - calMargin
             if startTime:
                 if (not earliest) or startTime<earliest:
                     earliest = startTime
