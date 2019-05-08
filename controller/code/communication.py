@@ -20,7 +20,10 @@ class Communication():
 
 
   def __del__(self): # Destructor
+    try:
         self._ser.close
+    except AttributeError:
+      pass
 
   def startSerial(self, serPort, baudRate):
     try:
