@@ -3,7 +3,9 @@ Class for reading io-inputs on pins
 """
 
 from gpiozero import Button
-from time import sleep
+import time
+
+INPUTTIMEOUT = 10
 
 class Io():
     def __init__(self):  # initialize GPIO
@@ -14,6 +16,7 @@ class Io():
 
 
     def waitForInput(self):
+        now = time.time()
         while True:
             if not self._up.is_pressed:
                 return 'up'
@@ -23,7 +26,10 @@ class Io():
                 return 'left'
             elif not self._right.is_pressed:
                 return 'right'
-            sleep(0.1)
+            time.sleep(0.1)
+            then = time.time()
+            if then-now>INPUTTIMEOUT:
+                return False
 
 
     def readInput(self):

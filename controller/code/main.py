@@ -33,6 +33,7 @@ SOUND = Sound() # Initializing Sound
 # Global timeconstants
 MESSAGEDELAY = 0.7
 BUTTONHOLDDELAY = 1
+INPUTTIMEOUT = 10
 
 
 def main():
@@ -232,8 +233,12 @@ def toTimeStr(hours, minutes):
 
 
 def waitForRelease():
+    now = time.time()
     while IO.readInput():
         time.sleep(0.1)
+        then = time.time()
+        if then-now>INPUTTIMEOUT:
+            return False
 
 
 main()
