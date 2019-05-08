@@ -116,10 +116,11 @@ def clockScreen():
 
 
 def newAlarmScreen():
-    message(['Set new Alarm'])
+    message(['Set new', 'alarm'])
     newAlarm = Alarm(time.time())
     while True:
         SCREEN.setHourScreen(str(newAlarm))
+        waitForRelease()
         input = IO.waitForInput()
         if input is 'left':
             message(['Alarm discarded'])
@@ -131,6 +132,7 @@ def newAlarmScreen():
         elif input is 'right':
             while True:
                 SCREEN.setMinuteScreen(str(newAlarm))
+                waitForRelease()
                 input = IO.waitForInput()
                 if input is 'left':
                     break
