@@ -105,7 +105,6 @@ def newAlarmScreen():
 def settingsScreen():
     message(['Settings'])
     while True:
-        print('test')
         SCREEN.settingsScreen()
         waitForRelease()
         input = IO.waitForInput()
