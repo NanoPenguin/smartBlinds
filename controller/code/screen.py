@@ -170,7 +170,6 @@ class Screen():
             draw.text(((W/2-w)/2, (H-h)/2), timeList[0], fill="black", font=self._fontClock)
             w, h = draw.textsize(timeList[1], font=self._fontClock)
             draw.text(((W/2-w)/2+W/2, (H-h)/2), timeList[1], fill="white", font=self._fontClock)
-        self._lastMode = 'setHour'
 
 
     def setMinuteScreen(self, timeStr):
@@ -186,7 +185,6 @@ class Screen():
             draw.text(((W/2-w)/2, (H-h)/2), timeList[0], fill="white", font=self._fontClock)
             w, h = draw.textsize(timeList[1], font=self._fontClock)
             draw.text(((W/2-w)/2+W/2, (H-h)/2), timeList[1], fill="black", font=self._fontClock)
-        self._lastMode = 'setMinute'
 
 
     # settingsScreen handels the graphichs of the settings screen. Similar to alarmScreen.

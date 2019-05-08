@@ -179,9 +179,10 @@ def settingsScreen():
                 message(['Close direction', 'set to '+direction])
             elif setting in ['Cal. margin', 'Easy wake']:
                 if setting is 'Cal. margin':
-                    message(['Set time for' ,'wake-up before', 'first event'])
+                    mes = ['Set time for' ,'wake-up before', 'first event']
                 elif setting is 'Easy wake':
-                    message(['Set how long', 'it takes to', 'open blinds'])
+                    mes = ['Set how long', 'it takes to', 'open blinds']
+                message(mes)
                 previous = SETTINGS.getSetting(setting)
                 hours = int(previous/3600)
                 minutes = int((previous%3600)/60)
