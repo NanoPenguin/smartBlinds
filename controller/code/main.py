@@ -24,7 +24,7 @@ epochSeconds = time.mktime(timeTuple)
 SETTINGS = Settings()  # initializing settings
 ALARMS = SETTINGS.getSetting('Alarms')  # initializing alarms
 SCREEN = Screen(ALARMS, SETTINGS)  # initializing screen
-#BLINDS =   # initializing blinds
+BLINDS =  Blinds() # initializing blinds
 CAL = Cal()  # initializing calendar
 IO = Io()  # Initializing GPIO
 SOUND = Sound() # Initializing Sound
@@ -64,9 +64,9 @@ def clockScreen():
                 newAlarmScreen()
                 SETTINGS.saveSettings()
             elif input is 'up':
-                pass
+                BLINDS.up()
             elif input is 'down':
-                pass
+                BLINDS.down()
             elif input is 'right':
                 settingsScreen()
                 SETTINGS.saveSettings()

@@ -16,11 +16,16 @@ class Communication():
     self._serPort = serPort
     self._baudRate = baudRate
     self._ser = self.startSerial(self._serPort, self._baudRate)
-    self.waitForArduino() 
-
+    try:
+      self.waitForArduino() 
+    except AttributeError:
+      pass
 
   def __del__(self): # Destructor
+    try:
         self._ser.close
+    except AttributeError:
+      pass
 
   def startSerial(self, serPort, baudRate):
     try:
