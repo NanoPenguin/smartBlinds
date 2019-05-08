@@ -124,7 +124,7 @@ class Screen():
 
     def scrollDown(self):  # scrolls and selects next alarm
         if self._lastMode == 'alarm':
-            if len(self._alarms) > self._currentScroll+1:
+            if len(self._alarms) > self._currentScroll:
                 self._scrollIndex+=1
             self.alarmScreen()
         elif self._lastMode == 'settings':
