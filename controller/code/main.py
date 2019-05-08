@@ -236,7 +236,7 @@ def alarmListScreen():
         elif input is 'down':
             SCREEN.scrollDown()
         elif input is 'right':
-            if SCREEN.selectedAlarm == 'New Alarm':
+            if not SCREEN.selectedAlarm():
                 newAlarmScreen()
             else:
                 message(['NOT CODED'])
