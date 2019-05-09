@@ -60,7 +60,7 @@ class Cal(): # Class for contact with google calendar
         if events:
             for event in events:
                 eventStart = event['start'].get('dateTime', event['start'].get('date'))
-                startTime = dateutil.parser.parse(eventStart).astimezone(LocalTimezone())
+                startTime = dateutil.parser.parse(eventStart).replace(tzinfo=LocalTimezone())
                 startTimeStr = startTime.strftime('%H:%M')
                 if startTimeStr != '00:00':
                     print(startTime.strftime('%H:%M'), event['summary'])
