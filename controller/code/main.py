@@ -310,6 +310,7 @@ def updateCalAlarms():
         removed = True
         while removed:
             removed = False
+            for alarm in ALARMS:
                 if alarm.isFromCalendar():
                     removeAlarm(alarm)
                     removed = True
