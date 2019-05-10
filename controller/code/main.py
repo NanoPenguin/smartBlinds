@@ -309,6 +309,7 @@ def updateCalAlarms():
         for alarm in ALARMS:
             if alarm.isFromCalendar():
                 removeAlarm(alarm)
+                print('removed '+alarm)
         for alarm in newCalAlarms:
             ALARMS.append(alarm)
 
