@@ -192,7 +192,8 @@ def settingsScreen():
                                 break
                         if toBreak:
                             break
-
+            elif setting is 'exit':
+                quit()
 
 def alarmListScreen():
     while True:

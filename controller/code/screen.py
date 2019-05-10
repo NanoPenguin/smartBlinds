@@ -10,7 +10,7 @@ from luma.oled.device import ssd1306
 
 SCREENSERIAL = spi(device=0, port=0)
 SCREENDEVICE = ssd1306(SCREENSERIAL, rotate=2)
-
+DEBUG = True
 
 class Screen():
     def __init__(self, alarms, settingsObject):
@@ -165,6 +165,8 @@ class Screen():
         keys = [key for key in self._settingsObject.getKeys()]
         if len(keys) > self._currentScroll:
             return keys[self._currentScroll]
+        elif len(keys) = self._currentScroll:
+            return 'exit'
         else:
             return False
 
@@ -199,7 +201,7 @@ class Screen():
             draw.text(((W/2-w)/2+W/2, (H-h)/2), timeList[1], fill="black", font=self._fontClock)
 
 
-    # settingsScreen handels the graphichs of the settings screen. Similar to alarmScreen.
+    # settingsScreen handles the graphichs of the settings screen. Similar to alarmScreen.
     def settingsScreen(self):
         if self._lastMode != 'settings':
             self.resetScroll()
@@ -210,7 +212,8 @@ class Screen():
         else:
             scrollDirUp = True
         keys = self._settingsObject.getKeys()
-        print
+        if(DEBUG):
+            keys.append('Exit script')
         for animationConst in range(self._blockSize,-1,-2):
             if scrollDirUp:
                 #animationConst = self._blockSize - animationConst
