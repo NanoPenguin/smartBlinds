@@ -72,7 +72,7 @@ class Screen():
         if self._lastMode != 'alarm':
             self.resetScroll()
         newAlarm = 'New Alarm'
-        updateCalAlarms = 'Update cal. alarms'
+        updateCalAlarms = 'Update cal.'
         alarms = list(self._alarms)
         alarms.append(newAlarm)
         alarms.append(updateCalAlarms)
