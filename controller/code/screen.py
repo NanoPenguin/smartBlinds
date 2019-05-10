@@ -91,7 +91,7 @@ class Screen():
                     #print(alarm)
                     if alarms.index(alarm) <= self._scrollIndex+2 and \
                         alarms.index(alarm) >= self._scrollIndex-2:
-                        if alarm != newAlarm:
+                        if alarm not in [newAlarm, updateCalAlarms]:
                             alarmTime = str(alarm)
                             alarmAuto = alarm.isFromCalendar()
                             alarmActive = alarm.isActivated()
@@ -114,13 +114,15 @@ class Screen():
                         draw.line((0, Y, W, Y), fill="white")
                         #draw.line((0, Y+self._blockSize, W, Y+self._blockSize), fill="white")
                         draw.rectangle((0, self._blockSize, 2, self._blockSize*2-1), fill="white")
-                        if alarm != newAlarm:
+                        if alarm not in [newAlarm, updateCalAlarms]:
                             draw.text((4, Y+(self._blockSize-self._fontSize)/2), alarmTime, fill="white", font=self._fontBold)
                             autoStrSize = draw.textsize(autoStr, font=self._font)
                             draw.text((W-self._blockSize-autoStrSize[0], Y+(self._blockSize-self._fontSize)/2), autoStr, fill="white", font=self._font)
                             draw.ellipse((W-self._blockSize+9, Y+5, W-1, Y+self._blockSize-5), outline="white", fill=activeColor)
-                        else:
+                        elif alarm == newAlarm:
                             draw.text((4, Y+(self._blockSize-self._fontSize)/2), newAlarm, fill="white", font=self._font)
+                        else:
+                            draw.text((4, Y+(self._blockSize-self._fontSize)/2), updateCalAlarms, fill="white", font=self._font)
                 if self._currentScroll == self._scrollIndex:
                     break
             time.sleep(self._scrollDelay)
