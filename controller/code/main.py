@@ -312,6 +312,7 @@ def updateCalAlarms():
                 alarm = ALARMS[i]
             except IndexError:
                 break
+            print(alarm.isFromCalendar()+' '+str(alarm))
             if alarm.isFromCalendar():
                 removeAlarm(alarm)
                 i-=1
