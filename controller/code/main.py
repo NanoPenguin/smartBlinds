@@ -306,15 +306,17 @@ def watchAlarms():
 def updateCalAlarms():
     newCalAlarms = CAL.getCalendarAlarms(SETTINGS.getSetting('Cal. margin'))
     if newCalAlarms != 'ERROR':
-        try:
-            for i in range(len(ALARMS)):
+
+        for i in range(len(ALARMS)):
+            try:
                 alarm = ALARMS[i]
-                if alarm.isFromCalendar():
-                    removeAlarm(alarm)
-                    i-=1
-                    print('removed '+str(alarm))
-        except IndexError:
-            pass
+            except IndexError:
+                break
+            if alarm.isFromCalendar():
+                removeAlarm(alarm)
+                i-=1
+                print('removed '+str(alarm))
+
         for alarm in newCalAlarms:
             ALARMS.append(alarm)
 
