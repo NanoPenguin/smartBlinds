@@ -165,7 +165,7 @@ class Screen():
         keys = [key for key in self._settingsObject.getKeys()]
         if len(keys) > self._currentScroll:
             return keys[self._currentScroll]
-        elif len(keys) = self._currentScroll:
+        elif len(keys) == self._currentScroll:
             return 'exit'
         else:
             return False
