@@ -210,6 +210,8 @@ def alarmListScreen():
             if SCREEN.selectedAlarm() == 'updateCalAlarms':
                 CAL.setDayTomorrow()
                 updateCalAlarms()
+                message(['Changing','calendar day'])
+                SCREEN.resetScroll()
             else:
                 now = time.time()
                 while True:

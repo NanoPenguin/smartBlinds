@@ -66,13 +66,11 @@ class Cal(): # Class for contact with google calendar
                     startTime = startTime.astimezone(LocalTimezone())
                 except ValueError:
                     print('Catched ValueError')
-
-                #print(startTime, event['summary'])
                 startTimeStr = startTime.strftime('%H:%M')
                 if startTimeStr != '00:00':
                     print(startTimeStr, event['summary'])
                     return time.mktime(startTime.timetuple())
-        print('No upcoming events found.')
+        # print('No upcoming events found.')
         return None
 
 
