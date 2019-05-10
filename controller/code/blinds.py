@@ -33,7 +33,7 @@ class Blinds():
 
     def up(self):  # set blinds to up
         try:
-            self.setAngle(self._upAngel)
+            self.setAngle(self._upAngle)
             return True
         except AttributeError:
             print("No blinds connected")
@@ -42,7 +42,7 @@ class Blinds():
 
     def down(self):  # set blinds to down
         try:
-            self.setAngle(self._downAngel)
+            self.setAngle(self._downAngle)
             return True
         except AttributeError:
             print("No blinds connected")
