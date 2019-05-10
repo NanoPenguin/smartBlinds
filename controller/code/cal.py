@@ -7,8 +7,6 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from tz import LocalTimezone
-from pytz import timezone
-import pytz
 
 from alarm import *
 
