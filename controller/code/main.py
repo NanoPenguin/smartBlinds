@@ -320,7 +320,7 @@ def updateCalAlarms():
                 print('removed '+str(alarm))
 
         for alarm in newCalAlarms:
-            ALARMS.append(alarm)
+            #ALARMS.append(alarm)
 
 def triggerAlarm():
     print('ALARM TRIGGERED')
