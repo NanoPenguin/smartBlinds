@@ -40,7 +40,6 @@ class Cal(): # Class for contact with google calendar
     def setDayTomorrow(self):
         currentTime = datetime.datetime.utcnow()
         self._alarmDate = currentTime.replace(day=currentTime.day+1,hour=0,minute=0,second=0)
-        print(self._alarmDate)
 
     def getFirstEvent(self, calendarId):
         # Get the first event (after 00:00) for calendar with given id.
@@ -112,7 +111,7 @@ class Cal(): # Class for contact with google calendar
                     earliest = startTime
                     earliestIndex = i
                 calendarAlarms.append(Alarm(startTime,True,False))
-            i+=1
+                i+=1
         if earliestIndex != -1:
             print(earliestIndex)
             try:
