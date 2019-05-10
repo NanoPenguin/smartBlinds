@@ -209,13 +209,13 @@ def alarmListScreen():
             if SCREEN.selectedAlarm() == 'newAlarm':
                 newAlarmScreen()
             elif SCREEN.selectedAlarm() == 'updateCalAlarms':
-                updateCalAlarms()
                 message(['Updating','cal alarms'])
+                updateCalAlarms()
                 SCREEN.resetScroll()
             elif SCREEN.selectedAlarm() == 'nextDay':
+                message(['Changing','calendar day'])
                 CAL.setDayTomorrow()
                 updateCalAlarms()
-                message(['Changing','calendar day'])
                 SCREEN.resetScroll()
             else:
                 now = time.time()
@@ -306,9 +306,10 @@ def watchAlarms():
 def updateCalAlarms():
     newCalAlarms = CAL.getCalendarAlarms(SETTINGS.getSetting('Cal. margin'))
     if newCalAlarms != 'ERROR':
-        for alarm in ALARMS:
-            if alarm.isFromCalendar():
-                removeAlarm(alarm)
+        for i in range(len(ALARMS)):
+            if ALARMS[i].isFromCalendar():
+                removeAlarm(ALARMS[i])
+                i-=1
                 print('removed '+str(alarm))
         for alarm in newCalAlarms:
             ALARMS.append(alarm)
