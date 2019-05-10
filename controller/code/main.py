@@ -205,8 +205,11 @@ def alarmListScreen():
         elif input is 'down':
             SCREEN.scrollDown()
         elif input is 'right':
-            if not SCREEN.selectedAlarm():
+            if SCREEN.selectedAlarm() == 'newAlarm':
                 newAlarmScreen()
+            if SCREEN.selectedAlarm() == 'updateCalAlarms':
+                CAL.setDayTomorrow()
+                updateCalAlarms()
             else:
                 now = time.time()
                 while True:

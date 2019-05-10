@@ -72,8 +72,10 @@ class Screen():
         if self._lastMode != 'alarm':
             self.resetScroll()
         newAlarm = 'New Alarm'
+        updateCalAlarms = 'Update cal. alarms'
         alarms = list(self._alarms)
         alarms.append(newAlarm)
+        alarms.append(updateCalAlarms)
         W = 128
         H = 64
         if self._currentScroll < self._scrollIndex:
@@ -149,8 +151,10 @@ class Screen():
     def selectedAlarm(self):  # returns the selected alarm
         if len(self._alarms) > self._currentScroll:
             return self._alarms[self._currentScroll]
+        elif len(self._alarms) == self._currentScroll:
+            return 'newAlarm'
         else:
-            return False
+            return 'updateCalAlarms'
 
 
     def selectedSetting(self):  # returns the selected setting

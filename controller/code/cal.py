@@ -7,6 +7,8 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from tz import LocalTimezone
+from pytz import timezone
+import pytz
 
 from alarm import *
 
@@ -21,7 +23,7 @@ class Cal(): # Class for contact with google calendar
             self._calendarIdList.append(calendarId)
         self.loadCalendarIds()
         currentTime = datetime.datetime.utcnow()
-        if currentTime.hour>=17:
+        if currentTime.hour>=13:
             self.setDayTomorrow()
         else:
             self._alarmDate = currentTime.replace(day=currentTime.day,hour=0,minute=0,second=0)
@@ -40,6 +42,7 @@ class Cal(): # Class for contact with google calendar
     def setDayTomorrow(self):
         currentTime = datetime.datetime.utcnow()
         self._alarmDate = currentTime.replace(day=currentTime.day+1,hour=0,minute=0,second=0)
+        print(self._alarmDate)
 
     def getFirstEvent(self, calendarId):
         # Get the first event (after 00:00) for calendar with given id.
@@ -49,7 +52,7 @@ class Cal(): # Class for contact with google calendar
         currentTime = datetime.datetime.utcnow()
         # Start and stop date for next day
         start = self._alarmDate
-        stop = self._alarmDate.replace(day=currentTime.day+1)
+        stop = self._alarmDate.replace(day=self._alarmDate.day+1)
         startDate = start.isoformat()+'Z'
         stopDate = stop.isoformat()+'Z'
         eventsResult = self._service.events().list(calendarId=calendarId, timeMin=startDate,
@@ -60,10 +63,16 @@ class Cal(): # Class for contact with google calendar
         if events:
             for event in events:
                 eventStart = event['start'].get('dateTime', event['start'].get('date'))
-                startTime = dateutil.parser.parse(eventStart).replace(tzinfo=LocalTimezone())
+                startTime = dateutil.parser.parse(eventStart)
+                try:
+                    startTime = startTime.astimezone(LocalTimezone())
+                except ValueError:
+                    print('Catched ValueError')
+
+                #print(startTime, event['summary'])
                 startTimeStr = startTime.strftime('%H:%M')
                 if startTimeStr != '00:00':
-                    print(startTime.strftime('%H:%M'), event['summary'])
+                    print(startTimeStr, event['summary'])
                     return time.mktime(startTime.timetuple())
         print('No upcoming events found.')
         return None
