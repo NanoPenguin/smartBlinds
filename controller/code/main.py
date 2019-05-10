@@ -65,7 +65,6 @@ def clockScreen():
         input = IO.waitForInput()
         if input:
             if input is 'left':
-                SOUND.makeSound()
                 newAlarmScreen()
                 SETTINGS.saveSettings()
             elif input is 'up':
@@ -314,7 +313,7 @@ def updateCalAlarms():
                 alarm = ALARMS[i]
             except IndexError:
                 break
-            print(str(alarm.isFromCalendar())+' '+str(alarm))
+            print('i= '+str(i)+' '+str(alarm.isFromCalendar())+' '+str(alarm))
             if alarm.isFromCalendar():
                 removeAlarm(alarm)
                 i-=1
@@ -325,6 +324,7 @@ def updateCalAlarms():
 
 def triggerAlarm():
     print('ALARM TRIGGERED')
+    SOUND.makeSound()
 
 
 main()
