@@ -71,11 +71,10 @@ class Screen():
     def alarmScreen(self):
         if self._lastMode != 'alarm':
             self.resetScroll()
-        newAlarm = 'New Alarm'
-        updateCalAlarms = 'Update cal.'
+        nonAlarms = ['New Alarm','Update cal.','Next day cal.']
         alarms = list(self._alarms)
-        alarms.append(newAlarm)
-        alarms.append(updateCalAlarms)
+        for nonAlarm in nonAlarms:
+            alarms.append(nonAlarm)
         W = 128
         H = 64
         if self._currentScroll < self._scrollIndex:
@@ -91,7 +90,7 @@ class Screen():
                     #print(alarm)
                     if alarms.index(alarm) <= self._scrollIndex+2 and \
                         alarms.index(alarm) >= self._scrollIndex-2:
-                        if alarm not in [newAlarm, updateCalAlarms]:
+                        if alarm not in nonAlarms:
                             alarmTime = str(alarm)
                             alarmAuto = alarm.isFromCalendar()
                             alarmActive = alarm.isActivated()
@@ -114,15 +113,16 @@ class Screen():
                         draw.line((0, Y, W, Y), fill="white")
                         #draw.line((0, Y+self._blockSize, W, Y+self._blockSize), fill="white")
                         draw.rectangle((0, self._blockSize, 2, self._blockSize*2-1), fill="white")
-                        if alarm not in [newAlarm, updateCalAlarms]:
+                        if alarm not in nonAlarms:
                             draw.text((4, Y+(self._blockSize-self._fontSize)/2), alarmTime, fill="white", font=self._fontBold)
                             autoStrSize = draw.textsize(autoStr, font=self._font)
                             draw.text((W-self._blockSize-autoStrSize[0], Y+(self._blockSize-self._fontSize)/2), autoStr, fill="white", font=self._font)
                             draw.ellipse((W-self._blockSize+9, Y+5, W-1, Y+self._blockSize-5), outline="white", fill=activeColor)
-                        elif alarm == newAlarm:
-                            draw.text((4, Y+(self._blockSize-self._fontSize)/2), newAlarm, fill="white", font=self._font)
                         else:
-                            draw.text((4, Y+(self._blockSize-self._fontSize)/2), updateCalAlarms, fill="white", font=self._font)
+                            for nonAlarm in nonAlarms:
+                                if alarm = nonAlarm:
+                                    draw.text((4, Y+(self._blockSize-self._fontSize)/2), nonAlarm, fill="white", font=self._font)
+                                    break
                 if self._currentScroll == self._scrollIndex:
                     break
             time.sleep(self._scrollDelay)
@@ -132,7 +132,7 @@ class Screen():
 
     def scrollDown(self):  # scrolls and selects next alarm
         if self._lastMode == 'alarm':
-            if len(self._alarms)+1 > self._currentScroll:
+            if len(self._alarms)+2 > self._currentScroll:
                 self._scrollIndex+=1
             self.alarmScreen()
         elif self._lastMode == 'settings':
@@ -155,8 +155,10 @@ class Screen():
             return self._alarms[self._currentScroll]
         elif len(self._alarms) == self._currentScroll:
             return 'newAlarm'
-        else:
+        elif len(self._alarms)+1 == self._currentScroll:
             return 'updateCalAlarms'
+        else:
+            return 'nextDay'
 
 
     def selectedSetting(self):  # returns the selected setting

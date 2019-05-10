@@ -208,7 +208,11 @@ def alarmListScreen():
         elif input is 'right':
             if SCREEN.selectedAlarm() == 'newAlarm':
                 newAlarmScreen()
-            if SCREEN.selectedAlarm() == 'updateCalAlarms':
+            elif SCREEN.selectedAlarm() == 'updateCalAlarms':
+                updateCalAlarms()
+                message(['Updating','cal alarms'])
+                SCREEN.resetScroll()
+            elif SCREEN.selectedAlarm() == 'nextDay':
                 CAL.setDayTomorrow()
                 updateCalAlarms()
                 message(['Changing','calendar day'])
