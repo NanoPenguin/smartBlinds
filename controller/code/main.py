@@ -38,6 +38,7 @@ CAL_CHANGE_DAY_TIME = '17:00'
 
 LASTTRIGGEREDMINUTE = 100
 CAL_UPDATED = False
+CAL_DAY_CHANGED = False
 
 
 def main():
@@ -272,12 +273,15 @@ def watchAlarms():
     now = time.strftime("%H:%M", time.localtime(time.time()))
     nowHour, nowMinute = toTimeInt(now)
     if not nowMinute and not CAL_UPDATED:
-        if now == CAL_CHANGE_DAY_TIME:
+        if now == CAL_CHANGE_DAY_TIME and not CAL_DAY_CHANGED:
             CAL.setDayTomorrow()
+            CAL_DAY_CHANGED = True
         updateCalAlarms()
-        CAL_UPDATED = true
+        CAL_UPDATED = True
+    elif nowMinute:
+        CAL_UPDATED = False
     elif int(now[0:2]) > int(CAL_CHANGE_DAY_TIME[0:2])+1:
-        CAL_DAY_CHANGED = false
+        CAL_DAY_CHANGED = False
 
     if nowMinute!=LASTTRIGGEREDMINUTE:
         LASTTRIGGEREDMINUTE = 100
