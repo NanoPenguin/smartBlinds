@@ -307,7 +307,7 @@ def watchAlarms():
 def updateCalAlarms():
     newCalAlarms = CAL.getCalendarAlarms(SETTINGS.getSetting('Cal. margin'))
     if newCalAlarms != 'ERROR':
-
+        print('alarmsLEN '+str(len(ALARMS)))
         for i in range(len(ALARMS)):
             try:
                 alarm = ALARMS[i]
