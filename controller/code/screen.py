@@ -120,7 +120,7 @@ class Screen():
                             draw.ellipse((W-self._blockSize+9, Y+5, W-1, Y+self._blockSize-5), outline="white", fill=activeColor)
                         else:
                             for nonAlarm in nonAlarms:
-                                if alarm = nonAlarm:
+                                if alarm == nonAlarm:
                                     draw.text((4, Y+(self._blockSize-self._fontSize)/2), nonAlarm, fill="white", font=self._font)
                                     break
                 if self._currentScroll == self._scrollIndex:
