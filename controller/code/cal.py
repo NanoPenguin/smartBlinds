@@ -3,6 +3,7 @@ import datetime
 import dateutil.parser
 import pickle
 import os.path
+import httplib2
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -19,7 +20,6 @@ class Cal(): # Class for contact with google calendar
         self.initCreds()
         if calendarId:
             self._calendarIdList.append(calendarId)
-        self.loadCalendarIds()
         currentTime = datetime.datetime.utcnow()
         if currentTime.hour>=13:
             self.setDayTomorrow()
@@ -52,10 +52,13 @@ class Cal(): # Class for contact with google calendar
         stop = self._alarmDate.replace(day=self._alarmDate.day+1)
         startDate = start.isoformat()+'Z'
         stopDate = stop.isoformat()+'Z'
-        eventsResult = self._service.events().list(calendarId=calendarId, timeMin=startDate,
-                                            timeMax=stopDate,maxResults=100, singleEvents=True,
-                                            orderBy='startTime').execute()
-        events = eventsResult.get('items', [])
+        try:
+            eventsResult = self._service.events().list(calendarId=calendarId, timeMin=startDate,
+                                                timeMax=stopDate,maxResults=100, singleEvents=True,
+                                                orderBy='startTime').execute()
+            events = eventsResult.get('items', [])
+        except httplib2.ServerNotFoundError:
+            events = None
 
         if events:
             for event in events:
@@ -91,14 +94,25 @@ class Cal(): # Class for contact with google calendar
             # Save the credentials for the next run
             with open('token.pickle', 'wb') as token:
                 pickle.dump(creds, token)
-
-        service = build('calendar', 'v3', credentials=creds)
+        self._credsInitialized = False
+        try:
+            service = build('calendar', 'v3', credentials=creds)
+            self._credsInitialized = True
+        except httplib2.ServerNotFoundError:
+            print('No connection to server')
+            return False
         self._service = service
+        self.loadCalendarIds()
+        return True
 
     def getCalendarAlarms(self,calMargin):
         # Returns list with Alarm-objects based on the first event
         # from each personal calendar.
         # The earliest alarm in the list is activated.
+        if not self._credsInitialized:
+            if not self.initCreds():
+                return 'ERROR'
+
         calendarAlarms = []
         earliest = None
         earliestIndex = -1
