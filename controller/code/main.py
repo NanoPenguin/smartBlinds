@@ -68,7 +68,6 @@ def clockScreen():
                 newAlarmScreen()
                 SETTINGS.saveSettings()
             elif input is 'up':
-                SOUND.makeSound()
                 connected = BLINDS.open()
                 if not connected:
                     message(['Blinds not', 'connected'])
