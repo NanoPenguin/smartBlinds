@@ -57,7 +57,7 @@ class Screen():
             if tempTime < earliest and alarm.isActivated():
                 earliest = tempTime
                 earliestAlarm = alarm
-        timeStr = '06:59' # time.strftime('%H:%M', time.localtime(time.time()))
+        timeStr = '05:59' # time.strftime('%H:%M', time.localtime(time.time()))
         with canvas(SCREENDEVICE) as draw:
             w, h = draw.textsize(timeStr, font=self._fontClock)
             draw.text(((W-w)/2, (H-h)/2), timeStr, fill="white", font=self._fontClock)
