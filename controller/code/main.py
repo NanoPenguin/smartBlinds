@@ -276,6 +276,7 @@ def waitForRelease():
 
 
 def watchAlarms():
+    global CAL_UPDATED
     print('watch begin')
     global LASTTRIGGEREDMINUTE
     now = time.strftime("%H:%M", time.localtime(time.time()))
