@@ -12,12 +12,9 @@ class Sound():
     def makeSound(self):
         self._pwmPin.start(0)
         self._pwmPin.ChangeDutyCycle(100)
-        for i in range(10):
-            sleep(0.4)
-            if i%2==0:
-                self._pwmPin.ChangeDutyCycle(0)
-            else:
-                self._pwmPin.ChangeDutyCycle(100)
+        sleep(0.4)
+        self._pwmPin.ChangeDutyCycle(0)
+        sleep(0.4)
         self.stopSound()
 
 
