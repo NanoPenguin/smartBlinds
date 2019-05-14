@@ -291,19 +291,22 @@ def watchAlarms():
         CAL_DAY_CHANGED = False
     print('Halfway')
     if nowMinute!=LASTTRIGGEREDMINUTE:
+        print('Alarm untriggered')
         LASTTRIGGEREDMINUTE = 100
     else:
+        print('Alarm triggered maybe')
         activeAlarms = []
         for alarm in ALARMS:
             if alarm.isActivated():
+                print('hejsan hoppsan')
                 activeAlarms.append(alarm)
-        for alarm in activeAlarms:
-            hour = alarm.getHour()
-            minute = alarm.getMinute()
-            if nowHour==hour and nowMinute==minute:
-                alarm.toggleActivated()
-                LASTTRIGGEREDMINUTE = minute
-                triggerAlarm()
+                hour = alarm.getHour()
+                minute = alarm.getMinute()
+                if nowHour==hour and nowMinute==minute:
+                    print('nu har det gått långt')
+                    alarm.toggleActivated()
+                    LASTTRIGGEREDMINUTE = minute
+                    triggerAlarm()
 
 
 def updateCalAlarms():
