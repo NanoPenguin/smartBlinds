@@ -63,6 +63,7 @@ def clockScreen():
         SCREEN.clockScreen()
         waitForRelease()
         input = IO.readInput()
+        print(input)
         if input is 'left':
             newAlarmScreen()
             SETTINGS.saveSettings()
