@@ -320,15 +320,11 @@ def updateCalAlarms():
 
 def triggerAlarm():
     print('ALARM TRIGGERED')
-<<<<<<< HEAD
-    SOUND.makeSound()
-=======
     while True:
         input = IO.readInput()
         if input is 'up':
             break
         SOUND.makeSound()
->>>>>>> c2fa7e41bd9f3cf0445e28e055557b444daa0b21
 
 
 main()
