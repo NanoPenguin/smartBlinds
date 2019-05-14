@@ -20,14 +20,14 @@ class Sound():
         if self._soundOn:
             if(timeSinceLast>beepLength*1000):
                 self.stop()
-                self._soundOn = False
-                self._lastSwitch = millis
         else:
             if(millis-self._lastSwitch>beepLength*1000):
-                self.IO.digitalWrite(SPEAKER_PIN,'HIGH')
+                GPIO.output(SPEAKER_PIN,GPIO.HIGH)
                 self._soundOn = True
                 self._lastSwitch = millis
 
 
     def stop(self):
         GPIO.output(SPEAKER_PIN,GPIO.LOW)
+        self._soundOn = False
+        self._lastSwitch = millis
