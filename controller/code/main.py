@@ -275,7 +275,6 @@ def waitForRelease():
 
 def watchAlarms():
     global CAL_UPDATED
-    print('watch begin')
     global LASTTRIGGEREDMINUTE
     now = time.strftime("%H:%M", time.localtime(time.time()))
     nowHour, nowMinute = toTimeInt(now)
@@ -289,21 +288,16 @@ def watchAlarms():
         CAL_UPDATED = False
     elif int(now[0:2]) > int(CAL_CHANGE_DAY_TIME[0:2])+1:
         CAL_DAY_CHANGED = False
-    print('Halfway')
     if nowMinute!=LASTTRIGGEREDMINUTE and LASTTRIGGEREDMINUTE != 100:
-        print('Alarm untriggered')
         LASTTRIGGEREDMINUTE = 100
     else:
-        print('Alarm triggered maybe')
         activeAlarms = []
         for alarm in ALARMS:
             if alarm.isActivated():
-                print('hejsan hoppsan')
                 activeAlarms.append(alarm)
                 hour = alarm.getHour()
                 minute = alarm.getMinute()
                 if nowHour==hour and nowMinute==minute:
-                    print('nu har det gått långt')
                     alarm.toggleActivated()
                     LASTTRIGGEREDMINUTE = minute
                     triggerAlarm()
