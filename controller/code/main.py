@@ -322,7 +322,7 @@ def triggerAlarm():
     while True:
         input = IO.readInput()
         if input is 'up':
-            message(['Alarm stopped'])
+            message(['Alarm'], ['stopped'])
             SOUND.stop()
             break
         SOUND.beep(0.5)
