@@ -62,22 +62,22 @@ def clockScreen():
         watchAlarms()
         SCREEN.clockScreen()
         waitForRelease()
-        input = IO.waitForInput()
-        if input:
-            if input is 'left':
-                newAlarmScreen()
-                SETTINGS.saveSettings()
-            elif input is 'up':
-                connected = BLINDS.open()
-                if not connected:
-                    message(['Blinds not', 'connected'])
-            elif input is 'down':
-                connected = BLINDS.down()
-                if not connected:
-                    message(['Blinds not', 'connected'])
-            elif input is 'right':
-                settingsScreen()
-                SETTINGS.saveSettings()
+        input = IO.readInput()
+        if input is 'left':
+            newAlarmScreen()
+            SETTINGS.saveSettings()
+        elif input is 'up':
+            connected = BLINDS.open()
+            if not connected:
+                message(['Blinds not', 'connected'])
+        elif input is 'down':
+            connected = BLINDS.down()
+            if not connected:
+                message(['Blinds not', 'connected'])
+        elif input is 'right':
+            settingsScreen()
+            SETTINGS.saveSettings()
+        time.sleep(0.1)
 
 
 def newAlarmScreen():
