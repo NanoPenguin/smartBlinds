@@ -327,7 +327,7 @@ def triggerAlarm():
     print('ALARM TRIGGERED')
     while True:
         if input is 'up':
-            break:
+            break
         SOUND.makeSound()
 
 
