@@ -8,8 +8,7 @@ class Sound():
         global SPEAKER_PIN
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(SPEAKER_PIN, GPIO.OUT)
-        self._lastSwitch = 0
-        self._soundOn = False
+        self.stop()
 
     def beep(self,beepLength):
         millis = int(round(time.time() * 1000))
