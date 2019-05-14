@@ -78,7 +78,7 @@ def clockScreen():
             elif input is 'right':
                 settingsScreen()
                 SETTINGS.saveSettings()
-        time.sleep(0.1)
+        time.sleep(2)
 
 
 def newAlarmScreen():
