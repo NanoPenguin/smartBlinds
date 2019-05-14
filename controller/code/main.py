@@ -27,7 +27,7 @@ SCREEN = Screen(ALARMS, SETTINGS)  # initializing screen
 BLINDS =  Blinds() # initializing blinds
 CAL = Cal()  # initializing calendar
 IO = Io()  # Initializing GPIO
-SOUND = Sound(IO) # Initializing Sound
+SOUND = Sound() # Initializing Sound
 
 
 # Global timeconstants
