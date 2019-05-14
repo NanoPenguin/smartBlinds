@@ -11,7 +11,6 @@ class Sound():
         self._lastSwitch = 0
         self._soundOn = False
 
-
     def beep(self,beepLength):
         millis = int(round(time.time() * 1000))
         timeSinceLast = millis-self._lastSwitch
@@ -26,8 +25,12 @@ class Sound():
                 self._soundOn = True
                 self._lastSwitch = millis
 
-
     def stop(self):
         GPIO.output(SPEAKER_PIN,GPIO.LOW)
         self._soundOn = False
-        self._lastSwitch = millis
+        self._lastSwitch = int(round(time.time() * 1000))
+
+    def start(self):
+        GPIO.output(SPEAKER_PIN,GPIO.HIGH)
+        self._soundOn = True
+        self._lastSwitch = int(round(time.time() * 1000))
