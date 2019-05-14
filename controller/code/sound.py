@@ -14,7 +14,7 @@ class Sound():
         millis = int(round(time.time() * 1000))
         if(millis-self._lastSwitch>beepLength*1000):
             if self._soundOn:
-                stopSound()
+                stop()
                 self._soundOn = False
                 self._lastSwitch = millis
             else:
