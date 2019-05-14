@@ -127,7 +127,6 @@ class Cal(): # Class for contact with google calendar
                 calendarAlarms.append(Alarm(startTime,True,False))
                 i+=1
         if earliestIndex != -1:
-            print(earliestIndex)
             try:
                 calendarAlarms[earliestIndex].activate()
             except IndexError:
