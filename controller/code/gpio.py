@@ -6,8 +6,6 @@ from gpiozero import Button
 from gpiozero import LED
 import time
 
-INPUTTIMEOUT = 10
-
 class Io():
     def __init__(self):  # initialize GPIO
         self._up = Button(27)
@@ -15,7 +13,7 @@ class Io():
         self._left = Button(17)
         self._right = Button(23)
 
-    def waitForInput(self):
+    def waitForInput(self, timeOut=10):
         now = time.time()
         while True:
             if not self._up.is_pressed:
@@ -28,7 +26,7 @@ class Io():
                 return 'right'
             time.sleep(0.1)
             then = time.time()
-            if then-now>INPUTTIMEOUT:
+            if then-now>timeOut:
                 return False
 
     def readInput(self):
