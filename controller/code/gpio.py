@@ -3,6 +3,7 @@ Class for reading io-inputs on pins
 """
 
 from gpiozero import Button
+from gpiozero import LED
 import time
 
 INPUTTIMEOUT = 10
@@ -13,7 +14,6 @@ class Io():
         self._down = Button(22)
         self._left = Button(17)
         self._right = Button(23)
-
 
     def waitForInput(self):
         now = time.time()
@@ -31,7 +31,6 @@ class Io():
             if then-now>INPUTTIMEOUT:
                 return False
 
-
     def readInput(self):
         if not self._up.is_pressed:
             return 'up'
@@ -42,3 +41,10 @@ class Io():
         elif not self._right.is_pressed:
             return 'right'
         return False
+
+    def digitalWrite(self,pinNumber,mode):
+        pinOut = LED(pinNumber)
+        if mode is 'HIGH':
+            pinOut.on()
+        else:
+            pinOut.off()

@@ -1,58 +1,27 @@
 from time import sleep
-import RPi.GPIO as GPIO
+from gpio import *
+
+SPEAKER_PIN = 13
 
 class Sound():
-    def __init__(self):
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(13, GPIO.OUT)
-        self._freq = 500
-        self._pwmPin = GPIO.PWM(13, self._freq)
+    def __init__(self,IO):
+        self.IO = IO
+        self._lastSwitch = 0
+        self._soundOn = False
 
 
-    def makeSound(self):
-        self._pwmPin.start(0)
-        self._pwmPin.ChangeDutyCycle(100)
-        sleep(0.4)
-        self._pwmPin.ChangeDutyCycle(0)
-        sleep(0.4)
-        self.stopSound()
-
-
-    def getFreq(self): # get frequency
-        return self._freq
-
-
-    def stopSound(self):
-        self._pwmPin.stop()
-
-
-    def gpioCleanup(self):
-        GPIO.cleanup()
-
-
-    def increaseFreq(self):
-        self._pwmPin.start(0)
-        self._pwmPin.ChangeDutyCycle(100)
-        for i in range(6):
-            sleep(0.8)
-            if i%2==0:
-                self._pwmPin.ChangeDutyCycle(0)
+    def beep(self,beepLength):
+        millis = int(round(time.time() * 1000))
+        if(millis-self._lastSwitch>beepLength*1000):
+            if self._soundOn:
+                stopSound()
+                self._soundOn = False
+                self._lastSwitch = millis
             else:
-                self._pwmPin.ChangeDutyCycle(100)
-        self.stopSound()
-    """
-    def increaseFreq(self):
-        self._freq += 100
-        self.updateFreq()
-    """
+                self.IO.digitalWrite(SPEAKER_PIN,'HIGH')
+                self._soundOn = True
+                self._lastSwitch = millis
 
 
-    def decreaseFreq(self):
-        self._pwmPin.start(0)
-        self._pwmPin.ChangeDutyCycle(100)
-        sleep(0.1)
-        self.stopSound()
-
-
-    def updateFreq(self):
-        self._pwmPin.ChangeFrequency(self._freq)
+    def stop(self):
+        self.IO.digitalWrite(SPEAKER_PIN,'LOW')

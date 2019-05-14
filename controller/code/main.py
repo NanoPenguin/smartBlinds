@@ -27,7 +27,7 @@ SCREEN = Screen(ALARMS, SETTINGS)  # initializing screen
 BLINDS =  Blinds() # initializing blinds
 CAL = Cal()  # initializing calendar
 IO = Io()  # Initializing GPIO
-SOUND = Sound() # Initializing Sound
+SOUND = Sound(IO) # Initializing Sound
 
 
 # Global timeconstants
@@ -328,8 +328,10 @@ def triggerAlarm():
     while True:
         input = IO.readInput()
         if input is 'up':
+            message('Alarm stopped')
+            SOUND.stop()
             break
-        SOUND.makeSound()
+        SOUND.beep(0.5)
         SCREEN.clockScreen()
 
 
