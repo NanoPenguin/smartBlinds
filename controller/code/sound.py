@@ -4,8 +4,8 @@ from gpio import *
 SPEAKER_PIN = 13
 
 class Sound():
-    def __init__(self,IO):
-        self.IO = IO
+    def __init__(self,io):
+        self.IO = io
         self._lastSwitch = 0
         self._soundOn = False
 
