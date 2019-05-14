@@ -290,7 +290,7 @@ def watchAlarms():
     elif int(now[0:2]) > int(CAL_CHANGE_DAY_TIME[0:2])+1:
         CAL_DAY_CHANGED = False
     print('Halfway')
-    if nowMinute!=LASTTRIGGEREDMINUTE:
+    if nowMinute!=LASTTRIGGEREDMINUTE and LASTTRIGGEREDMINUTE != 100:
         print('Alarm untriggered')
         LASTTRIGGEREDMINUTE = 100
     else:
