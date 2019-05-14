@@ -112,6 +112,7 @@ def newAlarmScreen():
                     message(['Alarm set'])
                     return True
 
+
 def settingsScreen():
     message(['Settings'])
     while True:
@@ -194,6 +195,7 @@ def settingsScreen():
             elif setting is 'exit':
                 quit()
 
+
 def alarmListScreen():
     while True:
         watchAlarms()
@@ -238,7 +240,6 @@ def alarmListScreen():
                         message(['Deleted'])
 
 
-
 def message(message):
     watchAlarms()
     SCREEN.messageScreen(message)
@@ -274,6 +275,7 @@ def waitForRelease():
 
 
 def watchAlarms():
+    print('watch begin')
     global LASTTRIGGEREDMINUTE
     now = time.strftime("%H:%M", time.localtime(time.time()))
     nowHour, nowMinute = toTimeInt(now)
@@ -287,7 +289,7 @@ def watchAlarms():
         CAL_UPDATED = False
     elif int(now[0:2]) > int(CAL_CHANGE_DAY_TIME[0:2])+1:
         CAL_DAY_CHANGED = False
-
+    print('Halfway')
     if nowMinute!=LASTTRIGGEREDMINUTE:
         LASTTRIGGEREDMINUTE = 100
     else:
