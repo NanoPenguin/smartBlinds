@@ -62,8 +62,7 @@ def clockScreen():
             newAlarmScreen()
             SETTINGS.saveSettings()
         elif input is 'up':
-            #connected = BLINDS.open()
-            BLINDS.setAngle(600, 300000)#SETTINGS.getSetting('Easy wake')*1000)
+            connected = BLINDS.open()
             if not connected:
                 message(['Blinds not', 'connected'])
         elif input is 'down':
@@ -313,7 +312,7 @@ def watchAlarms():
                     triggerAlarm()
                 elif blindHour==hour and blindMinute==minute:
                     LASTTRIGGEREDMINUTE = minute
-                    BLINDS.setAngle(600,SETTINGS.getSetting('Easy wake')*1000)
+                    BLINDS.setAngle(600,int(SETTINGS.getSetting('Easy wake'))*1000)
 
 
 # update calendar alarms
