@@ -66,7 +66,10 @@ def clockScreen():
             if not connected:
                 message(['Blinds not', 'connected'])
         elif input is 'down':
-            connected = BLINDS.down()
+            if SETTINGS.getSetting('Close dir'):
+                connected = BLINDS.up()
+            else:
+                connected = BLINDS.down()
             if not connected:
                 message(['Blinds not', 'connected'])
         elif input is 'right':
