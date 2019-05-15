@@ -313,7 +313,6 @@ def watchAlarms():
                     triggerAlarm()
                     break;
                 if blindHour==nowHour and blindMinute==nowMinute:
-                    print(int(SETTINGS.getSetting('Easy wake'))*1000)
                     LASTTRIGGEREDMINUTE = blindMinute
                     BLINDS.setAngle(600,int(SETTINGS.getSetting('Easy wake'))*1000)
                     break
