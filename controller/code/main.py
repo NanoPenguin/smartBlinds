@@ -336,7 +336,9 @@ def updateCalAlarms():
 # trigger alarm and beep until turned of
 def triggerAlarm():
     print('ALARM TRIGGERED')
-    BLINDS.open()
+    connected = BLINDS.open()
+    if not connected:
+        message(['Blinds not', 'connected'])
     while True:
         input = IO.readInput()
         if input is 'up':
