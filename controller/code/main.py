@@ -63,7 +63,7 @@ def clockScreen():
             SETTINGS.saveSettings()
         elif input is 'up':
             #connected = BLINDS.open()
-            BLINDS.setAngle(600, 60000)#SETTINGS.getSetting('Easy wake')*1000)
+            BLINDS.setAngle(600, 300000)#SETTINGS.getSetting('Easy wake')*1000)
             if not connected:
                 message(['Blinds not', 'connected'])
         elif input is 'down':
