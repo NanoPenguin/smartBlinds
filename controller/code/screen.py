@@ -67,19 +67,13 @@ class Screen():
                 nextAlarmList.append(str(alarm))
         nextAlarmList = sorted(nextAlarmList)
         
-        print(nextAlarmList)    
-        print("======")
-
         for alarm in nextAlarmList:
             if(alarm > time.strftime('%H:%M', time.localtime(time.time()))):
                 nextAlarm = alarm
                 break
-                    
-        """for alarm in self._alarms:
-            tempTime = alarm.getTime()
-            if tempTime < earliest and alarm.isActivated():
-                earliest = tempTime
-                earliestAlarm = alarm"""
+                
+            nextAlarm = nextAlarmList[0]
+                 
         timeStr = time.strftime('%H:%M', time.localtime(time.time()))
         if TIMEOVERRIDE:
             timeStr = TIMEOVERRIDE
