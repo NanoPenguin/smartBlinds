@@ -14,49 +14,44 @@ from cal import *
 from gpio import *
 from sound import *
 
-"""
-timeTuple = (2020,11,11,12,12,13,2,67,-1)
-year, mon, day, h, m, s, wd, yd, -1
-epochSeconds = time.mktime(timeTuple)
-"""
-
-# must be initialized settings - alarms - screen in that exact order
 SETTINGS = Settings()  # initializing settings
 ALARMS = SETTINGS.getSetting('Alarms')  # initializing alarms
 SCREEN = Screen(ALARMS, SETTINGS)  # initializing screen
 BLINDS =  Blinds() # initializing blinds
 CAL = Cal()  # initializing calendar
 IO = Io()  # Initializing GPIO
-SOUND = Sound() # Initializing Sound
+SOUND = Sound(IO) # Initializing Sound
 
-
-# Global timeconstants
+# global timeconstants
 MESSAGEDELAY = 0.7
 BUTTONHOLDDELAY = 1
 INPUTTIMEOUT = 10
 CAL_CHANGE_DAY_TIME = '17:00'
 
+# global calendar related variables
 LASTTRIGGEREDMINUTE = 100
 CAL_UPDATED = False
 CAL_DAY_CHANGED = False
 
 
+# main function
 def main():
-    # Load alarmtimes from calendar
     updateCalAlarms()
     clockScreen()
 
 
-# alarms=alarmArray, time=any time in seconds since epoch
+# create and append new alarm
 def newAlarm(time, fromCalendar=False, activated=True):
     newAlarm = Alarm(time, fromCalendar, activated)
     ALARMS.append(newAlarm)
 
 
+# remove alarm from list
 def removeAlarm(alarm):
     ALARMS.remove(alarm)
 
 
+# enter the clockscreen-loop
 def clockScreen():
     while True:
         watchAlarms()
@@ -64,34 +59,22 @@ def clockScreen():
         waitForRelease()
         input = IO.waitForInput(1)
         if input is 'left':
-            SCREEN.startScreen(2)
-            message(['Linus','Backlund'])
-            message(['Linus','Backlund'])
-            message(['Nils','Johansson'])
-            message(['Nils','Johansson'])
-            message(['Tore','Johansson'])
-            message(['Tore','Johansson'])
-            message(['Kristina','Kjellberg'])
-            message(['Kristina','Kjellberg'])
-            message(['Simon','Weideskog'])
-            message(['Simon','Weideskog'])
             newAlarmScreen()
             SETTINGS.saveSettings()
         elif input is 'up':
             connected = BLINDS.open()
             if not connected:
-                #message(['Blinds not', 'connected'])
-                pass
+                message(['Blinds not', 'connected'])
         elif input is 'down':
             connected = BLINDS.down()
             if not connected:
-                #message(['Blinds not', 'connected'])
-                pass
+                message(['Blinds not', 'connected'])
         elif input is 'right':
             settingsScreen()
             SETTINGS.saveSettings()
 
 
+# enter newalarm-loop
 def newAlarmScreen():
     message(['Set new', 'alarm'])
     newAlarm = Alarm(time.time())
@@ -125,6 +108,7 @@ def newAlarmScreen():
                     return True
 
 
+# enter settings-loop
 def settingsScreen():
     message(['Settings'])
     while True:
@@ -208,6 +192,7 @@ def settingsScreen():
                 quit()
 
 
+# enter alarmlist-loop
 def alarmListScreen():
     while True:
         watchAlarms()
@@ -252,12 +237,14 @@ def alarmListScreen():
                         message(['Deleted'])
 
 
+# display a message in 1-3 rows
 def message(message):
     watchAlarms()
     SCREEN.messageScreen(message)
     time.sleep(MESSAGEDELAY)
 
 
+# convert integers to a 24h-clock string in the format HH:MM
 def toTimeStr(hours, minutes):
     if hours < 10:
         hourStr = '0'+str(hours)
@@ -270,6 +257,7 @@ def toTimeStr(hours, minutes):
     return hourStr+':'+minuteStr
 
 
+# convert a string of format HH:MM into integers
 def toTimeInt(timeStr):
     hour, minute = timeStr.split(':')
     hour = int(hour)
@@ -277,6 +265,7 @@ def toTimeInt(timeStr):
     return hour, minute
 
 
+# wait for release of button or until timeout
 def waitForRelease():
     now = time.time()
     while IO.readInput():
@@ -286,6 +275,7 @@ def waitForRelease():
             return False
 
 
+# trigger alarms, open blinds and update calendar events
 def watchAlarms():
     global CAL_UPDATED
     global LASTTRIGGEREDMINUTE
@@ -316,6 +306,7 @@ def watchAlarms():
                     triggerAlarm()
 
 
+# update calendar alarms
 def updateCalAlarms():
     newCalAlarms = CAL.getCalendarAlarms(SETTINGS.getSetting('Cal. margin'))
     if newCalAlarms != 'ERROR':
@@ -330,15 +321,18 @@ def updateCalAlarms():
         for alarm in newCalAlarms:
             ALARMS.append(alarm)
 
+
+# trigger alarm and beep until turned of
 def triggerAlarm():
     print('ALARM TRIGGERED')
     while True:
         input = IO.readInput()
         if input is 'up':
-            message(['Alarm','stopped'])
+            message(['Alarm stopped'])
             SOUND.stop()
             break
         SOUND.beep(0.5)
         SCREEN.clockScreen()
+
 
 main()
