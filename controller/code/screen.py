@@ -41,6 +41,14 @@ class Screen():
                 draw.text((4, Y), line, fill="white", font=self._font)
                 Y += self._fontSize
 
+    def startScreen(self,delay):
+        W = 128
+        H = 64
+        text = 'PÄR'
+        with canvas(SCREENDEVICE) as draw:
+            w, h = draw.textsize(text, font=self._fontClock)
+            draw.text(((W-w)/2, (H-h)/2), text, fill="white", font=self._fontClock)
+        time.sleep(delay)
 
     def clockScreen(self):
         W = 128

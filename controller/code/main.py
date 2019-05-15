@@ -64,7 +64,7 @@ def clockScreen():
         waitForRelease()
         input = IO.waitForInput(1)
         if input is 'left':
-            message(['Persiennen PÄR'])
+            SCREEN.startScreen(1)
             message(['Linus','Backlund'])
             message(['Nils','Johansson'])
             message(['Tore','Johansson'])
