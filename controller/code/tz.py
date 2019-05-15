@@ -1,5 +1,5 @@
 """
-Class for handling time used in calendar related operations
+Class for handling local time with DST, used in calendar related operations
 """
 
 from datetime import tzinfo, timedelta, datetime
@@ -18,7 +18,8 @@ class LocalTimezone(tzinfo):
         self.DSTDIFF = self.DSTOFFSET - self.STDOFFSET
 
 
-    # text
+    # Return offset from UTC time wi
+    # with or without daylight saving time
     def utcoffset(self, dt):
         if self._isdst(dt):
             return self.DSTOFFSET
@@ -26,7 +27,7 @@ class LocalTimezone(tzinfo):
             return self.STDOFFSET
 
 
-    # text
+    # Return DST offset
     def dst(self, dt):
         if self._isdst(dt):
             return self.DSTDIFF
@@ -34,12 +35,12 @@ class LocalTimezone(tzinfo):
             return self.ZERO
 
 
-    # text
+    # Return tzname depending on DST
     def tzname(self, dt):
         return _time.tzname[self._isdst(dt)]
 
 
-    # text
+    # Return True if local time is DST now
     def _isdst(self, dt):
         tt = (dt.year, dt.month, dt.day,
               dt.hour, dt.minute, dt.second,
