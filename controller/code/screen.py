@@ -61,10 +61,10 @@ class Screen():
         H = 64
         earliest = 0
         earliestAlarm = ''
-        self._alarms = sorted(self._alarms)
+        test = sorted(list(self._alarms))
+        print(test)
         print("======")
         for alarm in self._alarms:
-            print(alarm)
             if alarm.isActivated():
                 """if(alarm.getHour() > int(time.strftime("%H", time.time()))):
                     earliest = alarm.getTime()
