@@ -1,11 +1,11 @@
 """
-Class for loading the settings from
-web interface or local drive
+Class for loading the settings from local settings.txt file
 """
 
 from collections import OrderedDict
 
 from alarm import *
+
 
 class Settings():
     def __init__(self):
@@ -19,21 +19,23 @@ class Settings():
         self._createAlarms()
 
 
+    # get a specific setting
     def getSetting(self, key):
         return self._settings[key]
 
 
+    # set a specific setting
     def setSetting(self, key, value):
         self._settings[key] = value
 
 
+    # get the entire settings dictionary
     def getAll(self):
         return self._settings
 
 
+    # load settings stored to settings.txt
     def loadLocalData(self):
-        #Funktion som läser in alla
-        #inställningar från en lokal textfil
         print('Reading settings from file:')
         try:
             file = open(self._file, 'r')
@@ -67,6 +69,7 @@ class Settings():
             print('No settings.txt found')
 
 
+    # save all settings to settings.txt
     def saveSettings(self):
         print('Saving the following settings:')
         file = open(self._file, 'w')
@@ -85,6 +88,7 @@ class Settings():
         file.close()
 
 
+    # create alarm objects of the data found in settings.txt
     def _createAlarms(self):
         alarms = []
         alarmList = self._settings['Alarms']
@@ -93,10 +97,12 @@ class Settings():
         self._settings['Alarms'] = alarms
 
 
+    # get all the keys for the settings dictionary
     def getKeys(self):
         keys = [key[0] for key in self._settings.items()]
         return keys
 
 
+    # add an alarm to settings
     def addAlarm(self, alarm):
         self._settings['Alarms'].append(alarm)

@@ -13,6 +13,7 @@ SCREENDEVICE = ssd1306(SCREENSERIAL, rotate=2)
 DEBUG = False # True for exit script option
 TIMEOVERRIDE = False # False if no override for clockscreen is wanted
 
+
 class Screen():
     def __init__(self, alarms, settingsObject):
         self._scrollIndex = 0
@@ -32,6 +33,7 @@ class Screen():
         self._lastMode = ''
 
 
+    # display a message of 1-3 lines
     def messageScreen(self, message):
         W = 128
         H = 64
@@ -41,6 +43,8 @@ class Screen():
                 draw.text((4, Y), line, fill="white", font=self._font)
                 Y += self._fontSize
 
+
+    # display startupscreen
     def startScreen(self,delay):
         W = 128
         H = 64
@@ -50,6 +54,8 @@ class Screen():
             draw.text(((W-w)/2, (H-h)/2), text, fill="white", font=self._fontClock)
         time.sleep(delay)
 
+
+    # display clockscreen with next alarm
     def clockScreen(self):
         W = 128
         H = 64
@@ -78,7 +84,6 @@ class Screen():
 
 
     # alarmScreen handels the graphichs of viewing, setting and activating alarms
-    # uses external functions to achieve this
     def alarmScreen(self):
         if self._lastMode != 'alarm':
             self.resetScroll()
@@ -94,11 +99,9 @@ class Screen():
             scrollDirUp = True
         for animationConst in range(self._blockSize,-1,-2):
             if scrollDirUp:
-                #animationConst = self._blockSize - animationConst
                 animationConst = -animationConst
             with canvas(SCREENDEVICE) as draw:
                 for alarm in alarms:
-                    #print(alarm)
                     if alarms.index(alarm) <= self._scrollIndex+2 and \
                         alarms.index(alarm) >= self._scrollIndex-2:
                         if alarm not in nonAlarms:
@@ -115,14 +118,12 @@ class Screen():
                             else:
                                     autoStr = ""
                         Y = (alarms.index(alarm)-self._currentScroll) * self._blockSize + animationConst - 1
-                        #print(Y)
                         if self._currentScroll == self._scrollIndex:
                                 Y += self._blockSize*2
                         else:
                             if scrollDirUp:
                                 Y += self._blockSize*2
                         draw.line((0, Y, W, Y), fill="white")
-                        #draw.line((0, Y+self._blockSize, W, Y+self._blockSize), fill="white")
                         draw.rectangle((0, self._blockSize, 2, self._blockSize*2-1), fill="white")
                         if alarm not in nonAlarms:
                             draw.text((4, Y+(self._blockSize-self._fontSize)/2), alarmTime, fill="white", font=self._fontBold)
@@ -141,7 +142,8 @@ class Screen():
         self._lastMode = 'alarm'
 
 
-    def scrollDown(self):  # scrolls and selects next alarm
+    # scrolls down in alarmlist or settingslist
+    def scrollDown(self):
         if self._lastMode == 'alarm':
             if len(self._alarms)+2 > self._currentScroll:
                 self._scrollIndex+=1
@@ -152,7 +154,8 @@ class Screen():
             self.settingsScreen()
 
 
-    def scrollUp(self):  # scrolls and selects previous alarm
+    # scrolls up in alarmlist or settingslist
+    def scrollUp(self):
         if self._scrollIndex:
             self._scrollIndex-=1
         if self._lastMode == 'alarm':
@@ -161,7 +164,8 @@ class Screen():
             self.settingsScreen()
 
 
-    def selectedAlarm(self):  # returns the selected alarm
+    # returns the selected alarm
+    def selectedAlarm(self):
         if len(self._alarms) > self._currentScroll:
             return self._alarms[self._currentScroll]
         elif len(self._alarms) == self._currentScroll:
@@ -172,7 +176,8 @@ class Screen():
             return 'nextDay'
 
 
-    def selectedSetting(self):  # returns the selected setting
+    # returns the selected setting
+    def selectedSetting(self):
         keys = [key for key in self._settingsObject.getKeys()]
         if len(keys) > self._currentScroll:
             return keys[self._currentScroll]
@@ -182,6 +187,7 @@ class Screen():
             return False
 
 
+    # screen for setting hours
     def setHourScreen(self, timeStr):
         timeList = timeStr.split(':')
         W = 128
@@ -197,6 +203,7 @@ class Screen():
             draw.text(((W/2-w)/2+W/2, (H-h)/2), timeList[1], fill="white", font=self._fontClock)
 
 
+    # screen for setting minutes
     def setMinuteScreen(self, timeStr):
         timeList = timeStr.split(':')
         W = 128
@@ -227,7 +234,6 @@ class Screen():
             keys.append('Exit script')
         for animationConst in range(self._blockSize,-1,-2):
             if scrollDirUp:
-                #animationConst = self._blockSize - animationConst
                 animationConst = -animationConst
             with canvas(SCREENDEVICE) as draw:
                 for key in keys:
@@ -240,7 +246,6 @@ class Screen():
                             if scrollDirUp:
                                 Y += self._blockSize*2
                         draw.line((0, Y, W, Y), fill="white")
-                        #draw.line((0, Y+self._blockSize, W, Y+self._blockSize), fill="white")
                         draw.rectangle((0, self._blockSize, 2, self._blockSize*2-1), fill="white")
                         draw.text((4, Y+(self._blockSize-self._fontSize)/2), key, fill="white", font=self._font)
                 if self._currentScroll == self._scrollIndex:
@@ -250,6 +255,7 @@ class Screen():
         self._lastMode = 'settings'
 
 
+    # reset the scroll to zero
     def resetScroll(self):
         self._currentScroll = 0
         self._scrollIndex = 0
