@@ -61,7 +61,7 @@ class Screen():
         H = 64
         earliest = 0
         earliestAlarm = ''
-        sorted(self._alarms)
+        self._alarms = sorted(self._alarms)
         print("======")
         for alarm in self._alarms:
             print(alarm)
