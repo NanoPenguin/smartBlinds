@@ -61,9 +61,12 @@ class Screen():
         H = 64
         earliest = 0
         earliestAlarm = ''
-        test = sorted(self._alarms)
-        for a in test:
-            print(a)
+        
+        for a in self._alarms:
+            test.append(str(a))
+
+        print(sorted(test))
+            
         print("======")
         for alarm in self._alarms:
             if alarm.isActivated():
