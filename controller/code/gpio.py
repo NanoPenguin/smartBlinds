@@ -6,13 +6,16 @@ from gpiozero import Button
 from gpiozero import LED
 import time
 
+
 class Io():
-    def __init__(self):  # initialize GPIO
+    def __init__(self):
         self._up = Button(27)
         self._down = Button(22)
         self._left = Button(17)
         self._right = Button(23)
 
+
+    # wait for and return button unless timeout
     def waitForInput(self, timeOut=10):
         now = time.time()
         while True:
@@ -29,6 +32,8 @@ class Io():
             if then-now>timeOut:
                 return False
 
+
+    # return current button pressed
     def readInput(self):
         if not self._up.is_pressed:
             return 'up'
@@ -40,6 +45,8 @@ class Io():
             return 'right'
         return False
 
+
+    # set state of pin
     def digitalWrite(self,pinNumber,mode):
         pinOut = LED(pinNumber)
         if mode is 'HIGH':

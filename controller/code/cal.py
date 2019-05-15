@@ -1,3 +1,7 @@
+"""
+Class for contact with google calendar
+"""
+
 from __future__ import print_function
 import datetime
 import dateutil.parser
@@ -14,8 +18,9 @@ from alarm import *
 #Delete file token.pickle when modifying scopes
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
-class Cal(): # Class for contact with google calendar
-    def __init__(self,calendarId=None): # initialize Cal object
+
+class Cal():
+    def __init__(self,calendarId=None):
         self._calendarIdList = []
         self.initCreds()
         if calendarId:
@@ -27,7 +32,8 @@ class Cal(): # Class for contact with google calendar
             self._alarmDate = currentTime.replace(day=currentTime.day,hour=0,minute=0,second=0)
 
 
-    def loadCalendarIds(self): # load personal calendarIds from google account
+    # load personal calendarIds from google account
+    def loadCalendarIds(self):
         ignoreIdList = ['e_2_sv#weeknum@group.v.calendar.google.com',
                 'sv.swedish#holiday@group.v.calendar.google.com',
                 'addressbook#contacts@group.v.calendar.google.com']
@@ -37,14 +43,16 @@ class Cal(): # Class for contact with google calendar
             if id not in ignoreIdList:
                 self._calendarIdList.append(id)
 
+
+    # set alarmday to next day
     def setDayTomorrow(self):
         currentTime = datetime.datetime.utcnow()
         self._alarmDate = currentTime.replace(day=currentTime.day+1,hour=0,minute=0,second=0)
 
-    def getFirstEvent(self, calendarId):
-        # Get the first event (after 00:00) for calendar with given id.
-        # Returns a time object or None if no event is found
 
+    # Get the first event (after 00:00) for calendar with given id.
+    # Returns a time object or None if no event is found
+    def getFirstEvent(self, calendarId):
         print('Getting upcoming morning event for '+calendarId)
         currentTime = datetime.datetime.utcnow()
         # Start and stop date for next day
@@ -72,11 +80,11 @@ class Cal(): # Class for contact with google calendar
                 if startTimeStr != '00:00':
                     print(startTimeStr, event['summary'])
                     return time.mktime(startTime.timetuple())
-        # print('No upcoming events found.')
         return None
 
 
-    def initCreds(self): # init credentials and connect to google account
+    # init credentials and connect to google account
+    def initCreds(self):
         creds = None
         # The file token.pickle stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
@@ -105,10 +113,11 @@ class Cal(): # Class for contact with google calendar
         self.loadCalendarIds()
         return True
 
+
+    # Returns list with Alarm-objects based on the first event
+    # from each personal calendar.
+    # The earliest alarm in the list is activated.
     def getCalendarAlarms(self,calMargin):
-        # Returns list with Alarm-objects based on the first event
-        # from each personal calendar.
-        # The earliest alarm in the list is activated.
         if not self._credsInitialized:
             if not self.initCreds():
                 return 'ERROR'
