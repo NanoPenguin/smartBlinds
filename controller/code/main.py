@@ -306,6 +306,7 @@ def watchAlarms():
                 alarmTime = alarm.getTime()
                 blindTime = time.strftime("%H:%M", time.localtime(alarmTime-SETTINGS.getSetting('Easy wake')))
                 blindHour, blindMinute = toTimeInt(blindTime)
+                print("blindH: " + blindHour + " blindM: " + blindMinute)
                 if nowHour==hour and nowMinute==minute:
                     alarm.toggleActivated()
                     LASTTRIGGEREDMINUTE = minute
