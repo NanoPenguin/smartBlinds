@@ -304,7 +304,7 @@ def watchAlarms():
                 hour = alarm.getHour()
                 minute = alarm.getMinute()
                 alarmTime = alarm.getTime()
-                blindTime = time.mktime((alarmTime-SETTINGS.getSetting('Easy wake')).timetuple())
+                blindTime = time.localtime(alarmTime-SETTINGS.getSetting('Easy wake'))
                 blindHour = int(blindTime.hour)
                 blindMinute = int(blindTime.minute)
                 if nowHour==hour and nowMinute==minute:
