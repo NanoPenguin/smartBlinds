@@ -167,7 +167,7 @@ def settingsScreen():
                         hours-=1
                         if hours < 0:
                             hours = 23
-                    elif input is 'right':
+                    elif input is 'right' or setting is 'Easy wake':
                         toBreak = False
                         while True:
                             watchAlarms()
@@ -175,6 +175,8 @@ def settingsScreen():
                             waitForRelease()
                             input = IO.waitForInput()
                             if input is 'left':
+                                if setting is 'Easy wake':
+                                    toBreak = True
                                 break
                             elif input is 'up':
                                 minutes+=1
@@ -297,16 +299,20 @@ def watchAlarms():
     if nowMinute!=LASTTRIGGEREDMINUTE and LASTTRIGGEREDMINUTE != 100:
         LASTTRIGGEREDMINUTE = 100
     else:
-        activeAlarms = []
         for alarm in ALARMS:
             if alarm.isActivated():
-                activeAlarms.append(alarm)
                 hour = alarm.getHour()
                 minute = alarm.getMinute()
+                alarmTime = alarm.getTime()
+                blindTime = time.strftime("%H:%M", alarmTime-SETTINGS.getSetting('Easy wake'))
+                blindHour, blindMinute = toTimeInt(blindTime)
                 if nowHour==hour and nowMinute==minute:
                     alarm.toggleActivated()
                     LASTTRIGGEREDMINUTE = minute
                     triggerAlarm()
+                elif blindHour==hour and blindMinute==minute:
+                    LASTTRIGGEREDMINUTE = minute
+                    BLINDS.setAngle(600,SETTINGS.getSetting('Easy wake')*1000)
 
 
 # update calendar alarms
