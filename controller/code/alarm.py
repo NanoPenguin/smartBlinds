@@ -16,6 +16,11 @@ class Alarm():
     def __str__(self):
         return time.strftime("%H:%M", time.localtime(self._time))
 
+    def __gt__(self, other):
+        self._time > other._time
+
+    def __lt__(self, other):
+        self._time < other._time
 
     # get the set time
     def getTime(self):
