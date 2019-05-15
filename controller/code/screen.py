@@ -59,21 +59,21 @@ class Screen():
     def clockScreen(self):
         W = 128
         H = 64
-        earliest = 0
-        earliestAlarm = ''
-        test = []
-        for a in self._alarms:
-            test.append(str(a))
-
-        print(sorted(test))
-            
-        print("======")
+        nextAlarm = ''
+        nextAlarmList = []
+        
         for alarm in self._alarms:
             if alarm.isActivated():
-                """if(alarm.getHour() > int(time.strftime("%H", time.time()))):
-                    earliest = alarm.getTime()
-                    earliestAlarm = alarm
-                    break"""
+                nextAlarmList.append(str(a))
+        nextAlarmList = sorted(nextAlarmList)
+        
+        print(sorted(test))    
+        print("======")
+
+        for alarm in nextAlarmList:
+            if(alarm > time.strftime('%H:%M', time.localtime(time.time())):
+                nextAlarm = alarm
+                break
                     
         """for alarm in self._alarms:
             tempTime = alarm.getTime()
@@ -87,7 +87,7 @@ class Screen():
             w, h = draw.textsize(timeStr, font=self._fontClock)
             draw.text(((W-w)/2, (H-h)/2), timeStr, fill="white", font=self._fontClock)
             if earliest:
-                draw.text((0, H-self._fontSize), str(earliestAlarm), fill="white", font=self._font)
+                draw.text((0, H-self._fontSize), nextAlarm, fill="white", font=self._font)
         self._lastMode = 'clock'
 
 
