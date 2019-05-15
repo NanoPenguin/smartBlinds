@@ -11,6 +11,7 @@ from luma.oled.device import ssd1306
 SCREENSERIAL = spi(device=0, port=0)
 SCREENDEVICE = ssd1306(SCREENSERIAL, rotate=2)
 DEBUG = True
+TIMEOVERRIDE = '07:10' # False if no override for clockscreen is wanted
 
 class Screen():
     def __init__(self, alarms, settingsObject):
@@ -58,6 +59,8 @@ class Screen():
                 earliest = tempTime
                 earliestAlarm = alarm
         timeStr = time.strftime('%H:%M', time.localtime(time.time()))
+        if TIMEOVERRIDE:
+            timeStr = TIMEOVERRIDE
         with canvas(SCREENDEVICE) as draw:
             w, h = draw.textsize(timeStr, font=self._fontClock)
             draw.text(((W-w)/2, (H-h)/2), timeStr, fill="white", font=self._fontClock)
@@ -172,6 +175,8 @@ class Screen():
 
 
     def setHourScreen(self, timeStr):
+        if TIMEOVERRIDE:
+            timeStr = TIMEOVERRIDE
         timeList = timeStr.split(':')
         W = 128
         H = 64
