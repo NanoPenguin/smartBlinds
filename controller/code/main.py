@@ -312,6 +312,7 @@ def watchAlarms():
                     triggerAlarm()
                     break;
                 if blindHour==nowHour and blindMinute==nowMinute:
+                    print(int(SETTINGS.getSetting('Easy wake'))*1000)
                     LASTTRIGGEREDMINUTE = blindMinute
                     BLINDS.setAngle(600,int(SETTINGS.getSetting('Easy wake'))*1000)
                     break
@@ -336,7 +337,9 @@ def updateCalAlarms():
 # trigger alarm and beep until turned of
 def triggerAlarm():
     print('ALARM TRIGGERED')
-    BLINDS.open()
+    connected = BLINDS.open()
+        if not connected:
+            message(['Blinds not', 'connected'])
     while True:
         input = IO.readInput()
         if input is 'up':
