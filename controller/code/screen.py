@@ -10,7 +10,7 @@ from luma.oled.device import ssd1306
 
 SCREENSERIAL = spi(device=0, port=0)
 SCREENDEVICE = ssd1306(SCREENSERIAL, rotate=2)
-DEBUG = True
+DEBUG = False # True for exit script option
 TIMEOVERRIDE = '07:10' # False if no override for clockscreen is wanted
 
 class Screen():
@@ -175,8 +175,6 @@ class Screen():
 
 
     def setHourScreen(self, timeStr):
-        if TIMEOVERRIDE:
-            timeStr = TIMEOVERRIDE
         timeList = timeStr.split(':')
         W = 128
         H = 64
