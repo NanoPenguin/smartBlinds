@@ -29,7 +29,7 @@ INPUTTIMEOUT = 10
 CAL_CHANGE_DAY_TIME = '17:00'
 
 # global calendar related variables
-LASTTRIGGEREDMINUTE = 100
+LAST_TRIGGERED_MINUTE = 100
 CAL_UPDATED = False
 CAL_DAY_CHANGED = False
 
@@ -283,7 +283,7 @@ def waitForRelease():
 # trigger alarms, open blinds and update calendar events
 def watchAlarms():
     global CAL_UPDATED
-    global LASTTRIGGEREDMINUTE
+    global LAST_TRIGGERED_MINUTE
     now = time.strftime("%H:%M", time.localtime(time.time()))
     nowHour, nowMinute = toTimeInt(now)
     if not nowMinute and not CAL_UPDATED:
@@ -296,10 +296,10 @@ def watchAlarms():
         CAL_UPDATED = False
     elif int(now[0:2]) > int(CAL_CHANGE_DAY_TIME[0:2])+1:
         CAL_DAY_CHANGED = False
-    if nowMinute!=LASTTRIGGEREDMINUTE and LASTTRIGGEREDMINUTE != 100:
-        LASTTRIGGEREDMINUTE = 100
-    
-    elif nowMinute != LASTTRIGGEREDMINUTE:
+    if nowMinute!=LAST_TRIGGERED_MINUTE and LAST_TRIGGERED_MINUTE != 100:
+        LAST_TRIGGERED_MINUTE = 100
+
+    elif nowMinute != LAST_TRIGGERED_MINUTE:
         for alarm in ALARMS:
             if alarm.isActivated():
                 hour = alarm.getHour()
@@ -309,11 +309,11 @@ def watchAlarms():
                 blindHour, blindMinute = toTimeInt(blindTime)
                 if nowHour==hour and nowMinute==minute:
                     alarm.toggleActivated()
-                    LASTTRIGGEREDMINUTE = minute
+                    LAST_TRIGGERED_MINUTE = minute
                     triggerAlarm()
                     break;
                 if blindHour==nowHour and blindMinute==nowMinute:
-                    LASTTRIGGEREDMINUTE = blindMinute
+                    LAST_TRIGGERED_MINUTE = blindMinute
                     BLINDS.setAngle(600,int(SETTINGS.getSetting('Easy wake'))*1000)
                     break
 
