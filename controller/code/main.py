@@ -311,7 +311,7 @@ def watchAlarms():
                     alarm.toggleActivated()
                     LASTTRIGGEREDMINUTE = minute
                     triggerAlarm()
-                elif blindHour==hour and blindMinute==minute:
+                if blindHour==nowHour and blindMinute==nowMinute:
                     LASTTRIGGEREDMINUTE = minute
                     print(int(SETTINGS.getSetting('Easy wake'))*1000)
                     BLINDS.setAngle(600,int(SETTINGS.getSetting('Easy wake'))*1000)
