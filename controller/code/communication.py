@@ -78,12 +78,12 @@ class Communication():
         # Debug: print(msg)
         # print
 
-  def setBlinds(self, setpoint):
+  def setBlinds(self, setpoint, time_ = 0):
       # Fully open setpoint 600
       # For smoth recursive calling jump setps of 20
       waitingForReply = False
       n = 0
-      commandstr = "<" + "setBlinds,1," + str(setpoint) + ">"
+      commandstr = "#<" + "setBlinds,2," + str(setpoint) + "," + str(time_) + ">"
 
       if waitingForReply == False:
         self.sendToArduino(commandstr)
@@ -97,7 +97,7 @@ class Communication():
   def getBlindsData(self):
     waitingForReply = False
     n = 0
-    commandstr = "<" + "getBlinds,0" + ">"
+    commandstr = "#<" + "getBlinds,0" + ">"
 
     if waitingForReply == False:
         self.sendToArduino(commandstr)
