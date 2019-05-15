@@ -70,10 +70,12 @@ def clockScreen():
             connected = BLINDS.open()
             if not connected:
                 # message(['Blinds not', 'connected'])
+                pass
         elif input is 'down':
             connected = BLINDS.down()
             if not connected:
                 # message(['Blinds not', 'connected'])
+                pass
         elif input is 'right':
             settingsScreen()
             SETTINGS.saveSettings()
