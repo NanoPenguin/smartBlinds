@@ -11,7 +11,7 @@ from luma.oled.device import ssd1306
 SCREENSERIAL = spi(device=0, port=0)
 SCREENDEVICE = ssd1306(SCREENSERIAL, rotate=2)
 DEBUG = False # True for exit script option
-TIMEOVERRIDE = False # False if no override for clockscreen is wanted
+TIMEOVERRIDE = '22:13' # False if no override for clockscreen is wanted
 
 class Screen():
     def __init__(self, alarms, settingsObject):
