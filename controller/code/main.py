@@ -64,29 +64,16 @@ def clockScreen():
         waitForRelease()
         input = IO.waitForInput(1)
         if input is 'left':
-            SCREEN.startScreen(2)
-            message(['Linus','Backlund'])
-            message(['Linus','Backlund'])
-            message(['Nils','Johansson'])
-            message(['Nils','Johansson'])
-            message(['Tore','Johansson'])
-            message(['Tore','Johansson'])
-            message(['Kristina','Kjellberg'])
-            message(['Kristina','Kjellberg'])
-            message(['Simon','Weideskog'])
-            message(['Simon','Weideskog'])
             newAlarmScreen()
             SETTINGS.saveSettings()
         elif input is 'up':
             connected = BLINDS.open()
             if not connected:
-                #message(['Blinds not', 'connected'])
-                pass
+                message(['Blinds not', 'connected'])
         elif input is 'down':
             connected = BLINDS.down()
             if not connected:
-                #message(['Blinds not', 'connected'])
-                pass
+                message(['Blinds not', 'connected'])
         elif input is 'right':
             settingsScreen()
             SETTINGS.saveSettings()
