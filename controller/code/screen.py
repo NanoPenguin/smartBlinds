@@ -61,7 +61,7 @@ class Screen():
         H = 64
         earliest = 0
         earliestAlarm = ''
-        
+        test = []
         for a in self._alarms:
             test.append(str(a))
 
