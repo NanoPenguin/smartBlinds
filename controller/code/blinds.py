@@ -28,6 +28,7 @@ class Blinds():
     # set blinds to angle
     def setAngle(self, angle, time = 0):  # set new angle
         self._angle = angle
+        self._time = time
         try:
             self._blinds.setBlinds(self._angle, self._time)
             return True
