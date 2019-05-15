@@ -67,7 +67,7 @@ class Screen():
                 nextAlarmList.append(str(alarm))
         nextAlarmList = sorted(nextAlarmList)
         
-        print(sorted(test))    
+        print(nextAlarmList)    
         print("======")
 
         for alarm in nextAlarmList:
