@@ -36,6 +36,7 @@ CAL_DAY_CHANGED = False
 
 # main function
 def main():
+    SCREEN.startScreen(3)
     updateCalAlarms()
     clockScreen()
 
