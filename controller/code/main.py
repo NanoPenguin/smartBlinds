@@ -304,7 +304,7 @@ def watchAlarms():
                 hour = alarm.getHour()
                 minute = alarm.getMinute()
                 alarmTime = alarm.getTime()
-                blindTime = time.strftime("%H:%M", alarmTime-SETTINGS.getSetting('Easy wake'))
+                blindTime = time.strftime("%H:%M", (alarmTime-SETTINGS.getSetting('Easy wake')))
                 blindHour, blindMinute = toTimeInt(blindTime)
                 if nowHour==hour and nowMinute==minute:
                     alarm.toggleActivated()
