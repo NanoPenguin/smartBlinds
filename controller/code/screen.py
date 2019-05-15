@@ -64,7 +64,7 @@ class Screen():
         
         for alarm in self._alarms:
             if alarm.isActivated():
-                nextAlarmList.append(str(a))
+                nextAlarmList.append(str(alarm))
         nextAlarmList = sorted(nextAlarmList)
         
         print(sorted(test))    
