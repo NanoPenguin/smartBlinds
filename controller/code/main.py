@@ -298,7 +298,8 @@ def watchAlarms():
         CAL_DAY_CHANGED = False
     if nowMinute!=LASTTRIGGEREDMINUTE and LASTTRIGGEREDMINUTE != 100:
         LASTTRIGGEREDMINUTE = 100
-    else:
+    
+    elif nowMinute != LASTTRIGGEREDMINUTE:
         for alarm in ALARMS:
             if alarm.isActivated():
                 hour = alarm.getHour()
