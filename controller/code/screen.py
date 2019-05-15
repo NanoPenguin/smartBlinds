@@ -86,7 +86,7 @@ class Screen():
         with canvas(SCREENDEVICE) as draw:
             w, h = draw.textsize(timeStr, font=self._fontClock)
             draw.text(((W-w)/2, (H-h)/2), timeStr, fill="white", font=self._fontClock)
-            if earliest:
+            if nextAlarm:
                 draw.text((0, H-self._fontSize), nextAlarm, fill="white", font=self._font)
         self._lastMode = 'clock'
 
