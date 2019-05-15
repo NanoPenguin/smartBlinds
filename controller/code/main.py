@@ -338,8 +338,8 @@ def updateCalAlarms():
 def triggerAlarm():
     print('ALARM TRIGGERED')
     connected = BLINDS.open()
-        if not connected:
-            message(['Blinds not', 'connected'])
+    if not connected:
+        message(['Blinds not', 'connected'])
     while True:
         input = IO.readInput()
         if input is 'up':
