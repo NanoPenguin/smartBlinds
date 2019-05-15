@@ -62,14 +62,14 @@ class Screen():
         earliest = 0
         earliestAlarm = ''
         sorted(self._alarms)
-        print(self._alarms)
         for alarm in self._alarms:
+            print(alarm)
             if alarm.isActivated():
                 print(alarm.getTime(), time.time(), time.localtime(time.time()))
-                if(alarm.getHour() > int(time.strftime("%H", time.time()))):
+                """if(alarm.getHour() > int(time.strftime("%H", time.time()))):
                     earliest = alarm.getTime()
                     earliestAlarm = alarm
-                    break
+                    break"""
                     
         """for alarm in self._alarms:
             tempTime = alarm.getTime()
