@@ -71,7 +71,7 @@ class Screen():
         print("======")
 
         for alarm in nextAlarmList:
-            if(alarm > time.strftime('%H:%M', time.localtime(time.time())):
+            if(alarm > time.strftime('%H:%M', time.localtime(time.time()))):
                 nextAlarm = alarm
                 break
                     
