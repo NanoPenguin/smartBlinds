@@ -64,6 +64,7 @@ class Screen():
         if self._alarms:
             for alarm in self._alarms:
                 if alarm.isActivated():
+                    print(alarm.getTime(), time.time())
                     if(alarm.getTime() > time.time()):
                         earliest = alarm.getTime()
                         earliestAlarm = alarm
