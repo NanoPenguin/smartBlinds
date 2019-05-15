@@ -336,6 +336,7 @@ def updateCalAlarms():
 # trigger alarm and beep until turned of
 def triggerAlarm():
     print('ALARM TRIGGERED')
+    BLINDS.open()
     while True:
         input = IO.readInput()
         if input is 'up':
