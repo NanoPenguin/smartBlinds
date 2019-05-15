@@ -62,8 +62,7 @@ def clockScreen():
             newAlarmScreen()
             SETTINGS.saveSettings()
         elif input is 'up':
-            BLINDS.setAngle(600,int(SETTINGS.getSetting('Easy wake'))*1000)
-            #connected = BLINDS.open()
+            connected = BLINDS.open()
             if not connected:
                 message(['Blinds not', 'connected'])
         elif input is 'down':
@@ -307,15 +306,13 @@ def watchAlarms():
                 alarmTime = alarm.getTime()
                 blindTime = time.strftime("%H:%M", time.localtime(alarmTime-SETTINGS.getSetting('Easy wake')))
                 blindHour, blindMinute = toTimeInt(blindTime)
-                print("blindH: " + str(blindHour) + " blindM: " + str(blindMinute))
                 if nowHour==hour and nowMinute==minute:
                     alarm.toggleActivated()
                     LASTTRIGGEREDMINUTE = minute
                     triggerAlarm()
                     break;
                 if blindHour==nowHour and blindMinute==nowMinute:
-                    LASTTRIGGEREDMINUTE = minute
-                    print(int(SETTINGS.getSetting('Easy wake'))*1000)
+                    LASTTRIGGEREDMINUTE = blindMinute
                     BLINDS.setAngle(600,int(SETTINGS.getSetting('Easy wake'))*1000)
                     break
 
@@ -339,9 +336,7 @@ def updateCalAlarms():
 # trigger alarm and beep until turned of
 def triggerAlarm():
     print('ALARM TRIGGERED')
-    connected = BLINDS.open()
-    if not connected:
-        message(['Blinds not', 'connected'])
+    BLINDS.open()
     while True:
         input = IO.readInput()
         if input is 'up':
