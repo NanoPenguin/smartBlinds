@@ -6,6 +6,7 @@ from communication import *
 class Blinds():
     def __init__(self, angle = 600):  # initialize blinds object
         self._angle = angle
+        self._time = 0
         self._downAngle = 1023
         self._openAngle = 600
         self._upAngle = 0
@@ -21,10 +22,10 @@ class Blinds():
             return 0, 0
 
 
-    def setAngle(self, angle):  # set new angle
+    def setAngle(self, angle, time = 0):  # set new angle
         self._angle = angle
         try:
-            self._blinds.setBlinds(angle)
+            self._blinds.setBlinds(self._angle, self._time)
             return True
         except AttributeError:
             print("No blinds connected")
