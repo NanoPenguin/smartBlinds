@@ -14,13 +14,21 @@ from cal import *
 from gpio import *
 from sound import *
 
+now = time.time()
 SETTINGS = Settings()  # initializing settings
+print(now-time.time())
 ALARMS = SETTINGS.getSetting('Alarms')  # initializing alarms
+print(now-time.time())
 SCREEN = Screen(ALARMS, SETTINGS)  # initializing screen
+print(now-time.time())
 BLINDS =  Blinds() # initializing blinds
+print(now-time.time())
 CAL = Cal()  # initializing calendar
+print(now-time.time())
 IO = Io()  # Initializing GPIO
+print(now-time.time())
 SOUND = Sound() # Initializing Sound
+print(now-time.time())
 
 # global timeconstants
 MESSAGEDELAY = 0.7
