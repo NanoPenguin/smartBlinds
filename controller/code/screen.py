@@ -61,19 +61,15 @@ class Screen():
         H = 64
         nextAlarm = ''
         nextAlarmList = []
-        
         for alarm in self._alarms:
             if alarm.isActivated():
                 nextAlarmList.append(str(alarm))
         nextAlarmList = sorted(nextAlarmList)
-        
         for alarm in nextAlarmList:
             if(alarm > time.strftime('%H:%M', time.localtime(time.time()))):
                 nextAlarm = alarm
                 break
-                
             nextAlarm = nextAlarmList[0]
-                 
         timeStr = time.strftime('%H:%M', time.localtime(time.time()))
         if TIMEOVERRIDE:
             timeStr = TIMEOVERRIDE
@@ -99,7 +95,7 @@ class Screen():
             scrollDirUp = False
         else:
             scrollDirUp = True
-        for animationConst in range(self._blockSize,-1,-2):
+        for animationConst in range(self._blockSize,-1,-4):
             if scrollDirUp:
                 animationConst = -animationConst
             with canvas(SCREENDEVICE) as draw:
