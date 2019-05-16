@@ -230,7 +230,7 @@ class Screen():
         keys = self._settingsObject.getKeys()
         if(DEBUG):
             keys.append('Exit script')
-        for animationConst in range(self._blockSize,-1,-2):
+        for animationConst in range(self._blockSize,-1,-4):
             if scrollDirUp:
                 animationConst = -animationConst
             with canvas(SCREENDEVICE) as draw:
