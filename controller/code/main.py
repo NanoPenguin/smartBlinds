@@ -18,12 +18,6 @@ now = time.time()
 SETTINGS = Settings()  # initializing settings
 print(time.time()-now)
 now = time.time()
-ALARMS = SETTINGS.getSetting('Alarms')  # initializing alarms
-print(time.time()-now)
-now = time.time()
-SCREEN = Screen(ALARMS, SETTINGS)  # initializing screen
-print(time.time()-now)
-now = time.time()
 BLINDS =  Blinds() # initializing blinds
 print(time.time()-now)
 now = time.time()
@@ -36,6 +30,12 @@ now = time.time()
 SOUND = Sound() # Initializing Sound
 print(time.time()-now)
 now = time.time()
+ALARMS = SETTINGS.getSetting('Alarms')  # initializing alarms
+print(time.time()-now)
+now = time.time()
+SCREEN = Screen(ALARMS, SETTINGS)  # initializing screen
+print(time.time()-now)
+
 
 # global timeconstants
 MESSAGEDELAY = 0.7
