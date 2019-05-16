@@ -147,7 +147,7 @@ class Screen():
                 self._scrollIndex+=1
             self.alarmScreen()
         elif self._lastMode == 'settings':
-            if len(self._settingsObject.getKeys())+1 > self._currentScroll+1:
+            if len(self._settingsObject.getKeys()) > self._currentScroll+1:
                 self._scrollIndex+=1
             self.settingsScreen()
 
