@@ -42,6 +42,7 @@ void loop() {
   callFunction();
 }
 
+// read message from serial port (USB)
 void getDataFromPC() {
   // receive data from PC and save it into inputBuffer
 
@@ -73,6 +74,7 @@ void getDataFromPC() {
   }
 }
 
+// parse the incoming data
 void parseData() {
   // split the data into its parts
   char * _strtokIndx; // this is used by strtok() as an index
@@ -90,6 +92,7 @@ void parseData() {
   }
 }
 
+// call funqtion reqursted by the incoming data
 void callFunction() {
   if (strcmp(messageFromPC, "setBlinds") == 0) {
     setBlinds(updateSetpoint(arguments[0]), arguments[1]);
@@ -101,7 +104,7 @@ void callFunction() {
     clearMessage();
   }
 }
-
+// update an integer (setpoint) via a formula
 unsigned long updateSetpoint(unsigned long incomingSetpoint) {
   unsigned long _setpoint = 0;
   if (incomingSetpoint >= 0 and incomingSetpoint <= 1023 and newDataFromPC) {
@@ -110,12 +113,13 @@ unsigned long updateSetpoint(unsigned long incomingSetpoint) {
   return _setpoint;
 }
 
+// read the analog value of A0 (feedbackpot)
 int readPot() {
-  /*To be transformed*/
   int _feedbackPot = analogRead(A0);
   return _feedbackPot;
 }
 
+// set te blinds to the requested value (during the requested time)
 void setBlinds(int setpoint, unsigned long time_) {
   Serial.println("setBlinds()");
   int _startPoint = readPot();
@@ -184,6 +188,7 @@ void setBlinds(int setpoint, unsigned long time_) {
 
 }
 
+// send data back to the controller via the srial port (USB)
 void replyToPC() {
   int _feedbackPot = readPot();
 
@@ -197,6 +202,7 @@ void replyToPC() {
   }
 }
 
+// clear the variable messageFromPC
 void clearMessage() {
   for (int i = 0; i < sizeof(messageFromPC); i++) {
     messageFromPC[i] = (char)0;
