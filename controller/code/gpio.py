@@ -1,5 +1,5 @@
 """
-Class for reading io-inputs on pins
+Class for reading input on pins
 """
 
 from gpiozero import Button
