@@ -44,13 +44,13 @@ def main():
 # check the file with wanted state of the blinds against current state
 def checkStateFile():
     try:
-    file = open(FILENAME, 'r')
-    state = file.read()
-    if state != BLINDS.getState():
-        if state is "open":
-            openBlinds()
-        else:
-            closeBlinds()
+        file = open(FILENAME, 'r')
+        state = file.read()
+        if state != BLINDS.getState():
+            if state is "open":
+                openBlinds()
+            else:
+                closeBlinds()
     except FileNotFoundError:
         file = open(FILENAME, 'w')
         file.write(BLINDS.getState())
