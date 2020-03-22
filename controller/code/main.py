@@ -41,6 +41,20 @@ def main():
     updateCalAlarms()
     clockScreen()
 
+def closeBlinds():
+    if SETTINGS.getSetting('Close dir'):
+        connected = BLINDS.up()
+    else:
+        connected = BLINDS.down()
+    if not connected:
+        message(['Blinds not', 'connected'])
+
+def openBlinds():
+    connected = BLINDS.open()
+    print("connected: "+connected)
+    if not connected:
+        message(['Blinds not', 'connected'])
+
 # check the file with wanted state of the blinds against current state
 def checkStateFile():
     try:
@@ -57,22 +71,6 @@ def checkStateFile():
         file = open(FILENAME, 'w')
         file.write(BLINDS.getState())
         file.close()
-
-
-def closeBlinds():
-    if SETTINGS.getSetting('Close dir'):
-        connected = BLINDS.up()
-    else:
-        connected = BLINDS.down()
-    if not connected:
-        message(['Blinds not', 'connected'])
-
-
-def openBlinds():
-    connected = BLINDS.open()
-    print("connected: "+connected)
-    if not connected:
-        message(['Blinds not', 'connected'])
 
 
 # create and append new alarm
