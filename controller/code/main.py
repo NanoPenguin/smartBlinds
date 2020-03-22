@@ -63,7 +63,7 @@ def checkStateFile():
         state = file.read()
         if state != BLINDS.getState():
             if state is "open":
-                print(state)
+                print("state är "+state)
                 openBlinds()
             else:
                 print(state)
