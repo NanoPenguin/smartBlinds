@@ -62,11 +62,11 @@ def checkStateFile():
         file = open(FILENAME, 'r')
         state = file.read()
         if state != BLINDS.getState():
-            if state is "open":
+            if state == "open":
                 print("state är "+state)
                 openBlinds()
             else:
-                print(state)
+                print("state är "+state)
                 closeBlinds()
     except FileNotFoundError:
         file = open(FILENAME, 'w')
