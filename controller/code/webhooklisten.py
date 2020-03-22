@@ -32,26 +32,20 @@ def index():
 
 @app.route('/blinds/close', methods=['POST'])
 def closeBlindsRequest():
-    payload = parse_request(request)
-    print("Mottaget: "+payload)
-    if "close" in payload:
-        file = open(FILENAME, 'w')
-        file.write("close")
-        file.close()
+    file = open(FILENAME, 'w')
+    file.write("closed")
+    file.close()
     printFile("Skrivet till fil: ")
 
     return ("Closing", 200, None)
 
 
 
-@app.route('/blinds/', methods=['POST'])
+@app.route('/blinds/open', methods=['POST'])
 def openBlindsRequest():
-    payload = parse_request(request)
-    print("Mottaget: "+payload)
-    if "open" in payload:
-        file = open(FILENAME, 'w')
-        file.write("open")
-        file.close()
+    file = open(FILENAME, 'w')
+    file.write("open")
+    file.close()
     printFile("Skrivet till fil: ")
 
     return ("Opening", 200, None)
