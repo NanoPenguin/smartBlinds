@@ -16,7 +16,7 @@ def parse_request(req):
     payload = json.loads(payload)
     """
 
-    return json.loads(req.get_data())
+    return json.loads(req.get_data().content.decode('utf-8'))
 
 @app.route('/', methods=['GET'])
 def index():
