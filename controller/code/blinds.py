@@ -13,7 +13,13 @@ class Blinds():
         self._openAngle = 600
         self._upAngle = 0
         self._blinds = Communication()
+        if self.getBlindsData()[0] == self._openAngle
+            self._state = "open"
+        else
+            self._state = "closed"
 
+    def getState():
+        return self._state
 
     # get the setpoint and position
     def getBlindsData(self):  # return current angle
@@ -39,14 +45,17 @@ class Blinds():
 
     # open blinds in the up-position
     def up(self):  # set blinds to up
+        self._state = "closed"
         return self.setAngle(self._upAngle)
 
 
     # open blinds in the down-position
     def down(self):  # set blinds to down
+        self._state = "closed"
         return self.setAngle(self._downAngle)
 
 
     # open blinds horizontally
     def open(self):  # set blinds to open
+        self._state = "open"
         return self.setAngle(self._openAngle)

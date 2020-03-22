@@ -27,6 +27,7 @@ MESSAGEDELAY = 0.7
 BUTTONHOLDDELAY = 1
 INPUTTIMEOUT = 10
 CAL_CHANGE_DAY_TIME = '17:00'
+FILENAME = "blindState"
 
 # global calendar related variables
 LAST_TRIGGERED_MINUTE = 100
@@ -39,6 +40,31 @@ def main():
     SCREEN.startScreen(3)
     updateCalAlarms()
     clockScreen()
+
+# check the file with wanted state of the blinds against current state
+def checkStateFile():
+    file = open('r', FILENAME)
+    state = file.read()
+    if state != BLINDS.getState():
+        if state is "open":
+            openBlinds()
+        else:
+            closeBlinds()
+
+
+def closeBlinds():
+    if SETTINGS.getSetting('Close dir'):
+        connected = BLINDS.up()
+    else:
+        connected = BLINDS.down()
+    if not connected:
+        message(['Blinds not', 'connected'])
+
+
+def openBlinds():
+    connected = BLINDS.open()
+    if not connected:
+        message(['Blinds not', 'connected'])
 
 
 # create and append new alarm
@@ -63,19 +89,17 @@ def clockScreen():
             newAlarmScreen()
             SETTINGS.saveSettings()
         elif input is 'up':
-            connected = BLINDS.open()
-            if not connected:
-                message(['Blinds not', 'connected'])
+            file = open('w', FILENAME)
+            file.write("open")
+            file.close()
         elif input is 'down':
-            if SETTINGS.getSetting('Close dir'):
-                connected = BLINDS.up()
-            else:
-                connected = BLINDS.down()
-            if not connected:
-                message(['Blinds not', 'connected'])
+            file = open('w', FILENAME)
+            file.write("close")
+            file.close()
         elif input is 'right':
             settingsScreen()
             SETTINGS.saveSettings()
+        checkStateFile()
 
 
 # enter newalarm-loop
