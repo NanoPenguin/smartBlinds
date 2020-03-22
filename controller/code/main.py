@@ -50,9 +50,7 @@ def closeBlinds():
         message(['Blinds not', 'connected'])
 
 def openBlinds():
-    print("jag är här")
     connected = BLINDS.open()
-    print("connected: "+connected)
     if not connected:
         message(['Blinds not', 'connected'])
 
@@ -62,11 +60,10 @@ def checkStateFile():
         file = open(FILENAME, 'r')
         state = file.read()
         if state != BLINDS.getState():
+            print("state är "+state)
             if state == "open":
-                print("state är "+state)
                 openBlinds()
             else:
-                print("state är "+state)
                 closeBlinds()
     except FileNotFoundError:
         file = open(FILENAME, 'w')
