@@ -13,9 +13,9 @@ class Blinds():
         self._openAngle = 600
         self._upAngle = 0
         self._blinds = Communication()
-        if self.getBlindsData()[0] == self._openAngle
+        if self.getBlindsData()[0] == self._openAngle:
             self._state = "open"
-        else
+        else:
             self._state = "closed"
 
     def getState():
