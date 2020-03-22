@@ -35,7 +35,7 @@ def closeBlindsRequest():
     payload = parse_request(request)
     print("Mottaget: "+payload)
     if "close" in payload:
-        file = open('w', FILENAME)
+        file = open(FILENAME, 'w')
         file.write("close")
         file.close()
     printFile("Skrivet till fil: ")
@@ -49,7 +49,7 @@ def openBlindsRequest():
     payload = parse_request(request)
     print("Mottaget: "+payload)
     if "open" in payload:
-        file = open('w', FILENAME)
+        file = open(FILENAME, 'w')
         file.write("open")
         file.close()
     printFile("Skrivet till fil: ")
@@ -57,7 +57,7 @@ def openBlindsRequest():
     return ("Opening", 200, None)
 
 def printFile(preString):
-    file = open('r', FILENAME)
+    file = open(FILENAME, 'r')
     print(preString + file.read())
     file.close()
 

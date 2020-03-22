@@ -43,7 +43,7 @@ def main():
 
 # check the file with wanted state of the blinds against current state
 def checkStateFile():
-    file = open('r', FILENAME)
+    file = open(FILENAME, 'r')
     state = file.read()
     if state != BLINDS.getState():
         if state is "open":
@@ -89,11 +89,11 @@ def clockScreen():
             newAlarmScreen()
             SETTINGS.saveSettings()
         elif input is 'up':
-            file = open('w', FILENAME)
+            file = open(FILENAME, 'w')
             file.write("open")
             file.close()
         elif input is 'down':
-            file = open('w', FILENAME)
+            file = open(FILENAME, 'w')
             file.write("close")
             file.close()
         elif input is 'right':
