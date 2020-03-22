@@ -17,7 +17,7 @@ class WHListener:
     def __init__(self,startState):
         state = startState
         self._app = Flask(__name__)
-        self._api = Api(app)
+        self._api = Api(self._app)
         self._api.add_resource(Action, "/blinds/")
         self._app.run(debug=True, host='0.0.0.0')
 
