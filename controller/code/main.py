@@ -47,10 +47,11 @@ def checkStateFile():
         file = open(FILENAME, 'r')
         state = file.read()
         if state != BLINDS.getState():
-            print(state)
             if state is "open":
+                print(state)
                 openBlinds()
             else:
+                print(state)
                 closeBlinds()
     except FileNotFoundError:
         file = open(FILENAME, 'w')
@@ -100,7 +101,7 @@ def clockScreen():
             file.close()
         elif input is 'down':
             file = open(FILENAME, 'w')
-            file.write("close")
+            file.write("closed")
             file.close()
         elif input is 'right':
             settingsScreen()
