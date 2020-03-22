@@ -70,6 +70,7 @@ def closeBlinds():
 
 def openBlinds():
     connected = BLINDS.open()
+    print("connected: "+connected)
     if not connected:
         message(['Blinds not', 'connected'])
 
