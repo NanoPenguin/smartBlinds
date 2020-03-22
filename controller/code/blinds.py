@@ -18,7 +18,7 @@ class Blinds():
         else:
             self._state = "closed"
 
-    def getState():
+    def getState(self):
         return self._state
 
     # get the setpoint and position
