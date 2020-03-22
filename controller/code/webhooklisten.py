@@ -44,7 +44,7 @@ def closeBlindsRequest():
 
 
 
-@app.route('/blinds/open', methods=['POST'])
+@app.route('/blinds/', methods=['POST'])
 def openBlindsRequest():
     payload = parse_request(request)
     print("Mottaget: "+payload)
