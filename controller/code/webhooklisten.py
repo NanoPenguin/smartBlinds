@@ -56,9 +56,9 @@ def openBlindsRequest():
 
     return ("Opening", 200, None)
 
-def printFile():
+def printFile(preString):
     file = open('r', FILENAME)
-    print(file.read())
+    print(preString + file.read())
     file.close()
 
 if __name__ == '__main__':
