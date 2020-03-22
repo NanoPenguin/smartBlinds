@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
+import time
 
 state = None
 
@@ -19,3 +20,8 @@ class WHListener:
         self._api = Api(app)
         self._api.add_resource(Action, "/blinds/")
         self._app.run(debug=True, host='0.0.0.0')
+
+whListener = WHListener("closed")
+while True:
+    print("waiting")
+    time.sleep(1000)
