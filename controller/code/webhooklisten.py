@@ -15,8 +15,10 @@ def parse_request(req):
     payload = re.sub('payload=', '', payload)
     payload = json.loads(payload)
     """
+    req_data = req.get_json()
+    str_obj = json.dumps(req_data)
 
-    return json.loads(req.get_data().decode('utf-8'))
+    return str_obj
 
 @app.route('/', methods=['GET'])
 def index():
