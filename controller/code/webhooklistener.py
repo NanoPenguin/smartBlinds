@@ -6,6 +6,7 @@ state = None
 
 class Action(Resource):
     def post(self, name):
+        print("name = "+ name)
         if name == "open":
             print("open")
             state = "open"
@@ -19,7 +20,9 @@ class WHListener:
         self._app = Flask(__name__)
         self._api = Api(self._app)
         self._api.add_resource(Action, "/blinds/")
+        print("test1")
         self._app.run(debug=True, host='0.0.0.0')
+        print("test2")
 
 whListener = WHListener("closed")
 while True:
