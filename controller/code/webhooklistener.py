@@ -14,7 +14,7 @@ class Action(Resource):
         return name, 200
 
 class WHListener:
-    def WHListener(self,startState):
+    def __init__(self,startState):
         state = startState
         self._app = Flask(__name__)
         self._api = Api(app)
@@ -23,5 +23,5 @@ class WHListener:
 
 whListener = WHListener("closed")
 while True:
-    print("waiting")
+    print("waiting "+state)
     time.sleep(1000)
