@@ -1,6 +1,6 @@
 from flask import Flask, request
 # from urllib import unquote_plus
-# import json
+import json
 # import re
 
 app = Flask(__name__)
@@ -16,7 +16,7 @@ def parse_request(req):
     payload = json.loads(payload)
     """
 
-    return req.get_data()
+    return json.loads(req.get_data())
 
 @app.route('/', methods=['GET'])
 def index():
@@ -42,3 +42,4 @@ def openBlindsRequest():
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True, host='0.0.0.0', port=5000, threaded=True)
+    print("test1")
