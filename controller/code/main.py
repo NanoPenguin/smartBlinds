@@ -57,16 +57,18 @@ def openBlinds(time = 0):
 # check the file with wanted state of the blinds against current state
 def checkStateFile():
     try:
-        file = open(FILENAME, 'r')
+        file = open(FILENAME, 'w+')
         state = file.read()
         if state != BLINDS.getState():
             print("state är "+state)
             if state == "openslowly":
                 openBlinds(int(SETTINGS.getSetting('Easy wake'))*1000)
+                file.write("open")
             elif state == "open":
                 openBlinds()
             else:
                 closeBlinds()
+        file.close()
     except FileNotFoundError:
         file = open(FILENAME, 'w')
         file.write(BLINDS.getState())
