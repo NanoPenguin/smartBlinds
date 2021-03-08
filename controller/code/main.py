@@ -64,11 +64,12 @@ def checkStateFile():
             if state == "openslowly":
                 openBlinds(int(SETTINGS.getSetting('Easy wake'))*1000)
                 file.write("open")
+                file.close()
             elif state == "open":
                 openBlinds()
             else:
                 closeBlinds()
-        file.close()
+
     except FileNotFoundError:
         file = open(FILENAME, 'w')
         file.write(BLINDS.getState())
