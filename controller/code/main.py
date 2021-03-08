@@ -49,8 +49,8 @@ def closeBlinds():
     if not connected:
         message(['Blinds not', 'connected'])
 
-def openBlinds():
-    connected = BLINDS.open()
+def openBlinds(time = 0):
+    connected = BLINDS.open(time)
     if not connected:
         message(['Blinds not', 'connected'])
 
@@ -61,7 +61,9 @@ def checkStateFile():
         state = file.read()
         if state != BLINDS.getState():
             print("state är "+state)
-            if state == "open":
+            if state == "openslowly":
+                openBlinds(int(SETTINGS.getSetting('Easy wake'))*1000)
+            elif state == "open":
                 openBlinds()
             else:
                 closeBlinds()
@@ -343,7 +345,7 @@ def watchAlarms():
                     break;
                 if blindHour==nowHour and blindMinute==nowMinute:
                     LAST_TRIGGERED_MINUTE = blindMinute
-                    BLINDS.setAngle(600,int(SETTINGS.getSetting('Easy wake'))*1000)
+                    openBlinds(int(SETTINGS.getSetting('Easy wake'))*1000)
                     break
 
 

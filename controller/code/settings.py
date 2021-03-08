@@ -13,7 +13,7 @@ class Settings():
         self._settings = OrderedDict()
         self._settings['Alarms'] = []
         self._settings['Cal. margin'] = 0
-        self._settings['Easy wake'] = 0
+        self._settings['Easy wake'] = 100
         self._settings['Close dir'] = 1 # 1 or 0, 1=up 0=down
         self.loadLocalData()
         self._createAlarms()

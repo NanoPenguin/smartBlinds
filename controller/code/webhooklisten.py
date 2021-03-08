@@ -50,6 +50,15 @@ def openBlindsRequest():
 
     return ("Opening", 200, None)
 
+@app.route('/blinds/openslowly', methods=['POST'])
+def openBlindsSlowlyRequest():
+    file = open(FILENAME, 'w')
+    file.write("openslowly")
+    file.close()
+    printFile("Skrivet till fil: ")
+
+    return ("Opening", 200, None)
+
 def printFile(preString):
     file = open(FILENAME, 'r')
     print(preString + file.read())

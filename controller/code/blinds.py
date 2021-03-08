@@ -56,6 +56,6 @@ class Blinds():
 
 
     # open blinds horizontally
-    def open(self):  # set blinds to open
+    def open(self, time = 0):  # set blinds to open
         self._state = "open"
-        return self.setAngle(self._openAngle)
+        return self.setAngle(self._openAngle, time)
