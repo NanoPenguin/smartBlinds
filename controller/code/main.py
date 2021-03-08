@@ -10,7 +10,7 @@ from settings import *
 from blinds import *
 from communication import *
 from screen import *
-from cal import *
+from cal_dummy import *
 from gpio import *
 from sound import *
 
